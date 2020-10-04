@@ -1,0 +1,53 @@
+<div fxLayoutAlign="space-around center" fxFlex="100">
+  <mat-card fxFlex="40" class="login-content" fxFlex.xs="100">
+    <img alt="logo" class="fundoo-logo" src="../../../assets/FundooLogo.PNG">
+
+    <div>
+      <mat-card-title class="signin" fxLayoutAlign="center">Sign In</mat-card-title>
+      <mat-card-subtitle fxLayoutAlign="center">to continue to Fundoo</mat-card-subtitle>
+    </div>
+
+    <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
+      <mat-form-field appearance="outline">
+        <mat-label>Email or phone</mat-label>
+        <input type="text" matInput placeholder="Email or phone" formControlName="email">
+        <mat-error *ngIf="email.errors " [ngClass]="'error'">
+          <div *ngIf="email.errors.required">
+            Email is required.
+          </div>
+          <div *ngIf="email.errors.pattern">
+            Email not valid.
+          </div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-form-field appearance="outline">
+        <mat-label>Password</mat-label>
+        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                [attr.aria-pressed]="hide">
+          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+        </button>
+        <mat-error *ngIf="password.errors " [ngClass]="'error'">
+          <div *ngIf="password.errors.required">
+            Password is required.
+          </div>
+          <div *ngIf="password.errors.pattern">
+            Password is not valid.
+          </div>
+        </mat-error>
+      </mat-form-field>
+
+      <mat-card-subtitle class="forgot-password">
+        Forgot password
+      </mat-card-subtitle>
+
+      <div class="last-div">
+        <button mat-button class="register-button"> Create account</button>
+        <button [disabled]="loginForm.invalid" mat-raised-button class="next-button" color="primary">Next</button>
+      </div>
+
+    </form>
+  </mat-card>
+
+</div>
