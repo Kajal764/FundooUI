@@ -10,7 +10,7 @@ import {Router} from '@angular/router';
 
 export class LoginComponent implements OnInit {
 
-  hide: boolean = true;
+  hide = true;
   isValidFormSubmitted = null;
   emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   passwordPattern = '^((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%]).{6,})$';
@@ -27,10 +27,12 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
   }
 
+  // tslint:disable-next-line:typedef
   get email() {
     return this.loginForm.get('email');
   }
 
+  // tslint:disable-next-line:typedef
   get password() {
     return this.loginForm.get('password');
   }
@@ -44,8 +46,13 @@ export class LoginComponent implements OnInit {
     this.isValidFormSubmitted = true;
   }
 
+  // tslint:disable-next-line:typedef
   redirect() {
-    this.router.navigate(['/forgotPassword']);
+    this.router.navigate(['/forgot-password']);
   }
 
+  // tslint:disable-next-line:typedef
+  redirectToRegister() {
+    this.router.navigate(['/register']);
+  }
 }

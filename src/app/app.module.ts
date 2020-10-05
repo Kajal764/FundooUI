@@ -9,12 +9,16 @@ import {MaterialModule} from './material/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppRoutingModule} from './app-routing.module';
 import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
+import { UpdatePasswordComponent } from './component/update-password/update-password.component';
+import { RegisterComponent } from './component/register/register.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     LoginComponent,
     ForgotPasswordComponent,
+    UpdatePasswordComponent,
+    RegisterComponent,
   ],
   imports: [
     BrowserModule,
