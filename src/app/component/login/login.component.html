@@ -1,5 +1,5 @@
 <div fxLayoutAlign="space-around center" fxFlex="100">
-  <mat-card fxFlex="40" class="login-content" fxFlex.xs="100">
+  <mat-card fxFlex="40" class="main-content" fxFlex.xs="100">
     <img alt="logo" class="fundoo-logo" src="../../../assets/FundooLogo.PNG">
 
     <div>
@@ -34,15 +34,15 @@
             <ng-container *ngIf="password.errors.minlength;else third"> Password must be at least 6 character long.
             </ng-container>
           </ng-template>
-          <ng-template #third>Password should contain one upper case,lowercase,digit and symbol</ng-template>
+          <ng-template #third>Password should contain uppercase,lowercase,digit and symbol</ng-template>
         </mat-error>
       </mat-form-field>
 
-      <mat-card-subtitle class="forgot-password">
+      <mat-card-subtitle class="forgot-password" (click)="redirect()">
         Forgot password
       </mat-card-subtitle>
 
-      <div class="last-div">
+      <div class="last-div" fxLayoutAlign="space-between center">
         <button mat-button class="register-button"> Create account</button>
         <button [disabled]="loginForm.invalid" mat-raised-button class="next-button" color="primary">Next</button>
       </div>
