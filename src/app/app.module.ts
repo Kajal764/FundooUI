@@ -6,14 +6,13 @@ import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginComponent} from './component/login/login.component';
 import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from './material/material.module';
-import { FlexLayoutModule } from '@angular/flex-layout';
-import {MatIconModule} from '@angular/material/icon';
-
+import {FlexLayoutModule} from '@angular/flex-layout';
+import {AppRoutingModule} from './app-routing.module';
 
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent
+    LoginComponent,
   ],
   imports: [
     BrowserModule,
@@ -21,7 +20,7 @@ import {MatIconModule} from '@angular/material/icon';
     ReactiveFormsModule,
     MaterialModule,
     FlexLayoutModule,
-    MatIconModule
+    AppRoutingModule
   ],
   providers: [],
   bootstrap: [AppComponent]

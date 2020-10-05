@@ -29,12 +29,12 @@
           <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
         </button>
         <mat-error *ngIf="password.errors " [ngClass]="'error'">
-          <div *ngIf="password.errors.required">
-            Password is required.
-          </div>
-          <div *ngIf="password.errors.pattern">
-            Password is not valid.
-          </div>
+          <ng-container *ngIf="password.errors.required; else second ">Password is required.</ng-container>
+          <ng-template #second>
+            <ng-container *ngIf="password.errors.minlength;else third"> Password must be at least 6 character long.
+            </ng-container>
+          </ng-template>
+          <ng-template #third>Password should contain one upper case,lowercase,digit and symbol</ng-template>
         </mat-error>
       </mat-form-field>
 
