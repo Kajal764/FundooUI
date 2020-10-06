@@ -1,14 +1,15 @@
 import {Component, OnInit} from '@angular/core';
-import {FormBuilder, FormControl, FormGroup, ValidatorFn, Validators} from '@angular/forms';
+import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {PasswordValidation} from './password-validator';
 
 
-function confirmPassword(control: FormControl, group: FormGroup, matchPassword: string) {
-  if (!control.value || group.controls[matchPassword].value !== null || group.controls[matchPassword].value === control.value) {
-    return null;
-  }
-  return {'mismatch': true};
-}
+// function confirmPassword(control: FormControl, group: FormGroup, matchPassword: string) {
+//   if (!control.value || group.controls[matchPassword].value !== null || group.controls[matchPassword].value === control.value) {
+//     return null;
+//   }
+//   return {'mismatch': true};
+// }
 
 @Component({
   selector: 'app-register',
@@ -31,8 +32,10 @@ export class RegisterComponent implements OnInit {
     lastname: ['', [Validators.required, Validators.pattern(this.namePattern)]],
     email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
     password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.passwordPattern)]],
-    confirmPassword: ['', [Validators.required, Validators.minLength(6), (control => confirmPassword(control, this.registerForm, 'password'))]]
-  });
+    confirmPassword: ['', Validators.required]}
+    ,{
+      validator: PasswordValidation.MatchPassword
+    });
 
 
   ngOnInit(): void {

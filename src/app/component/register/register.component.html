@@ -70,8 +70,9 @@
           <mat-label aria-autocomplete="off">Confirm</mat-label>
           <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
                  formControlName="confirmPassword"/>
-          <mat-error *ngIf="confirmPassword.errors" [ngClass]="'error'">
-            Password not match
+          <mat-error
+            *ngIf="registerForm.controls['confirmPassword'].pristine || registerForm.controls['confirmPassword'].errors?.MatchPassword">
+            Password does not match
           </mat-error>
         </mat-form-field>
         <mat-icon fxLayoutAlign="end center" id="suffix" matSuffix (click)="hide = !hide">{{
