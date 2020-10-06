@@ -69,22 +69,14 @@
         <mat-form-field appearance="outline" class="confirm">
           <mat-label aria-autocomplete="off">Confirm</mat-label>
           <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
-                 formControlName="confirmPassword" autocomplete="off" requried/>
-          <mat-error *ngIf="confirmPassword.errors " [ngClass]="'error'">
-            <ng-container *ngIf="confirmPassword.errors.required; else second ">Password is required.</ng-container>
-            <ng-template #second>
-              <ng-container *ngIf="confirmPassword.errors.minlength;else third"> Password must be at least 6 character
-                long.
-              </ng-container>
-            </ng-template>
-            <ng-template #third>Password should contain uppercase,lowercase,digit and symbol</ng-template>
+                 formControlName="confirmPassword"/>
+          <mat-error *ngIf="confirmPassword.errors" [ngClass]="'error'">
+            Password not match
           </mat-error>
         </mat-form-field>
-
         <mat-icon fxLayoutAlign="end center" id="suffix" matSuffix (click)="hide = !hide">{{
           hide ? "visibility_off" : "visibility"
           }}</mat-icon>
-
       </div>
 
       <div class="last-div" fxLayoutAlign="space-between center">
