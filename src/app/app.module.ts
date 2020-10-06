@@ -8,9 +8,11 @@ import {ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from './material/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppRoutingModule} from './app-routing.module';
-import { ForgotPasswordComponent } from './component/forgot-password/forgot-password.component';
-import { UpdatePasswordComponent } from './component/update-password/update-password.component';
-import { RegisterComponent } from './component/register/register.component';
+import {ForgotPasswordComponent} from './component/forgot-password/forgot-password.component';
+import {UpdatePasswordComponent} from './component/update-password/update-password.component';
+import {RegisterComponent} from './component/register/register.component';
+import {UserService} from './service/user/user.service';
+import {HttpClientModule} from '@angular/common/http';
 
 @NgModule({
   declarations: [
@@ -26,9 +28,10 @@ import { RegisterComponent } from './component/register/register.component';
     ReactiveFormsModule,
     MaterialModule,
     FlexLayoutModule,
-    AppRoutingModule
+    AppRoutingModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

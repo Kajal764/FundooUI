@@ -1,15 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {UserService} from '../../service/user/user.service';
 import {PasswordValidation} from './password-validator';
 
-
-// function confirmPassword(control: FormControl, group: FormGroup, matchPassword: string) {
-//   if (!control.value || group.controls[matchPassword].value !== null || group.controls[matchPassword].value === control.value) {
-//     return null;
-//   }
-//   return {'mismatch': true};
-// }
 
 @Component({
   selector: 'app-register',
@@ -17,8 +11,10 @@ import {PasswordValidation} from './password-validator';
   styleUrls: ['./register.component.scss']
 })
 export class RegisterComponent implements OnInit {
+  // tslint:disable-next-line:ban-types
+  private responseData: Object;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) {
   }
 
   hide = true;
@@ -28,18 +24,19 @@ export class RegisterComponent implements OnInit {
 
 
   registerForm = this.formBuilder.group({
-    firstname: ['', [Validators.required, Validators.pattern(this.namePattern)]],
-    lastname: ['', [Validators.required, Validators.pattern(this.namePattern)]],
-    email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
-    password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.passwordPattern)]],
-    confirmPassword: ['', Validators.required]}
-    ,{
+      firstname: ['', [Validators.required, Validators.pattern(this.namePattern)]],
+      lastname: ['', [Validators.required, Validators.pattern(this.namePattern)]],
+      email: ['', [Validators.required, Validators.pattern(this.emailPattern)]],
+      password: ['', [Validators.required, Validators.minLength(6), Validators.pattern(this.passwordPattern)]],
+      confirmPassword: ['', Validators.required]
+    }
+    , {
       validator: PasswordValidation.MatchPassword
     });
 
-
   ngOnInit(): void {
   }
+
 
   get firstname() {
     return this.registerForm.get('firstname');
@@ -69,7 +66,19 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
+  // tslint:disable-next-line:typedef
   onSubmit() {
+    const data = {
+      firstName: this.firstname.value,
+      lastName: this.lastname.value,
+      email: this.email.value,
+      password: this.password.value
+    };
+    this.userService.register(data)
+      .subscribe(response => {
+        this.responseData = response;
+        console.log(this.responseData);
+      });
 
   }
 
