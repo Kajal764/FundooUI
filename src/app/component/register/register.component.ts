@@ -3,6 +3,7 @@ import {FormBuilder, FormControl, FormGroup, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
 import {UserService} from '../../service/user/user.service';
 import {PasswordValidation} from './password-validator';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-register',
@@ -11,10 +12,10 @@ import {PasswordValidation} from './password-validator';
 })
 export class RegisterComponent implements OnInit {
   // tslint:disable-next-line:ban-types
-  private responseData: Object;
-  private errorResponse: any;
+  private responseData: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) {
+  constructor(private formBuilder: FormBuilder, private router: Router,
+              private userService: UserService, private snackBar: MatSnackBar) {
   }
 
   hide = true;
@@ -78,9 +79,13 @@ export class RegisterComponent implements OnInit {
         this.responseData = response;
         console.log(this.responseData);
       }, (error) => {
-        this.errorResponse = error.error;
-        console.log(this.errorResponse);
+        this.responseData = error.error;
+        console.log(this.responseData);
       });
+    this.openSnackBar('Dismiss');
   }
 
+  openSnackBar(action) {
+    this.snackBar.open(this.responseData.message, action, {duration: 2000});
+  }
 }
