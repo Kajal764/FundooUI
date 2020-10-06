@@ -1,0 +1,76 @@
+
+.card {
+  margin-left: auto;
+  margin-right: auto;
+  margin-top: 3%;
+  border: 1px solid lightgrey;
+  box-shadow: 1px 2px #888888;
+  border-radius: 2%;
+}
+
+.fundoo-logo {
+  padding-top: 10px;
+  width: 25%;
+  margin-left: 35%;
+  padding-bottom: 10px;
+}
+
+.text {
+  font-weight: 400;
+  font-size: 18px;
+  font-family: Roboto;
+  padding: 3px;
+
+}
+
+#firstname {
+  width: 45%;
+}
+
+#lastname {
+  width: 45%;
+}
+
+.email {
+  width: 92%;
+}
+
+.password {
+  width: 45%;
+}
+
+.confirm {
+  width: 45%;
+}
+
+.last-div {
+  padding-top: 40px;
+}
+
+.login-button {
+  color: blue;
+}
+
+#suffix {
+  margin-left: 0%;
+  margin-top: 5%;
+}
+
+@media only screen and (max-width: 600px) {
+  #firstname {
+    width: 100%;
+  }
+  #lastname {
+    width: 100%;
+  }
+  .email {
+    width: 100%;
+  }
+  .password {
+    width: 100%;
+  }
+  .confirm {
+    width: 100%;
+  }
+
+}

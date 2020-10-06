@@ -1,1 +1,101 @@
-<p>register works!</p>
+<div fxLayoutAlign="space-around center" fxFlex="100">
+  <mat-card fxFlex="40" class="card" fxFlex.xs="100">
+    <img alt="logo" class="fundoo-logo" src="../../../assets/FundooLogo.PNG">
+    <mat-card-subtitle class="text" fxLayoutAlign="center">Create your Account</mat-card-subtitle>
+
+    <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="2%">
+        <mat-form-field fxFlex.xs="100" appearance="outline" id="firstname">
+          <mat-label fxFlex="40"> First name</mat-label>
+          <input matInput placeholder="First name" formControlName="firstname"/>
+          <mat-error *ngIf="firstname.errors " [ngClass]="'error'">
+            <div *ngIf="firstname.errors.required">
+              firstname is required.
+            </div>
+            <div *ngIf="firstname.errors.pattern">
+              name not valid.
+            </div>
+          </mat-error>
+        </mat-form-field>
+        <mat-form-field fxFlex.xs="100" appearance="outline" id="lastname">
+          <mat-label fxFlex="40"> Last name</mat-label>
+          <input matInput placeholder="Last name" formControlName="lastname"/>
+          <mat-error *ngIf="lastname.errors " [ngClass]="'error'">
+            <div *ngIf="lastname.errors.required">
+              lastname is required.
+            </div>
+            <div *ngIf="lastname.errors.pattern">
+              name not valid.
+            </div>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div>
+        <mat-form-field appearance="outline" class="email">
+          <mat-label>Email id</mat-label>
+          <input matInput placeholder="Enter your email id" formControlName="email"/>
+          <mat-hint>You can use letters,numbers and periods</mat-hint>
+          <span matSuffix style="color: gray">@gmail.com</span>
+          <mat-error *ngIf="email.errors " [ngClass]="'error'">
+            <div *ngIf="email.errors.required">
+              Email is required.
+            </div>
+            <div *ngIf="email.errors.pattern">
+              Email not valid.
+            </div>
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <div fxLayout="row" fxLayout.xs="column" fxLayoutGap="2%" style="padding-top: 10px">
+        <mat-form-field appearance="outline" class="password">
+          <mat-label aria-autocomplete="off">Password</mat-label>
+          <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
+                 formControlName="password"
+                 autocomplete="off" requried/>
+          <mat-hint fxShow.sm="false" fxShow.xs="false" fxShow="true">Use 8 or more characters with numbers & Symbol
+          </mat-hint>
+          <mat-error *ngIf="password.errors " [ngClass]="'error'">
+            <ng-container *ngIf="password.errors.required; else second ">Password is required.</ng-container>
+            <ng-template #second>
+              <ng-container *ngIf="password.errors.minlength;else third"> Password must be at least 6 character long.
+              </ng-container>
+            </ng-template>
+            <ng-template #third>Password should contain uppercase,lowercase,digit and symbol</ng-template>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-form-field appearance="outline" class="confirm">
+          <mat-label aria-autocomplete="off">Confirm</mat-label>
+          <input matInput placeholder="Enter your password" [type]="hide ? 'password' : 'text'"
+                 formControlName="confirmPassword" autocomplete="off" requried/>
+          <mat-error *ngIf="confirmPassword.errors " [ngClass]="'error'">
+            <ng-container *ngIf="confirmPassword.errors.required; else second ">Password is required.</ng-container>
+            <ng-template #second>
+              <ng-container *ngIf="confirmPassword.errors.minlength;else third"> Password must be at least 6 character
+                long.
+              </ng-container>
+            </ng-template>
+            <ng-template #third>Password should contain uppercase,lowercase,digit and symbol</ng-template>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-icon fxLayoutAlign="end center" id="suffix" matSuffix (click)="hide = !hide">{{
+          hide ? "visibility_off" : "visibility"
+          }}</mat-icon>
+
+      </div>
+
+      <div class="last-div" fxLayoutAlign="space-between center">
+        <button mat-button class="login-button" (click)="redirectToLogin()"> Sign in insted</button>
+        <button [disabled]="registerForm.invalid" mat-raised-button color="primary"
+                style="margin-right: 35px">
+          Sign up
+        </button>
+      </div>
+    </form>
+  </mat-card>
+</div>
+
+
