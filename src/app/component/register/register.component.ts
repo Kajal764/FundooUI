@@ -4,7 +4,6 @@ import {Router} from '@angular/router';
 import {UserService} from '../../service/user/user.service';
 import {PasswordValidation} from './password-validator';
 
-
 @Component({
   selector: 'app-register',
   templateUrl: './register.component.html',
@@ -13,6 +12,7 @@ import {PasswordValidation} from './password-validator';
 export class RegisterComponent implements OnInit {
   // tslint:disable-next-line:ban-types
   private responseData: Object;
+  private errorResponse: any;
 
   constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService) {
   }
@@ -21,7 +21,6 @@ export class RegisterComponent implements OnInit {
   namePattern = '^[A-Za-z]{2,}$';
   emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   passwordPattern = '^((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%]).{6,})$';
-
 
   registerForm = this.formBuilder.group({
       firstname: ['', [Validators.required, Validators.pattern(this.namePattern)]],
@@ -78,9 +77,10 @@ export class RegisterComponent implements OnInit {
       .subscribe(response => {
         this.responseData = response;
         console.log(this.responseData);
+      }, (error) => {
+        this.errorResponse = error.error;
+        console.log(this.errorResponse);
       });
-
   }
-
 
 }
