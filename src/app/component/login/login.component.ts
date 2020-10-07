@@ -1,6 +1,9 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, Validators} from '@angular/forms';
 import {Router} from '@angular/router';
+import {UserService} from '../../service/user/user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {HttpResponse} from '@angular/common/http';
 
 @Component({
   selector: 'app-login',
@@ -14,8 +17,10 @@ export class LoginComponent implements OnInit {
   isValidFormSubmitted = null;
   emailPattern = '^[a-z0-9._%+-]+@[a-z0-9.-]+\\.[a-z]{2,4}$';
   passwordPattern = '^((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%]).{6,})$';
+  private responseData: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router) {
+  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService
+    , private snackBar: MatSnackBar) {
   }
 
   loginForm = this.formBuilder.group({
@@ -38,12 +43,32 @@ export class LoginComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  onSubmit() {
+  async onSubmit() {
     this.isValidFormSubmitted = false;
     if (this.loginForm.invalid) {
       return;
     }
     this.isValidFormSubmitted = true;
+    const data = {
+      email: this.email.value,
+      password: this.password.value
+    };
+
+    this.userService.login(data)
+      .subscribe((response: HttpResponse<any>) => {
+          localStorage.setItem('token', response.headers.get('AuthorizeToken'));
+          this.responseData = response.body;
+          console.log(localStorage.getItem('token'));
+        },
+        (error) => {
+          this.responseData = error.error;
+        });
+    await this.openSnackBar('Dismiss');
+  }
+
+  // tslint:disable-next-line:typedef
+  openSnackBar(action) {
+    this.snackBar.open(this.responseData.message, action, {duration: 3000});
   }
 
   // tslint:disable-next-line:typedef

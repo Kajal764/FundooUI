@@ -76,16 +76,16 @@ export class RegisterComponent implements OnInit {
     };
     this.userService.register(data)
       .subscribe(response => {
-        this.responseData = response;
-        console.log(this.responseData);
+        this.responseData = response.body;
       }, (error) => {
         this.responseData = error.error;
-        console.log(this.responseData);
       });
     this.openSnackBar('Dismiss');
+    this.redirectToLogin();
   }
 
   openSnackBar(action) {
-    this.snackBar.open(this.responseData.message, action, {duration: 2000});
+    this.snackBar.open(this.responseData.message, action, {duration: 4000});
+
   }
 }

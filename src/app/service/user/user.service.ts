@@ -17,4 +17,20 @@ export class UserService {
   register(data) {
     return this.httpclientService.postdata(data, this.url + this.user + 'register');
   }
+
+  // tslint:disable-next-line:typedef
+  login(data) {
+    return this.httpclientService.postdata(data, this.url + this.user + 'login');
+  }
+
+  // tslint:disable-next-line:typedef
+  forgotPw(data: { email: any }) {
+    return this.httpclientService.postdata(data, this.url + this.user + 'forgot_password');
+  }
+
+  // tslint:disable-next-line:typedef
+  updatePassword(data: { password: any; confirmPassword: any }, token) {
+    return this.httpclientService.putdata(data, this.url + this.user + 'update_password/' + token);
+  }
+
 }

@@ -18,15 +18,15 @@ const routes: Routes = [
     path: 'forgot-password',
     component: ForgotPasswordComponent
   },
-  {
-    path: 'update-password',
-    component: UpdatePasswordComponent
-  },
+
   {
     path: 'register',
     component: RegisterComponent
   }
-
+  , {
+    path: 'update-password',
+    component: UpdatePasswordComponent
+  }
 ];
 
 @NgModule({
