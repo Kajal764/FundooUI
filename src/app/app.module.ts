@@ -4,7 +4,7 @@ import {NgModule} from '@angular/core';
 import {AppComponent} from './app.component';
 import {BrowserAnimationsModule} from '@angular/platform-browser/animations';
 import {LoginComponent} from './component/login/login.component';
-import {ReactiveFormsModule} from '@angular/forms';
+import {FormsModule, ReactiveFormsModule} from '@angular/forms';
 import {MaterialModule} from './material/material.module';
 import {FlexLayoutModule} from '@angular/flex-layout';
 import {AppRoutingModule} from './app-routing.module';
@@ -13,6 +13,8 @@ import {UpdatePasswordComponent} from './component/update-password/update-passwo
 import {RegisterComponent} from './component/register/register.component';
 import {UserService} from './service/user/user.service';
 import {HttpClientModule} from '@angular/common/http';
+import { DashboardComponent } from './component/dashboard/dashboard.component';
+
 
 @NgModule({
   declarations: [
@@ -21,6 +23,7 @@ import {HttpClientModule} from '@angular/common/http';
     ForgotPasswordComponent,
     UpdatePasswordComponent,
     RegisterComponent,
+    DashboardComponent,
   ],
   imports: [
     BrowserModule,
@@ -29,7 +32,8 @@ import {HttpClientModule} from '@angular/common/http';
     MaterialModule,
     FlexLayoutModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    FormsModule
   ],
   providers: [UserService],
   bootstrap: [AppComponent]

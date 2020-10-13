@@ -43,7 +43,7 @@ export class LoginComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  async onSubmit() {
+  onSubmit() {
     this.isValidFormSubmitted = false;
     if (this.loginForm.invalid) {
       return;
@@ -58,12 +58,12 @@ export class LoginComponent implements OnInit {
       .subscribe((response: HttpResponse<any>) => {
           localStorage.setItem('token', response.headers.get('AuthorizeToken'));
           this.responseData = response.body;
-          console.log(localStorage.getItem('token'));
+          this.redirectToDashboard();
         },
         (error) => {
           this.responseData = error.error;
         });
-    await this.openSnackBar('Dismiss');
+    this.openSnackBar('Dismiss');
   }
 
   // tslint:disable-next-line:typedef
@@ -79,5 +79,10 @@ export class LoginComponent implements OnInit {
   // tslint:disable-next-line:typedef
   redirectToRegister() {
     this.router.navigate(['/register']);
+  }
+
+  private redirectToDashboard() {
+    this.openSnackBar('Dismiss');
+    this.router.navigate(['/home']);
   }
 }
