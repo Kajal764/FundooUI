@@ -1,5 +1,6 @@
 <mat-toolbar class="main-div" fxLayout="row" fxLayoutAlign="space-between center">
   <div fxLayout="row" fxLayoutAlign="space-around center" class="first-mat-tool-element">
+
     <button mat-icon-button>
       <mat-icon (click)="isExpanded = !isExpanded">menu</mat-icon>
     </button>
@@ -43,7 +44,7 @@
         <button
           [ngStyle]="{'background-image':'url(' +'../../../assets/avatar.PNG'+ ')','background-size':'cover','width':'75px','height':'75px','margin-left':'53px'}"
           matTooltip="Fundoo Account" mat-mini-fab>
-          <!--          <div mat-raised-button class="change">change</div>-->
+          <div mat-raised-button class="change">change</div>
         </button>
         <div>
           <div class="profileName">
@@ -62,8 +63,6 @@
 </mat-toolbar>
 
 <!--sidenav-->
-
-
 <mat-sidenav-container class="example-container" autosize>
 
   <mat-sidenav #sidenav class="example-sidenav" mode="side" opened="true" (mouseenter)="mouseenter()"
@@ -71,34 +70,34 @@
     <mat-nav-list>
 
       <mat-list-item class="side-nav-list" style="background-color: #fff5be">
-        <img src="../../../assets/note.svg">
+        <img src="../../../assets/note.svg" style="margin-left: 11px">
         <span class="full-width" *ngIf="isExpanded || isShowing">Notes</span>
       </mat-list-item>
 
       <mat-list-item class="side-nav-list">
-        <img src="../../../assets/notifications_none-24px.svg">
+        <img src="../../../assets/notifications_none-24px.svg" style="margin-left: 11px">
         <span class="full-width" *ngIf="isExpanded || isShowing">Reminders</span>
       </mat-list-item>
 
-      <mat-list-item class="side-nav-list">
-        <mat-icon>edit</mat-icon>
+      <mat-list-item >
+        <mat-icon style="margin-left: 11px">edit</mat-icon>
         <span class="full-width" *ngIf="isExpanded || isShowing">Edit labels</span>
       </mat-list-item>
 
       <mat-list-item class="side-nav-list">
-        <img src="../../../assets/archive-24px.svg">
+        <img src="../../../assets/archive-24px.svg" style="margin-left: 11px">
         <span class="full-width" *ngIf="isExpanded || isShowing">Archieve</span>
       </mat-list-item>
 
       <mat-list-item class="side-nav-list">
-        <img src="../../../assets/trash.svg">
+        <img src="../../../assets/trash.svg" style="margin-left: 11px">
         <span class="full-width" *ngIf="isExpanded || isShowing">Trash</span>
       </mat-list-item>
 
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    {{message}}
+    <app-notes></app-notes>
   </mat-sidenav-content>
 </mat-sidenav-container>
 

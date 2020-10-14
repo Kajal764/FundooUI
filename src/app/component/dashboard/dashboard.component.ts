@@ -1,5 +1,6 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
+import {Router} from '@angular/router';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,7 +20,7 @@ export class DashboardComponent implements OnInit {
   username = 'kajal waghmare';
   emailId = 'kajalw1998@gmail.com';
 
-  constructor() {
+  constructor(private router: Router) {
   }
 
   toggle() {
@@ -51,5 +52,10 @@ export class DashboardComponent implements OnInit {
 
   signOut() {
     localStorage.removeItem('token');
+    this.redirectToLogin();
+  }
+
+  redirectToLogin() {
+    this.router.navigate(['/login']);
   }
 }
