@@ -33,4 +33,9 @@ export class UserService {
     return this.httpclientService.putdata(data, this.url + this.user + 'update_password/' + token);
   }
 
+  // tslint:disable-next-line:typedef
+  loggedIn() {
+    return !!localStorage.getItem('token');
+  }
+
 }

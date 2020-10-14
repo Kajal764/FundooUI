@@ -5,6 +5,7 @@ import {UpdatePasswordComponent} from './component/update-password/update-passwo
 import {ForgotPasswordComponent} from './component/forgot-password/forgot-password.component';
 import {RegisterComponent} from './component/register/register.component';
 import {DashboardComponent} from './component/dashboard/dashboard.component';
+import {AuthGuard} from './auth.guard';
 
 const routes: Routes = [
   {
@@ -27,9 +28,11 @@ const routes: Routes = [
   , {
     path: 'update-password',
     component: UpdatePasswordComponent
-  }, {
+  },
+  {
     path: 'home',
-    component: DashboardComponent
+    component: DashboardComponent,
+    canActivate: [AuthGuard]
   },
 ];
 

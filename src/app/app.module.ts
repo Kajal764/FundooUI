@@ -13,8 +13,9 @@ import {UpdatePasswordComponent} from './component/update-password/update-passwo
 import {RegisterComponent} from './component/register/register.component';
 import {UserService} from './service/user/user.service';
 import {HttpClientModule} from '@angular/common/http';
-import { DashboardComponent } from './component/dashboard/dashboard.component';
-import { NotesComponent } from './component/notes/notes.component';
+import {DashboardComponent} from './component/dashboard/dashboard.component';
+import {NotesComponent} from './component/notes/notes.component';
+import {AuthGuard} from './auth.guard';
 
 
 @NgModule({
@@ -37,7 +38,7 @@ import { NotesComponent } from './component/notes/notes.component';
     HttpClientModule,
     FormsModule
   ],
-  providers: [UserService],
+  providers: [UserService, AuthGuard],
   bootstrap: [AppComponent]
 })
 export class AppModule {
