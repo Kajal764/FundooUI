@@ -1,21 +1,14 @@
-.main-content {
-}
 
 .note-create {
   margin-top: 40px;
   width: 55%;
-  height: 30%;
   margin-left: 20%;
-  padding-bottom:6px;
-  padding-top:6px;
+  padding-bottom: 6px;
+  padding-top: 6px;
 }
 
 .border {
-  border-color: white;
-  border: none;
-  outline: none;
   user-select: none;
-  box-shadow: 1px 2px #888888;
   border-radius: 5%;
 }
 
@@ -24,19 +17,17 @@
 }
 
 .maincard {
-  //width:%;
   font-weight: 500;
   outline: none;
   opacity: 0.6;
+  width: 60%;
+
 }
 
-#icon {
-  opacity: 0.5;
+.icon {
+  opacity: 0.7;
 }
 
-//
-//@media only screen and (max-width: 412px) {
-//  .full-width {
-//    display: none;
-//  }
-//}
+.take-note-icon {
+  height: 75%;
+}

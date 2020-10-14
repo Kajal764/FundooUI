@@ -77,7 +77,7 @@ mat-sidenav {
 
 .full-width {
   margin-left: 40px;
-  margin-right: 100px;
+  margin-right: 80px;
 }
 
 .profile-div {
@@ -112,8 +112,9 @@ mat-sidenav {
 //  box-shadow: 0 0 0 10px red;
 //}
 
-@media only screen and (max-width: 412px) {
+@media only screen and (max-width: 420px) {
   .full-width {
     display: none;
   }
 }
+

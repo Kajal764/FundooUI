@@ -1,27 +1,87 @@
-<div >
-  <mat-card class="note-create" fxLayoutAlign="space-between center" fxFlex="60">
+<div *ngIf="flag==true" fxLayout="row" fxFlex="100" fxLayout="column" (click)="addNote()"
+     fxLayoutAlign="space-around start">
+  <mat-card class="note-create" fxLayoutAlign="space-between center" fxFlex="55">
     <div data-text="Take a note..." class="border" id="noteTitle" fxLayout="column" contenteditable="true"
          class="maincard">
     </div>
     <div fxLayout="row" fxLayoutAlign="end start">
       <button mat-icon-button>
         <mat-icon class="icon-take-note" matTooltip="New List">
-          <img id="icon" src="../../../assets/check_box-24px.svg"/>
+          <img class="icon" src="../../../assets/check_box-24px.svg"/>
         </mat-icon>
       </button>
       <button mat-icon-button>
         <mat-icon matTooltip="New note with drawing">
-          <img id="icon" src="../../../assets/outline-brush-24px.svg"/>
+          <img class="icon" src="../../../assets/outline-brush-24px.svg"/>
         </mat-icon>
       </button>
       <button mat-icon-button>
         <mat-icon matTooltip="New note with image">
-          <img id="icon" src="../../../assets/outline-image-24px.svg"/>
+          <img class="icon" src="../../../assets/outline-image-24px.svg"/>
         </mat-icon>
       </button>
     </div>
   </mat-card>
-
 </div>
 
+<div *ngIf="flag==false" fxLayout="row" fxFlex="100" fxLayout="column" fxLayoutAlign="space-around start" sss>
+  <mat-card class="note-create" fxFlex="85" fxLayout="column" fxFlex.xs="100">
+    <div fxLayoutAlign="space-between center">
+      <div data-text="Title" class="border" fxLayout="column" contenteditable="true"
+           class="maincard" style="margin: 10px 0 10px 0">
+      </div>
+      <button mat-icon-button class="pin-button">
+        <mat-icon *ngIf="!isPin" class="icon-take-note" matTooltip="Pin note" (click)="notePin()">
+          <img class="ssicon" src="../../../assets/unpinbar.svg"/>
+        </mat-icon>
+        <mat-icon *ngIf="isPin" class="icon-take-note" matTooltip="Unpin note" (click)="notePin()">
+          <img class="icon" src="../../../assets/pinbar.svg"/>
+        </mat-icon>
+      </button>
+    </div>
+    <div data-text="Take a note..." class="border" id="noteTitle" fxLayout="column" contenteditable="true"
+         class="maincard" style="margin: 10px 0 0px 0; padding-bottom: 10px;font-size: 14px">
+    </div>
+
+    <!--    last div-->
+
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <div>
+        <button mat-icon-button>
+          <mat-icon class="icon-take-note" matTooltip="Remind me">
+            <img class="icon" class="take-note-icon" src="../../../assets/reminder.svg"/>
+          </mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon matTooltip="Collaborator">
+            <img class="icon" class="take-note-icon" src="../../../assets/person_add-24px.svg"/>
+          </mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon matTooltip="Chnage color">
+            <img class="icon" class="take-note-icon" src="../../../assets/color_lens-24px.svg"/>
+          </mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon matTooltip="Add image">
+            <img class="icon" class="take-note-icon" src="../../../assets/outline-image-24px.svg"/>
+          </mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon matTooltip="Archieve">
+            <img class="icon" class="take-note-icon" src="../../../assets/archive-24px.svg"/>
+          </mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon matTooltip="More">
+            <img class="icon" class="take-note-icon" src="../../../assets/more_vert-24px.svg"/>
+          </mat-icon>
+        </button>
+      </div>
+      <div>
+        <button mat-flat-button>Close</button>
+      </div>
+    </div>
+  </mat-card>
+</div>
 

@@ -127,5 +127,8 @@
       }
     }
   },
-  "defaultProject": "FundooUI"
+  "defaultProject": "FundooUI",
+  "cli": {
+    "analytics": "e435827b-4c94-40d8-8057-d48ff6487b1c"
+  }
 }
