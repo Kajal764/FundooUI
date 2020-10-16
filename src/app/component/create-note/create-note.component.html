@@ -1,6 +1,6 @@
 <div *ngIf="flag==true" fxLayout="row" fxFlex="100" fxLayout="column" (click)="addNote()"
      fxLayoutAlign="space-around start">
-  <mat-card class="note-create" fxLayoutAlign="space-between center" fxFlex="55">
+  <mat-card class="note-create" fxLayoutAlign="space-between center">
     <div data-text="Take a note..." class="border" id="noteTitle" fxLayout="column" contenteditable="true"
          class="maincard">
     </div>
@@ -24,11 +24,12 @@
   </mat-card>
 </div>
 
-<div *ngIf="flag==false" fxLayout="row" fxFlex="100" fxLayout="column" fxLayoutAlign="space-around start" sss>
-  <mat-card class="note-create" fxFlex="85" fxLayout="column" fxFlex.xs="100">
+<div *ngIf="flag==false" fxLayout="row" fxFlex="100" fxLayout="column" fxLayoutAlign="space-around start">
+  <mat-card class="note-create" fxLayout="column">
     <div fxLayoutAlign="space-between center">
-      <div data-text="Title" class="border" fxLayout="column" contenteditable="true"
-           class="maincard" style="margin: 10px 0 10px 0">
+      <div class="border" fxLayout="column" class="takenote">
+        <textarea class="textArea" matTextareaAutosize placeholder="Title" style="font-size: 15px"
+                  [(ngModel)]="noteTitle"></textarea>
       </div>
       <button mat-icon-button class="pin-button">
         <mat-icon *ngIf="!isPin" class="icon-take-note" matTooltip="Pin note" (click)="notePin()">
@@ -39,10 +40,12 @@
         </mat-icon>
       </button>
     </div>
-    <div data-text="Take a note..." class="border" id="noteTitle" fxLayout="column" contenteditable="true"
-         class="maincard" style="margin: 10px 0 0px 0; padding-bottom: 10px;font-size: 14px">
-    </div>
 
+
+    <div class="border" fxLayout="column" class="takenote">
+      <textarea class="textArea" style="font-size: 14px" matTextareaAutosize placeholder="Take a note..."
+                [(ngModel)]="noteDesc"></textarea>
+    </div>
     <!--    last div-->
 
     <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -79,9 +82,10 @@
         </button>
       </div>
       <div>
-        <button mat-flat-button>Close</button>
+        <button mat-flat-button (click)="createNote()">Close</button>
       </div>
     </div>
   </mat-card>
 </div>
+
 

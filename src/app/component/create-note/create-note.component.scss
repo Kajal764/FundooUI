@@ -1,8 +1,8 @@
 
 .note-create {
   margin-top: 40px;
-  width: 55%;
-  margin-left: 20%;
+  width: 60%;
+  margin-left: 15%;
   padding-bottom: 6px;
   padding-top: 6px;
 }
@@ -31,3 +31,22 @@
 .take-note-icon {
   height: 75%;
 }
+
+
+.textArea {
+  border: none;
+  outline: none;
+  user-select: none;
+  font-family: Roboto;
+  font-weight: 500;
+
+}
+
+.takenote {
+  margin-bottom: 10px;
+  color: rgb(173, 166, 166);
+  border: none;
+  outline: none;
+  user-select: none;
+}
+

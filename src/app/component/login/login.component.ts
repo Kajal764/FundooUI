@@ -56,9 +56,7 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(data)
       .subscribe((response: HttpResponse<any>) => {
-          console.log("before"+response.headers.get('AuthorizeToken'));
-          localStorage.setItem('token', response.headers.get('AuthorizeToken'));
-          console.log(localStorage.getItem('token'));
+        localStorage.setItem('token', `Bearer ${response.headers.get('AuthorizeToken')}`);
           this.responseData = response.body;
           this.redirectToDashboard();
         },

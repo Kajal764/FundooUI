@@ -14,8 +14,8 @@ import {RegisterComponent} from './component/register/register.component';
 import {UserService} from './service/user/user.service';
 import {HttpClientModule} from '@angular/common/http';
 import {DashboardComponent} from './component/dashboard/dashboard.component';
-import {NotesComponent} from './component/notes/notes.component';
 import {AuthGuard} from './auth.guard';
+import { CreateNoteComponent } from './component/create-note/create-note.component';
 
 
 @NgModule({
@@ -26,7 +26,7 @@ import {AuthGuard} from './auth.guard';
     UpdatePasswordComponent,
     RegisterComponent,
     DashboardComponent,
-    NotesComponent,
+    CreateNoteComponent,
   ],
   imports: [
     BrowserModule,
