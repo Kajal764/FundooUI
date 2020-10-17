@@ -23,39 +23,39 @@ export class DashboardComponent implements OnInit {
   constructor(private router: Router) {
   }
 
-  toggle() {
+  toggle(): void {
     this.sidenav.toggle();
   }
 
   ngOnInit(): void {
   }
 
-  refresh() {
+  refresh(): void {
     this.isRefresh ? this.isRefresh = false : this.isRefresh = true;
   }
 
-  grid() {
+  grid(): void {
     this.isGrid ? this.isGrid = false : this.isGrid = true;
   }
 
-  mouseenter() {
+  mouseenter(): void {
     if (!this.isExpanded) {
       this.isShowing = true;
     }
   }
 
-  mouseleave() {
+  mouseleave(): void {
     if (!this.isExpanded) {
       this.isShowing = false;
     }
   }
 
-  signOut() {
+  signOut(): void {
     localStorage.removeItem('token');
     this.redirectToLogin();
   }
 
-  redirectToLogin() {
+  redirectToLogin(): void {
     this.router.navigate(['/login']);
   }
 }

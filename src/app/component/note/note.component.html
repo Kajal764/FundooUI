@@ -1,33 +1,26 @@
-<div class="main-div" fxLayout="row" style="margin:20px;">
-  <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px"
-       style="display:flex;align-self: flex-start;justify-content: center;">
-
-    <mat-card *ngFor="let notedata of notes" style="margin-top: 60px">
-      <div fxLayout="row" fxLayoutAlign="space-between center">
-        <div class="border" fxLayout="column" class="takenote">
+<mat-card style="margin-top: 20px;">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="border" fxLayout="column" class="takenote">
                 <textarea class="textArea" matTextareaAutosize
-                          [(ngModel)]="notedata.title"></textarea>
-        </div>
-        <div fxLayout="row" fxLayoutAlign="end start">
-          <button mat-icon-button class="pin-button">
-            <mat-icon *ngIf="!isPin" class="icon-take-note" matTooltip="Pin note" (click)="notePin()">
-              <img class="icon" src="../../../assets/unpinbar.svg"/>
-            </mat-icon>
-            <mat-icon *ngIf="isPin" class="icon-take-note" matTooltip="Unpin note" (click)="notePin()">
-              <img class="icon" src="../../../assets/pinbar.svg"/>
-            </mat-icon>
-          </button>
-        </div>
-      </div>
-
-      <div class="border" class="takenote" fxLayout="row" fxLayoutAlign="start start" style="padding-top: 5px">
-                <textarea class="textArea" style="font-size: 15px"
-                          matTextareaAutosize
-                          [(ngModel)]="notedata.description"></textarea>
-      </div>
-      <app-icons></app-icons>
-    </mat-card>
+                          [(ngModel)]="note.title"></textarea>
+    </div>
+    <div fxLayout="row" fxLayoutAlign="end start">
+      <button mat-icon-button class="pin-button">
+        <mat-icon *ngIf="!isPin" class="icon-take-note" matTooltip="Pin note" (click)="notePin()">
+          <img class="icon" src="../../../assets/unpinbar.svg"/>
+        </mat-icon>
+        <mat-icon *ngIf="isPin" class="icon-take-note" matTooltip="Unpin note" (click)="notePin()">
+          <img class="icon" src="../../../assets/pinbar.svg"/>
+        </mat-icon>
+      </button>
+    </div>
   </div>
 
+  <div class="border" class="takenote" fxLayout="row" fxLayoutAlign="start start" style="padding-top: 5px">
+                <textarea class="textArea" style="font-size: 15px"
+                          matTextareaAutosize
+                          [(ngModel)]="note.description"></textarea>
+  </div>
 
-</div>
+  <app-icons></app-icons>
+</mat-card>

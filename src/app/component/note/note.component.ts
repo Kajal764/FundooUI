@@ -1,6 +1,5 @@
-import {Component, OnInit} from '@angular/core';
-import {HttpclientService} from '../../service/http/httpclient.service';
-import {NoteService} from '../../service/note/note.service';
+import {Component, Input, OnInit} from '@angular/core';
+import {INote} from './note';
 
 @Component({
   selector: 'app-note',
@@ -9,22 +8,19 @@ import {NoteService} from '../../service/note/note.service';
 })
 export class NoteComponent implements OnInit {
 
-  public flag: boolean = true;
-  public isPin: boolean = false;
+  @Input() public note: INote ;
 
-  public notes = [];
+  public isPin = false;
 
-  constructor(private noteService: NoteService) {
+  constructor() {
   }
 
   ngOnInit(): void {
-    this.noteService.getNotes()
-      .subscribe(data => this.notes = data,
-        error => error.error);
   }
 
   notePin(): void {
     this.isPin ? this.isPin = false : this.isPin = true;
   }
+
 
 }

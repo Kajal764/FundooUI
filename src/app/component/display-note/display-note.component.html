@@ -1,0 +1,8 @@
+<div class="main-div" fxLayout="row">
+  <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px"
+      style="justify-content: center;padding: 20px">
+    <div *ngFor="let note of notes">
+      <app-note [note]="note"></app-note>
+    </div>
+  </div>
+</div>

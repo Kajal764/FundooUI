@@ -18,6 +18,7 @@ import {AuthGuard} from './auth.guard';
 import { CreateNoteComponent } from './component/create-note/create-note.component';
 import { NoteComponent } from './component/note/note.component';
 import { IconsComponent } from './component/icons/icons.component';
+import { DisplayNoteComponent } from './component/display-note/display-note.component';
 
 
 @NgModule({
@@ -31,6 +32,7 @@ import { IconsComponent } from './component/icons/icons.component';
     CreateNoteComponent,
     NoteComponent,
     IconsComponent,
+    DisplayNoteComponent,
   ],
   imports: [
     BrowserModule,

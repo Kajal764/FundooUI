@@ -47,6 +47,7 @@ export class CreateNoteComponent implements OnInit {
       .subscribe(response => {
         this.responseData = response;
         this.openSnackBar('Dismiss');
+
       }, (error) => {
         this.responseData = error.error;
         this.openSnackBar('Dismiss');
