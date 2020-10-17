@@ -17,6 +17,7 @@ import {DashboardComponent} from './component/dashboard/dashboard.component';
 import {AuthGuard} from './auth.guard';
 import { CreateNoteComponent } from './component/create-note/create-note.component';
 import { NoteComponent } from './component/note/note.component';
+import { IconsComponent } from './component/icons/icons.component';
 
 
 @NgModule({
@@ -29,6 +30,7 @@ import { NoteComponent } from './component/note/note.component';
     DashboardComponent,
     CreateNoteComponent,
     NoteComponent,
+    IconsComponent,
   ],
   imports: [
     BrowserModule,

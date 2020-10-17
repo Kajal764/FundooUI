@@ -1,6 +1,6 @@
-<div class="main-div" fxLayout="row" style="margin-top: 20px">
+<div class="main-div" fxLayout="row" style="margin:20px;">
   <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px"
-       style="display:flex;align-self: flex-start;justify-content: center">
+       style="display:flex;align-self: flex-start;justify-content: center;">
 
     <mat-card *ngFor="let notedata of notes" style="margin-top: 60px">
       <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -25,43 +25,7 @@
                           matTextareaAutosize
                           [(ngModel)]="notedata.description"></textarea>
       </div>
-
-      <div fxLayout="row" class="icon-div">
-
-        <div fxLayout="row" fxLayoutAlign="space-between center">
-          <button mat-icon-button>
-            <mat-icon class="icon-take-note" matTooltip="Remind me">
-              <img class="icon" class="take-note-icon" src="../../../assets/reminder.svg"/>
-            </mat-icon>
-          </button>
-          <button mat-icon-button>
-            <mat-icon matTooltip="Collaborator">
-              <img class="icon" class="take-note-icon" src="../../../assets/person_add-24px.svg"/>
-            </mat-icon>
-          </button>
-          <button mat-icon-button>
-            <mat-icon matTooltip="Chnage color">
-              <img class="icon" class="take-note-icon" src="../../../assets/color_lens-24px.svg"/>
-            </mat-icon>
-          </button>
-          <button mat-icon-button>
-            <mat-icon matTooltip="Add image">
-              <img class="icon" class="take-note-icon" src="../../../assets/outline-image-24px.svg"/>
-            </mat-icon>
-          </button>
-          <button mat-icon-button>
-            <mat-icon matTooltip="Archieve">
-              <img class="icon" class="take-note-icon" src="../../../assets/archive-24px.svg"/>
-            </mat-icon>
-          </button>
-          <button mat-icon-button>
-            <mat-icon matTooltip="More">
-              <img class="icon" class="take-note-icon" src="../../../assets/more_vert-24px.svg"/>
-            </mat-icon>
-          </button>
-        </div>
-
-      </div>
+      <app-icons></app-icons>
     </mat-card>
   </div>
 
