@@ -19,8 +19,10 @@ export class NoteService {
     return this.httpclientService.addNote(data, this.url + this.note + 'create');
   }
 
+
   // tslint:disable-next-line:typedef
-  // getNote() {
-  //   return this.httpclientService.getData(this.url + this.note + 'list');
-  // }
+  getNotes() {
+    return this.httpclientService.getNotes(this.url + this.note + 'list');
+  }
 }
+

@@ -46,16 +46,18 @@ export class CreateNoteComponent implements OnInit {
     this.noteService.createNote(data)
       .subscribe(response => {
         this.responseData = response;
+        this.openSnackBar('Dismiss');
       }, (error) => {
         this.responseData = error.error;
-        console.log(error.error);
+        this.openSnackBar('Dismiss');
       });
-    this.openSnackBar('Dismiss');
     this.noteTitle = '';
     this.noteDesc = '';
+
   }
 
   openSnackBar(action): void {
+    this.flag = true;
     this.snackBar.open(JSON.stringify(this.responseData.message), action, {duration: 4000});
   }
 

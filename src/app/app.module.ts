@@ -16,6 +16,7 @@ import {HttpClientModule} from '@angular/common/http';
 import {DashboardComponent} from './component/dashboard/dashboard.component';
 import {AuthGuard} from './auth.guard';
 import { CreateNoteComponent } from './component/create-note/create-note.component';
+import { NoteComponent } from './component/note/note.component';
 
 
 @NgModule({
@@ -27,6 +28,7 @@ import { CreateNoteComponent } from './component/create-note/create-note.compone
     RegisterComponent,
     DashboardComponent,
     CreateNoteComponent,
+    NoteComponent,
   ],
   imports: [
     BrowserModule,

@@ -1,0 +1,63 @@
+
+main-div {
+  padding-top: 10px;
+}
+
+element.style {
+  flex-flow: row wrap;
+  box-sizing: border-box;
+  display: flex;
+  justify-content: center;
+}
+
+.mat-card {
+  margin-top: 20px;
+  width: 240px;
+  border: 1px solid lightgray;
+  transition: none !important;
+  box-shadow: none !important;
+}
+
+//.note-create {
+//  margin-top: 40px;
+//  width: 25%;
+//  //padding-bottom: 6px;
+//  //padding-top: 6px;
+//  border:1px solid lightgray;
+//
+//}
+//
+.border {
+  user-select: none;
+  border-radius: 5%;
+}
+
+.icon {
+  opacity: 0.5;
+}
+
+.textArea {
+  border: none;
+  outline: none;
+  user-select: none;
+  font-family: Roboto;
+  font-weight: 400;
+}
+
+.takenote {
+  color: rgb(173, 166, 166);
+  border: none;
+  outline: none;
+  user-select: none;
+}
+
+.take-note-icon {
+  height: 65%;
+}
+
+.icon-div {
+  padding-top: 10px;
+
+}
+
+

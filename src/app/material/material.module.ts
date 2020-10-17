@@ -11,10 +11,11 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
+import {MatGridListModule} from '@angular/material/grid-list';
 
 const MaterialComponents = [MatButtonModule, MatFormFieldModule, MatFormFieldModule, MatInputModule, MatCardModule,
   MatIconModule, MatSnackBarModule, MatToolbarModule, MatAutocompleteModule, MatSidenavModule, MatTooltipModule,
-  MatMenuModule, MatListModule];
+  MatMenuModule, MatListModule, MatGridListModule];
 
 @NgModule({
   imports: [MaterialComponents],
