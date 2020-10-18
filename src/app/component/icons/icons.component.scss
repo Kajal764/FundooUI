@@ -10,6 +10,22 @@
   padding-top: 10px;
 }
 
-.mat-icon-button{
+.mat-icon-button {
   width: 35px;
 }
+
+//color css
+.colors {
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  border-color: lavender;
+  outline: none;
+
+}
+.colors:hover{
+  border-color: grey;
+
+}
+
+

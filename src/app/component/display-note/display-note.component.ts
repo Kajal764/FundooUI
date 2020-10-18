@@ -22,6 +22,7 @@ export class DisplayNoteComponent implements OnInit {
     this.noteService.getNotes()
       .subscribe(data => {
           this.notes = data;
+          console.log(this.notes);
           this.message = 'Note Fetch';
           this.openSnackBar('Dismiss');
         },

@@ -1,8 +1,9 @@
-<mat-dialog-content style="padding:0 15px; border-radius: 4px; ">
+<mat-dialog-content style="border-radius: 4px"
+                    [style.backgroundColor]="note.color">
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div class="border" fxLayout="column" class="takenote">
                 <textarea class="textArea" matTextareaAutosize
-                          [(ngModel)]="note.title"></textarea>
+                          [(ngModel)]="note.title" [style.backgroundColor]="note.color"></textarea>
     </div>
     <div fxLayout="row" fxLayoutAlign="end start">
       <button mat-icon-button class="pin-button">
@@ -19,13 +20,13 @@
   <div class="border" class="takenote" fxLayout="row" fxLayoutAlign="start start" style="padding-top: 5px">
                 <textarea class="textArea" style="font-size: 15px"
                           matTextareaAutosize
-                          [(ngModel)]="note.description"></textarea>
+                          [(ngModel)]="note.description" [style.backgroundColor]="note.color"></textarea>
   </div>
 
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <app-icons></app-icons>
     <div>
-      <button mat-flat-button [mat-dialog-close]="note">Close</button>
+      <button mat-flat-button [mat-dialog-close]="note" [style.backgroundColor]="note.color">Close</button>
     </div>
   </div>
 

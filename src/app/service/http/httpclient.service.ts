@@ -26,7 +26,7 @@ export class HttpclientService {
       .pipe(catchError(this.handleError));
   }
 
-  editNote(data: any, url: string): Observable<any> {
+  updateData(data: any, url: string): Observable<any> {
     return this.httpClient.put(url, data)
       .pipe(catchError(this.handleError));
   }

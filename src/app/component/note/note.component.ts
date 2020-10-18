@@ -55,4 +55,9 @@ export class NoteComponent implements OnInit {
   openSnackBar(action): void {
     this.snackBar.open(this.responseData.message, action, {duration: 4000});
   }
+
+
+  getUpdatedValue($event: any): void {
+    this.note.color = $event;
+  }
 }

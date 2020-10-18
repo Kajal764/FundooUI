@@ -9,16 +9,28 @@
       <img class="take-note-icon" src="../../../assets/person_add-24px.svg"/>
     </mat-icon>
   </button>
-  <button mat-icon-button class="icon">
-    <mat-icon matTooltip="Chnage color">
+  <button mat-icon-button class="icon" [matMenuTriggerFor]="colorlist">
+    <mat-icon matTooltip="Change color">
       <img class="icon" class="take-note-icon" src="../../../assets/color_lens-24px.svg"/>
     </mat-icon>
   </button>
+
+  <mat-menu #colorlist="matMenu" yPosition="above">
+    <div fxLayout="row" fxLayoutGap="5px" style="margin: 3px;padding-bottom: 0px" *ngFor="let colors of colorArray">
+      <div *ngFor="let color of colors">
+        <button class="colors" [ngStyle]="{ 'background-color': color.color }"
+                (click)="colorEdit(color.color,note)" matTooltip="{{ color.name}}"></button>
+      </div>
+    </div>
+  </mat-menu>
+
   <button mat-icon-button class="icon">
     <mat-icon matTooltip="Add image">
       <img class="icon" class="take-note-icon" src="../../../assets/outline-image-24px.svg"/>
     </mat-icon>
   </button>
+
+
   <button mat-icon-button class="icon">
     <mat-icon matTooltip="Archieve" (click)="deleteNote('archive')">
       <img class="icon" class="take-note-icon" src="../../../assets/archive-24px.svg"/>
