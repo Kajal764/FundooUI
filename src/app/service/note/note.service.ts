@@ -1,6 +1,7 @@
 import {Injectable} from '@angular/core';
 import {HttpclientService} from '../http/httpclient.service';
 import {environment} from '../../../environments/environment';
+import {Observable} from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -23,6 +24,10 @@ export class NoteService {
   // tslint:disable-next-line:typedef
   getNotes() {
     return this.httpclientService.getNotes(this.url + this.note + 'list');
+  }
+
+  editNote(data: any): Observable<any> {
+    return this.httpclientService.editNote(data, this.url + this.note + 'update');
   }
 }
 

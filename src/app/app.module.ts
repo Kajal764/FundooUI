@@ -19,6 +19,7 @@ import { CreateNoteComponent } from './component/create-note/create-note.compone
 import { NoteComponent } from './component/note/note.component';
 import { IconsComponent } from './component/icons/icons.component';
 import { DisplayNoteComponent } from './component/display-note/display-note.component';
+import { UpdateNoteComponent } from './component/update-note/update-note.component';
 
 
 @NgModule({
@@ -33,6 +34,7 @@ import { DisplayNoteComponent } from './component/display-note/display-note.comp
     NoteComponent,
     IconsComponent,
     DisplayNoteComponent,
+    UpdateNoteComponent,
   ],
   imports: [
     BrowserModule,

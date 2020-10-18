@@ -12,10 +12,11 @@ import {MatTooltipModule} from '@angular/material/tooltip';
 import {MatMenuModule} from '@angular/material/menu';
 import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
+import {MatDialogModule} from '@angular/material/dialog';
 
 const MaterialComponents = [MatButtonModule, MatFormFieldModule, MatFormFieldModule, MatInputModule, MatCardModule,
   MatIconModule, MatSnackBarModule, MatToolbarModule, MatAutocompleteModule, MatSidenavModule, MatTooltipModule,
-  MatMenuModule, MatListModule, MatGridListModule];
+  MatMenuModule, MatListModule, MatGridListModule, MatDialogModule];
 
 @NgModule({
   imports: [MaterialComponents],

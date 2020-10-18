@@ -1,4 +1,4 @@
-<mat-card (click)="openNotePopup()">
+<mat-dialog-content style="padding:0 15px; border-radius: 4px; ">
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <div class="border" fxLayout="column" class="takenote">
                 <textarea class="textArea" matTextareaAutosize
@@ -21,6 +21,15 @@
                           matTextareaAutosize
                           [(ngModel)]="note.description"></textarea>
   </div>
-  <app-icons></app-icons>
-</mat-card>
+
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <app-icons></app-icons>
+    <div>
+      <button mat-flat-button [mat-dialog-close]="note">Close</button>
+    </div>
+  </div>
+
+
+  <mat-dialog-content>
+
 

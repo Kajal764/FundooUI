@@ -48,4 +48,8 @@ export class HttpclientService {
       .pipe(catchError(this.handleError));
   }
 
+  editNote(data: any, url: string): Observable<any> {
+    return this.httpClient.put(url, data, this.httpOptions)
+      .pipe(catchError(this.handleError));
+  }
 }

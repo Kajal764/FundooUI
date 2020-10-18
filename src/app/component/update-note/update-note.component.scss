@@ -1,0 +1,31 @@
+
+.mat-card {
+  padding: 0px;
+  transition: none !important;
+  box-shadow: none !important;
+  border: none;
+  outline: none;
+  border-radius: 8px;
+}
+
+.border {
+  user-select: none;
+  border-radius: 30px;
+}
+
+.textArea {
+  border: none;
+  outline: none;
+  user-select: none;
+  font-family: Roboto;
+  font-weight: 400;
+}
+
+.takenote {
+  color: rgb(173, 166, 166);
+  border: none;
+  outline: none;
+  user-select: none;
+}
+
+
