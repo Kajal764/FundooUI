@@ -2,6 +2,7 @@ import {Injectable} from '@angular/core';
 import {HttpclientService} from '../http/httpclient.service';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
+import {INote} from '../../component/note/note';
 
 @Injectable({
   providedIn: 'root'
@@ -15,14 +16,12 @@ export class NoteService {
   constructor(private httpclientService: HttpclientService) {
   }
 
-  // tslint:disable-next-line:typedef
-  createNote(data: { note_id: number; description: any; title: any }) {
+  createNote(data: { note_id: number; description: any; title: any }): Observable<any> {
     return this.httpclientService.addNote(data, this.url + this.note + 'create');
   }
 
 
-  // tslint:disable-next-line:typedef
-  getNotes() {
+  getNotes(): Observable<INote[]> {
     return this.httpclientService.getNotes(this.url + this.note + 'list');
   }
 

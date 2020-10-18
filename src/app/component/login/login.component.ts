@@ -56,14 +56,17 @@ export class LoginComponent implements OnInit {
 
     this.userService.login(data)
       .subscribe((response: HttpResponse<any>) => {
-        localStorage.setItem('token', `Bearer ${response.headers.get('AuthorizeToken')}`);
+          localStorage.setItem('token', `Bearer ${response.headers.get('AuthorizeToken')}`);
           this.responseData = response.body;
+          this.openSnackBar('Dismiss');
           this.redirectToDashboard();
         },
         (error) => {
           this.responseData = error.error;
+          console.log(this.responseData);
+          this.openSnackBar('Dismiss');
         });
-    this.openSnackBar('Dismiss');
+
   }
 
   // tslint:disable-next-line:typedef

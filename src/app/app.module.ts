@@ -12,15 +12,15 @@ import {ForgotPasswordComponent} from './component/forgot-password/forgot-passwo
 import {UpdatePasswordComponent} from './component/update-password/update-password.component';
 import {RegisterComponent} from './component/register/register.component';
 import {UserService} from './service/user/user.service';
-import {HttpClientModule} from '@angular/common/http';
+import {HttpClientModule, HTTP_INTERCEPTORS} from '@angular/common/http';
 import {DashboardComponent} from './component/dashboard/dashboard.component';
 import {AuthGuard} from './auth.guard';
-import { CreateNoteComponent } from './component/create-note/create-note.component';
-import { NoteComponent } from './component/note/note.component';
-import { IconsComponent } from './component/icons/icons.component';
-import { DisplayNoteComponent } from './component/display-note/display-note.component';
-import { UpdateNoteComponent } from './component/update-note/update-note.component';
-
+import {CreateNoteComponent} from './component/create-note/create-note.component';
+import {NoteComponent} from './component/note/note.component';
+import {IconsComponent} from './component/icons/icons.component';
+import {DisplayNoteComponent} from './component/display-note/display-note.component';
+import {UpdateNoteComponent} from './component/update-note/update-note.component';
+import {TokenInterceptorService} from './service/token/token-interceptor.service';
 
 @NgModule({
   declarations: [
@@ -46,7 +46,14 @@ import { UpdateNoteComponent } from './component/update-note/update-note.compone
     HttpClientModule,
     FormsModule
   ],
-  providers: [UserService, AuthGuard],
+  providers: [UserService,
+    AuthGuard,
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: TokenInterceptorService,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule {

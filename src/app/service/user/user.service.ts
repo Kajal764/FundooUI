@@ -1,40 +1,52 @@
 import {Injectable} from '@angular/core';
-import {HttpclientService} from '../http/httpclient.service';
 import {environment} from '../../../environments/environment';
+import {Observable, throwError} from 'rxjs';
+import {HttpBackend, HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {catchError} from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
 })
 export class UserService {
 
-  private url = environment.baseUrl;
+  private baseUrl = environment.baseUrl;
   private user = 'fundoo/user/';
 
-  constructor(private httpclientService: HttpclientService) {
+  constructor(private httpClient: HttpClient, private httpBackend: HttpBackend) {
+    this.httpClient = new HttpClient(httpBackend);
   }
 
-  // tslint:disable-next-line:typedef
-  register(data) {
-    return this.httpclientService.postdata(data, this.url + this.user + 'register');
+  handleError(error: HttpErrorResponse): Observable<never> {
+    return throwError(error);
   }
 
-  // tslint:disable-next-line:typedef
-  login(data) {
-    return this.httpclientService.postdata(data, this.url + this.user + 'login');
+  postData(data, url): Observable<any> {
+    console.log(data, url);
+    return this.httpClient.post<any>(url, data, {observe: 'response' as 'body'})
+      .pipe(catchError(this.handleError));
   }
 
-  // tslint:disable-next-line:typedef
-  forgotPw(data: { email: any }) {
-    return this.httpclientService.postdata(data, this.url + this.user + 'forgot_password');
+  register(data): Observable<any> {
+    const apiUrl: string = this.baseUrl + this.user + 'register';
+    return this.postData(data, apiUrl);
   }
 
-  // tslint:disable-next-line:typedef
-  updatePassword(data: { password: any; confirmPassword: any }, token) {
-    return this.httpclientService.putdata(data, this.url + this.user + 'update_password/' + token);
+  login(data): Observable<any> {
+    const apiUrl = this.baseUrl + this.user + 'login';
+    return this.postData(data, apiUrl);
   }
 
-  // tslint:disable-next-line:typedef
-  loggedIn() {
+  forgotPw(data: { email: any }): Observable<any> {
+    const apiUrl: string = this.baseUrl + this.user + 'forgot_password';
+    return this.postData(data, apiUrl);
+  }
+
+  updatePassword(data: { password: any; confirmPassword: any }, token): Observable<any> {
+    const apiUrl: string = this.baseUrl + this.user + 'update_password/' + token;
+    return this.httpClient.put(apiUrl, data);
+  }
+
+  loggedIn(): boolean {
     return !!localStorage.getItem('token');
   }
 

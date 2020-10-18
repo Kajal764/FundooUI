@@ -12,6 +12,7 @@ export class DisplayNoteComponent implements OnInit {
   public flag = true;
 
   public notes = [];
+  private message: string;
 
 
   constructor(private noteService: NoteService, private snackBar: MatSnackBar) {
@@ -21,19 +22,17 @@ export class DisplayNoteComponent implements OnInit {
     this.noteService.getNotes()
       .subscribe(data => {
           this.notes = data;
+          this.message = 'Note Fetch';
           this.openSnackBar('Dismiss');
         },
-        error => error.error);
+        error => {
+          this.message = error.error.message;
+          this.openSnackBar('Dismiss');
+        });
   }
 
   openSnackBar(action): void {
-    let message: string;
-    if (this.notes.length > 1) {
-      message = 'Note Fetch';
-    } else {
-      message = 'Note not present';
-    }
-    this.snackBar.open(message, action, {duration: 4000});
+    this.snackBar.open(this.message, action, {duration: 4000});
   }
 
 }
