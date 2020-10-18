@@ -28,5 +28,9 @@ export class NoteService {
   editNote(data: any): Observable<any> {
     return this.httpclientService.editNote(data, this.url + this.note + 'update');
   }
+
+  deleteNote(noteId: number): Observable<any> {
+    return this.httpclientService.deleteData(`${this.url}${this.note}delete/${noteId}`);
+  }
 }
 

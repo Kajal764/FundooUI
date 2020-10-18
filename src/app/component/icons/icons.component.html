@@ -6,7 +6,7 @@
   </button>
   <button mat-icon-button class="icon">
     <mat-icon matTooltip="Collaborator">
-      <img  class="take-note-icon" src="../../../assets/person_add-24px.svg"/>
+      <img class="take-note-icon" src="../../../assets/person_add-24px.svg"/>
     </mat-icon>
   </button>
   <button mat-icon-button class="icon">
@@ -25,13 +25,13 @@
     </mat-icon>
   </button>
   <button mat-icon-button class="icon" [matMenuTriggerFor]="menu">
-    <mat-icon matTooltip="More" >
+    <mat-icon matTooltip="More">
       <img class="icon" class="take-note-icon" src="../../../assets/more_vert-24px.svg"/>
     </mat-icon>
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item>
-      <span>Delete note</span>
+      <span (click)="deleteNote()">Delete note</span>
     </button>
     <button mat-menu-item>
       <span>Add label</span>

@@ -18,7 +18,9 @@ export class NoteComponent implements OnInit {
   // tslint:disable-next-line:ban-types
   private responseData: any;
 
-  constructor(public dialog: MatDialog, private noteService: NoteService, private snackBar: MatSnackBar) {
+  constructor(public dialog: MatDialog,
+              private noteService: NoteService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
