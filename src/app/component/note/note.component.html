@@ -1,5 +1,5 @@
-<mat-card (click)="openNotePopup()">
-  <div fxLayout="row" fxLayoutAlign="space-between center">
+<mat-card>
+  <div fxLayout="row" fxLayoutAlign="space-between center" (click)="openNotePopup()">
     <div class="border" fxLayout="column" class="takenote">
                 <textarea class="textArea" matTextareaAutosize
                           [(ngModel)]="note.title"></textarea>

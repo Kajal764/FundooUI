@@ -24,10 +24,18 @@
       <img class="icon" class="take-note-icon" src="../../../assets/archive-24px.svg"/>
     </mat-icon>
   </button>
-  <button mat-icon-button class="icon">
-    <mat-icon matTooltip="More">
+  <button mat-icon-button class="icon" [matMenuTriggerFor]="menu">
+    <mat-icon matTooltip="More" >
       <img class="icon" class="take-note-icon" src="../../../assets/more_vert-24px.svg"/>
     </mat-icon>
   </button>
+  <mat-menu #menu="matMenu">
+    <button mat-menu-item>
+      <span>Delete note</span>
+    </button>
+    <button mat-menu-item>
+      <span>Add label</span>
+    </button>
+  </mat-menu>
 </div>
 
