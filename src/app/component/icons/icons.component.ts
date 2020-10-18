@@ -20,8 +20,8 @@ export class IconsComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  deleteNote(): void {
-    this.noteService.deleteNote(this.note.note_Id)
+  deleteNote(apiCall: string): void {
+    this.noteService.deleteNote(this.note.note_Id, apiCall)
       .subscribe(response => {
         this.responseData = response;
         this.openSnackBar('Dismiss');
@@ -29,7 +29,6 @@ export class IconsComponent implements OnInit {
         this.responseData = error.error;
         this.openSnackBar('Dismiss');
       });
-
   }
 
 

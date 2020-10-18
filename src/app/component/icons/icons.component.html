@@ -20,7 +20,7 @@
     </mat-icon>
   </button>
   <button mat-icon-button class="icon">
-    <mat-icon matTooltip="Archieve">
+    <mat-icon matTooltip="Archieve" (click)="deleteNote('archive')">
       <img class="icon" class="take-note-icon" src="../../../assets/archive-24px.svg"/>
     </mat-icon>
   </button>
@@ -31,7 +31,7 @@
   </button>
   <mat-menu #menu="matMenu">
     <button mat-menu-item>
-      <span (click)="deleteNote()">Delete note</span>
+      <span (click)="deleteNote('delete')">Delete note</span>
     </button>
     <button mat-menu-item>
       <span>Add label</span>
