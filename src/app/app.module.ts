@@ -21,6 +21,8 @@ import {IconsComponent} from './component/icons/icons.component';
 import {DisplayNoteComponent} from './component/display-note/display-note.component';
 import {UpdateNoteComponent} from './component/update-note/update-note.component';
 import {TokenInterceptorService} from './service/token/token-interceptor.service';
+import { TrashComponent } from './component/trash/trash.component';
+import { NoteHomePageComponent } from './component/note-home-page/note-home-page.component';
 
 @NgModule({
   declarations: [
@@ -35,6 +37,8 @@ import {TokenInterceptorService} from './service/token/token-interceptor.service
     IconsComponent,
     DisplayNoteComponent,
     UpdateNoteComponent,
+    TrashComponent,
+    NoteHomePageComponent,
   ],
   imports: [
     BrowserModule,

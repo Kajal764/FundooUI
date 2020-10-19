@@ -1,0 +1,35 @@
+.img-icon {
+  width: 10%;
+  height: 100%;
+  margin-left: 10px;
+}
+
+#search-text-div {
+  height: 100%;
+}
+
+.search {
+  display: flex;
+  margin-left: 25%;
+  height: 75%;
+  border-radius: 10px;
+  background-color: #f1f3f4;
+  outline: none;
+  width: 100%;
+}
+
+#search-input {
+  height: 99%;
+  margin-left: 20px;
+  border: none;
+  outline: none;
+  background: transparent;
+}
+
+@media only screen and (max-width: 319px) {
+  .search {
+    margin: 30px;
+  }
+}
+
+

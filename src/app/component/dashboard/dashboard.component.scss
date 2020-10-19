@@ -71,9 +71,10 @@ mat-sidenav {
   user-select: none;
 }
 
-.side-nav-list {
-  border-radius: 0px 25px 25px 0px;
-}
+//.side-nav-list {
+//  border-radius: 0px 25px 25px 0px;
+//
+//}
 
 .full-width {
   margin-left: 40px;
@@ -116,5 +117,11 @@ mat-sidenav {
   .full-width {
     display: none;
   }
+}
+
+.active-list-item {
+  background-color: #fff5be !important;
+  border-radius: 0px 25px 25px 0px;
+
 }
 

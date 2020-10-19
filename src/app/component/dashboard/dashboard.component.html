@@ -69,36 +69,34 @@
                (mouseleave)="mouseleave()">
     <mat-nav-list>
 
-      <mat-list-item class="side-nav-list" style="background-color: #fff5be">
+      <a routerLink="./note" mat-list-item routerLinkActive="active-list-item">
         <img src="../../../assets/note.svg" style="margin-left: 11px">
         <span class="full-width" *ngIf="isExpanded || isShowing">Notes</span>
-      </mat-list-item>
+      </a>
 
-      <mat-list-item class="side-nav-list">
+      <a mat-list-item routerLinkActive="active-list-item">
         <img src="../../../assets/notifications_none-24px.svg" style="margin-left: 11px">
         <span class="full-width" *ngIf="isExpanded || isShowing">Reminders</span>
-      </mat-list-item>
+      </a>
 
-      <mat-list-item class="side-nav-list">
+      <a mat-list-item routerLinkActive="active-list-item">
         <mat-icon style="margin-left: 11px">edit</mat-icon>
         <span class="full-width" *ngIf="isExpanded || isShowing">Edit labels</span>
-      </mat-list-item>
+      </a>
 
-      <mat-list-item class="side-nav-list">
+      <a mat-list-item routerLinkActive="active-list-item">
         <img src="../../../assets/archive-24px.svg" style="margin-left: 11px">
         <span class="full-width" *ngIf="isExpanded || isShowing">Archieve</span>
-      </mat-list-item>
+      </a>
 
-      <mat-list-item class="side-nav-list">
+      <a routerLink="./trash" mat-list-item class="side-nav-list" routerLinkActive="active-list-item">
         <img src="../../../assets/trash.svg" style="margin-left: 11px">
         <span class="full-width" *ngIf="isExpanded || isShowing">Trash</span>
-      </mat-list-item>
-
+      </a>
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-    <app-create-note></app-create-note>
-    <app-display-note></app-display-note>
+    <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>
 

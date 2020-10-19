@@ -6,6 +6,8 @@ import {ForgotPasswordComponent} from './component/forgot-password/forgot-passwo
 import {RegisterComponent} from './component/register/register.component';
 import {DashboardComponent} from './component/dashboard/dashboard.component';
 import {AuthGuard} from './auth.guard';
+import {NoteHomePageComponent} from './component/note-home-page/note-home-page.component';
+import {TrashComponent} from './component/trash/trash.component';
 
 const routes: Routes = [
   {
@@ -32,7 +34,22 @@ const routes: Routes = [
   {
     path: 'home',
     component: DashboardComponent,
-    canActivate: [AuthGuard]
+    canActivate: [AuthGuard],
+    children: [
+      {
+        path: '',
+        redirectTo: 'note',
+        pathMatch: 'full'
+      },
+      {
+        path: 'note',
+        component: NoteHomePageComponent
+      },
+      {
+        path: 'trash',
+        component: TrashComponent
+      },
+    ]
   },
 ];
 
