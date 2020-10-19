@@ -16,7 +16,6 @@ export class NoteComponent implements OnInit {
   @Input() public noteType: string;
 
   public isPin = false;
-  // tslint:disable-next-line:ban-types
   private responseData: any;
 
   constructor(public dialog: MatDialog,

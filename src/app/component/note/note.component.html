@@ -1,26 +1,25 @@
 <mat-card [style.backgroundColor]="note.color" class="note">
-  <div (click)="openNotePopup()">
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div class="border" fxLayout="column" class="takenote">
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <div class="border" fxLayout="column" class="takenote" (click)="openNotePopup()">
                 <textarea class="textArea" matTextareaAutosize
                           [(ngModel)]="note.title" [style.backgroundColor]="note.color"></textarea>
-      </div>
-      <div fxLayout="row" fxLayoutAlign="end start">
-        <button mat-icon-button class="pin-button">
-          <mat-icon *ngIf="!isPin" class="icon-take-note" matTooltip="Pin note" (click)="notePin()">
-            <img class="icon" src="../../../assets/unpinbar.svg"/>
-          </mat-icon>
-          <mat-icon *ngIf="isPin" class="icon-take-note" matTooltip="Unpin note" (click)="notePin()">
-            <img class="icon" src="../../../assets/pinbar.svg"/>
-          </mat-icon>
-        </button>
-      </div>
     </div>
-    <div class="border" class="takenote" fxLayout="row" fxLayoutAlign="start start" style="padding-top: 5px">
+    <div fxLayout="row" fxLayoutAlign="end start">
+      <button mat-icon-button class="pin-button">
+        <mat-icon *ngIf="!isPin" class="icon-take-note" matTooltip="Pin note" (click)="notePin()">
+          <img class="icon" src="../../../assets/unpinbar.svg"/>
+        </mat-icon>
+        <mat-icon *ngIf="isPin" class="icon-take-note" matTooltip="Unpin note" (click)="notePin()">
+          <img class="icon" src="../../../assets/pinbar.svg"/>
+        </mat-icon>
+      </button>
+    </div>
+  </div>
+  <div class="border" class="takenote" fxLayout="row" fxLayoutAlign="start start" style="padding-top: 5px"
+       (click)="openNotePopup()">
                 <textarea class="textArea" style="font-size: 15px" [style.backgroundColor]="note.color"
                           matTextareaAutosize
                           [(ngModel)]="note.description"></textarea>
-    </div>
   </div>
   <app-icons class="note-select"
              [noteType]="noteType" [note]="note" (setColor)="getUpdatedValue($event)">
