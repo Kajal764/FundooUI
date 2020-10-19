@@ -12,7 +12,7 @@ export class IconsComponent implements OnInit {
 
   @Output() setColor = new EventEmitter();
   @Input() note: any;
-
+  @Input() noteType: any;
 
   private responseData: any;
 
@@ -43,6 +43,7 @@ export class IconsComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    console.log(this.noteType);
   }
 
   deleteNote(apiCall: string): void {
@@ -55,7 +56,6 @@ export class IconsComponent implements OnInit {
         this.openSnackBar('Dismiss');
       });
   }
-
 
   openSnackBar(action): void {
     this.snackBar.open(this.responseData.message, action, {duration: 4000});

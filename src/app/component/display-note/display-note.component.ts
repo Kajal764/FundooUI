@@ -13,7 +13,7 @@ export class DisplayNoteComponent implements OnInit {
 
   public notes = [];
   private message: string;
-
+  noteType = 'note';
 
   constructor(private noteService: NoteService, private snackBar: MatSnackBar) {
   }

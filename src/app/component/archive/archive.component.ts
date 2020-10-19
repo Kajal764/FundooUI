@@ -11,6 +11,7 @@ import {INote} from '../note/note';
 export class ArchiveComponent implements OnInit {
   public archiveNoteList: INote[];
   private message: string;
+  noteType = 'archive';
 
   constructor(private noteService: NoteService, private snackBar: MatSnackBar) {
   }

@@ -1,8 +1,8 @@
-<div class="main-div" fxLayout="row" fxLayoutAlign='center center' >
+<div class="main-div" fxLayout="row" fxLayoutAlign='center center'>
   <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px"
-      style="justify-content: center;padding: 35px 30px 10px 30px">
+       style="justify-content: center;padding: 35px 30px 10px 30px">
     <div *ngFor="let note of notes" style="justify-content: center">
-      <app-note [note]="note" ></app-note>
+      <app-note [note]="note" [noteType]="noteType"></app-note>
     </div>
   </div>
 </div>

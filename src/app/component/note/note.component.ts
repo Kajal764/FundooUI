@@ -13,6 +13,7 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class NoteComponent implements OnInit {
 
   @Input() public note: INote;
+  @Input() public noteType: string;
 
   public isPin = false;
   // tslint:disable-next-line:ban-types
