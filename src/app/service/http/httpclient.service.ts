@@ -35,4 +35,10 @@ export class HttpclientService {
     return this.httpClient.put(url, null)
       .pipe(catchError(this.handleError));
   }
+
+  deleteData(url: string): Observable<any> {
+    console.log(url);
+    return this.httpClient.delete(url)
+      .pipe(catchError(this.handleError));
+  }
 }

@@ -35,5 +35,9 @@ export class NoteService {
   updateColor(data: { note_id: number; color: string }): Observable<any> {
     return this.httpclientService.updateData(data, this.url + this.note + 'color');
   }
+
+  permanentDelete(noteId: number): Observable<any> {
+    return this.httpclientService.deleteData(this.url + this.note + 'trash/' + noteId);
+  }
 }
 

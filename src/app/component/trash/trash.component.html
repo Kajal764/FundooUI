@@ -1,4 +1,3 @@
-
 <div fxLayoutAlign='center center' class="trash" fxLayout='row' style="padding-top: 20px">
   Notes in Trash are deleted after 7 days.
 </div>
@@ -19,7 +18,7 @@
                             [(ngModel)]="trashNote.description"></textarea>
       </div>
       <div class="icon-div" class="note-select">
-        <button mat-icon-button class="icon" (click)="deleteForever()">
+        <button mat-icon-button class="icon" (click)="deleteForever(trashNote)">
           <mat-icon class="icon-take-note" matTooltip="Delete forever" style="padding-left: 0px">
             <img class="icon" class="take-note-icon" src="../../../assets/delete_forever-24px.svg"/>
           </mat-icon>

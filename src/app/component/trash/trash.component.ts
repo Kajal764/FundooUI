@@ -9,7 +9,7 @@ import {INote} from '../note/note';
   styleUrls: ['./trash.component.scss']
 })
 export class TrashComponent implements OnInit {
-  private trashNoteList: INote[];
+  public trashNoteList: INote[];
   private message: string;
   private responseData: any;
 
@@ -21,29 +21,36 @@ export class TrashComponent implements OnInit {
     this.trashNote();
   }
 
-  // tslint:disable-next-line:typedef
-  private trashNote() {
+
+  private trashNote(): void {
     this.noteService.getNotes('trashList')
       .subscribe(data => {
           this.trashNoteList = data;
           this.message = 'Note Fetch';
-          this.openSnackBar('Dismiss');
+          this.snackBar.open(this.message, 'Dismiss', {duration: 4000});
         },
         error => {
           this.message = error.error.message;
-          this.openSnackBar('Dismiss');
+          this.snackBar.open(this.message, 'Dismiss', {duration: 4000});
         });
   }
 
-  openSnackBar(action): void {
-    this.snackBar.open(this.message, action, {duration: 4000});
+
+  deleteForever(trashNote: INote): void {
+    this.noteService.permanentDelete(trashNote.note_Id)
+      .subscribe(response => {
+        this.responseData = response;
+        console.log(this.responseData);
+        this.openSnackBar('Dismiss');
+      }, error => {
+        this.responseData = error.error;
+        this.openSnackBar('Dismiss');
+      });
+
+
   }
 
-  deleteForever() {
-
-  }
-
-  restoreNote(trashNote: INote) {
+  restoreNote(trashNote: INote): void {
     this.noteService.deleteNote(trashNote.note_Id, 'restoreTrashNote')
       .subscribe(response => {
         this.responseData = response;
@@ -52,6 +59,9 @@ export class TrashComponent implements OnInit {
         this.responseData = error.error;
         this.openSnackBar('Dismiss');
       });
+  }
 
+  openSnackBar(action): void {
+    this.snackBar.open(this.responseData.message, action, {duration: 4000});
   }
 }

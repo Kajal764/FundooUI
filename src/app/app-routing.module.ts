@@ -8,6 +8,8 @@ import {DashboardComponent} from './component/dashboard/dashboard.component';
 import {AuthGuard} from './auth.guard';
 import {NoteHomePageComponent} from './component/note-home-page/note-home-page.component';
 import {TrashComponent} from './component/trash/trash.component';
+import {ArchitectCommand} from '@angular/cli/models/architect-command';
+import {ArchiveComponent} from './component/archive/archive.component';
 
 const routes: Routes = [
   {
@@ -48,6 +50,10 @@ const routes: Routes = [
       {
         path: 'trash',
         component: TrashComponent
+      },
+      {
+        path: 'archive',
+        component: ArchiveComponent
       },
     ]
   },

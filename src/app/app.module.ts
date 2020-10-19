@@ -23,6 +23,7 @@ import {UpdateNoteComponent} from './component/update-note/update-note.component
 import {TokenInterceptorService} from './service/token/token-interceptor.service';
 import { TrashComponent } from './component/trash/trash.component';
 import { NoteHomePageComponent } from './component/note-home-page/note-home-page.component';
+import { ArchiveComponent } from './component/archive/archive.component';
 
 @NgModule({
   declarations: [
@@ -39,6 +40,8 @@ import { NoteHomePageComponent } from './component/note-home-page/note-home-page
     UpdateNoteComponent,
     TrashComponent,
     NoteHomePageComponent,
+    ArchiveComponent,
+
   ],
   imports: [
     BrowserModule,
