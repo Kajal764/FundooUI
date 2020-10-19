@@ -19,7 +19,7 @@ export class DisplayNoteComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.noteService.getNotes()
+    this.noteService.getNotes('list')
       .subscribe(data => {
           this.notes = data;
           console.log(this.notes);

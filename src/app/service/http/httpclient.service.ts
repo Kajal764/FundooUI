@@ -31,7 +31,7 @@ export class HttpclientService {
       .pipe(catchError(this.handleError));
   }
 
-  deleteData(url: string): Observable<any> {
+  putData(url: string): Observable<any> {
     return this.httpClient.put(url, null)
       .pipe(catchError(this.handleError));
   }

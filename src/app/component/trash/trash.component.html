@@ -1,1 +1,38 @@
-<p>trash works!</p>
+
+<div fxLayoutAlign='center center' class="trash" fxLayout='row' style="padding-top: 20px">
+  Notes in Trash are deleted after 7 days.
+</div>
+<div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px"
+     style="justify-content: center;padding: 35px 30px 10px 30px">
+  <div *ngFor="let trashNote of trashNoteList">
+
+    <mat-card [style.backgroundColor]="trashNote.color" class="note">
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div class="border" fxLayout="column" class="takenote">
+                  <textarea class="textArea" matTextareaAutosize
+                            [(ngModel)]="trashNote.title" [style.backgroundColor]="trashNote.color"></textarea>
+        </div>
+      </div>
+      <div class="border" class="takenote" fxLayout="row" fxLayoutAlign="start start" style="padding-top: 5px">
+                  <textarea class="textArea" style="font-size: 15px" [style.backgroundColor]="trashNote.color"
+                            matTextareaAutosize
+                            [(ngModel)]="trashNote.description"></textarea>
+      </div>
+      <div class="icon-div" class="note-select">
+        <button mat-icon-button class="icon" (click)="deleteForever()">
+          <mat-icon class="icon-take-note" matTooltip="Delete forever" style="padding-left: 0px">
+            <img class="icon" class="take-note-icon" src="../../../assets/delete_forever-24px.svg"/>
+          </mat-icon>
+        </button>
+        <button mat-icon-button class="icon" style="margin-left: 10px" (click)="restoreNote(trashNote)">
+          <mat-icon matTooltip="Collaborator" matTooltip="Restore">
+            <img class="take-note-icon" src="../../../assets/restore_from_trash-24px.svg"/>
+          </mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+
+

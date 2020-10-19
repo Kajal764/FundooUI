@@ -20,8 +20,8 @@ export class NoteService {
     return this.httpclientService.addNote(data, this.url + this.note + 'create');
   }
 
-  getNotes(): Observable<INote[]> {
-    return this.httpclientService.getNotes(this.url + this.note + 'list');
+  getNotes(apiUrl: string): Observable<INote[]> {
+    return this.httpclientService.getNotes(this.url + this.note + apiUrl);
   }
 
   editNote(data: any): Observable<any> {
@@ -29,7 +29,7 @@ export class NoteService {
   }
 
   deleteNote(noteId: number, apiCall: string): Observable<any> {
-    return this.httpclientService.deleteData(`${this.url}${this.note}${apiCall}/${noteId}`);
+    return this.httpclientService.putData(`${this.url}${this.note}${apiCall}/${noteId}`);
   }
 
   updateColor(data: { note_id: number; color: string }): Observable<any> {
