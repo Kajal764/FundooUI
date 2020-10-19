@@ -20,8 +20,8 @@ export class NoteService {
     return this.httpclientService.addNote(data, this.url + this.note + 'create');
   }
 
-  getNotes(apiUrl: string): Observable<INote[]> {
-    return this.httpclientService.getNotes(this.url + this.note + apiUrl);
+  getList(apiUrl: string): Observable<INote[]> {
+    return this.httpclientService.getList(this.url + this.note + apiUrl);
   }
 
   editNote(data: any): Observable<any> {

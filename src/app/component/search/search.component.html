@@ -1,22 +1,8 @@
-<!--<div fxFlex="row"  fxLayoutAlign="center center">-->
-<!--  <div class="img-icon" >-->
-<!--    <button mat-icon-button>-->
-<!--      <mat-icon id="search" matTooltip="Search">search</mat-icon>-->
-<!--    </button>-->
-<!--  </div>-->
-<!--  <div id="search-text-div" fxLayoutAlign="end end">-->
-<!--    <input id="search-input" type="text" placeholder="Search..."/>-->
-<!--  </div>-->
-<!--</div>-->
-
-
-<div fxFlex="row" fxLayoutAlign="center center">
-
-  <button mat-icon-button class="img-icon">
-    <mat-icon id="search" matTooltip="Search">search</mat-icon>
-  </button>
-
-  <div id="search-text-div" fxLayoutAlign="end end">
-    <input id="search-input" type="text" placeholder="Search..."/>
+<div class="main-div" fxLayout="column" style="padding-top: 30px">
+  <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px"
+       style="justify-content: center;padding: 0px 30px 10px 30px">
+    <div *ngFor="let note of searchList" style="justify-content: center">
+      <app-note [note]="note" [noteType]="noteType"></app-note>
+    </div>
   </div>
 </div>

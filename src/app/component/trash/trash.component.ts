@@ -23,7 +23,7 @@ export class TrashComponent implements OnInit {
 
 
   private trashNote(): void {
-    this.noteService.getNotes('trashList')
+    this.noteService.getList('trashList')
       .subscribe(data => {
           this.trashNoteList = data;
           this.message = 'Note Fetch';

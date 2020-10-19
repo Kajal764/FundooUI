@@ -1,6 +1,8 @@
 import {Component, OnInit, ViewChild} from '@angular/core';
 import {MatSidenav} from '@angular/material/sidenav';
 import {Router} from '@angular/router';
+import {NoteService} from '../../service/note/note.service';
+import {InteractionService} from '../../service/search-data/interaction.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -19,8 +21,12 @@ export class DashboardComponent implements OnInit {
   isGrid = true;
   username = 'kajal waghmare';
   emailId = 'kajalw1998@gmail.com';
+  search: string;
+  noteType: 'note';
 
-  constructor(private router: Router) {
+  constructor(private router: Router,
+              private noteService: NoteService,
+              private interactionService: InteractionService) {
   }
 
   toggle(): void {
@@ -57,5 +63,10 @@ export class DashboardComponent implements OnInit {
 
   redirectToLogin(): void {
     this.router.navigate(['/login']);
+  }
+
+  searchData(searchValue: any): void {
+    this.interactionService.sendData(searchValue);
+    this.router.navigate(['home/search']);
   }
 }

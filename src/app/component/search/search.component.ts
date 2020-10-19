@@ -1,6 +1,7 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
-import {FormControl} from '@angular/forms';
-import {debounceTime, distinctUntilChanged, startWith} from 'rxjs/operators';
+import {Component, OnInit} from '@angular/core';
+import {InteractionService} from '../../service/search-data/interaction.service';
+import {NoteService} from '../../service/note/note.service';
+import {INote} from '../note/note';
 
 @Component({
   selector: 'app-search',
@@ -8,21 +9,31 @@ import {debounceTime, distinctUntilChanged, startWith} from 'rxjs/operators';
   styleUrls: ['./search.component.scss']
 })
 export class SearchComponent implements OnInit {
+  public searchList: INote[];
+  private message: any;
+  noteType = 'note';
 
-  @Output() search = new EventEmitter<string>();
-  searchField: FormControl;
-
-  constructor() {
+  constructor(private interactionService: InteractionService, private noteService: NoteService) {
   }
 
   ngOnInit(): void {
-    this.searchField = new FormControl();
-    this.searchField.valueChanges.pipe(debounceTime[250],
-      distinctUntilChanged(), startWith(''))
+    this.interactionService.searchData$
       .subscribe(data => {
-        // @ts-ignore
-        return this.search.emit(data);
+        this.searchData(data);
       });
+  }
+
+  searchData(searchValue: any): void {
+    const url = `searchData/${searchValue}`;
+    this.noteService.getList(url)
+      .subscribe(data => {
+          this.searchList = data;
+          console.log(this.searchList);
+        },
+        error => {
+          this.message = error.error.message;
+        });
+
   }
 
 }

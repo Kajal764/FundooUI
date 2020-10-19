@@ -1,11 +1,11 @@
 <mat-toolbar class="main-div" fxLayout="row" fxLayoutAlign="space-between center">
-  <div fxLayout="row" fxLayoutAlign="space-around center" class="first-mat-tool-element">
-
+  <div fxLayout="row" fxLayoutAlign="space-around center"
+       class="first-mat-tool-element">
     <button mat-icon-button>
       <mat-icon (click)="isExpanded = !isExpanded">menu</mat-icon>
     </button>
     <img alt="google-keep-logo" class="google-keep-logo" src="../../../assets/google-keep-icon.svg">
-    <span fxHide.xs class="message-text">{{message}}</span>
+    <span class="message-text">Fundoo</span>
   </div>
 
   <div class="search" fxLayout="row" fxFlex="50">
@@ -15,7 +15,8 @@
       </button>
     </div>
     <div id="search-text-div" fxLayoutAlign="end end">
-      <input id="search-input" type="text" placeholder="Search..."/>
+      <input id="search-input" type="text" placeholder="Search..."
+             [ngModel]="search" (ngModelChange)="searchData($event)"/>
     </div>
   </div>
 
@@ -96,6 +97,7 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
+<!--    <app-note [note]="searchList" [noteType]="noteType"></app-note>-->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

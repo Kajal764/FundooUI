@@ -51,9 +51,18 @@
 }
 
 
-@media only screen and (max-width: 319px) {
-  .search {
-    margin: 30px;
+
+
+@media only screen and (max-width: 745px) {
+  .message-text {
+    visibility: hidden;
+  }
+
+}
+
+@media only screen and (max-width: 410px) {
+  .google-keep-logo{
+    visibility: hidden;
   }
 }
 

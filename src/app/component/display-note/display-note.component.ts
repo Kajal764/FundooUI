@@ -19,21 +19,21 @@ export class DisplayNoteComponent implements OnInit {
   constructor(private noteService: NoteService, private snackBar: MatSnackBar) {
   }
 
-  ngOnInit(): void {
+  // tslint:disable-next-line:typedef
+  ngOnInit() {
     this.getNoteList();
-
   }
 
   openSnackBar(action): void {
+    this.getPinNoteList();
     this.snackBar.open(this.message, action, {duration: 4000});
   }
 
   private getNoteList(): void {
-    this.noteService.getNotes('list')
+    this.noteService.getList('list')
       .subscribe(data => {
           this.notes = data;
           this.message = 'Note Fetch';
-          this.getPinNoteList();
           this.openSnackBar('Dismiss');
         },
         error => {
@@ -43,7 +43,7 @@ export class DisplayNoteComponent implements OnInit {
   }
 
   private getPinNoteList(): void {
-    this.noteService.getNotes('pinList')
+    this.noteService.getList('pinList')
       .subscribe(data => {
           this.pinNotes = data;
         },

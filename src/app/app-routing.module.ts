@@ -10,6 +10,7 @@ import {NoteHomePageComponent} from './component/note-home-page/note-home-page.c
 import {TrashComponent} from './component/trash/trash.component';
 import {ArchitectCommand} from '@angular/cli/models/architect-command';
 import {ArchiveComponent} from './component/archive/archive.component';
+import {SearchComponent} from './component/search/search.component';
 
 const routes: Routes = [
   {
@@ -46,6 +47,10 @@ const routes: Routes = [
       {
         path: 'note',
         component: NoteHomePageComponent
+      },
+      {
+        path: 'search',
+        component: SearchComponent
       },
       {
         path: 'trash',

@@ -15,7 +15,6 @@ export class NoteComponent implements OnInit {
   @Input() public note: INote;
   @Input() public noteType: string;
 
-  public isPin = false;
   private responseData: any;
 
   constructor(public dialog: MatDialog,

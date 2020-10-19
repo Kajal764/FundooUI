@@ -21,7 +21,7 @@ export class HttpclientService {
       .pipe(catchError(this.handleError));
   }
 
-  getNotes(url: string): Observable<INote[]> {
+  getList(url: string): Observable<INote[]> {
     return this.httpClient.get<INote[]>(url)
       .pipe(catchError(this.handleError));
   }
