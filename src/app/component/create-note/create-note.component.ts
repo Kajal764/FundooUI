@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
@@ -9,8 +9,11 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 })
 export class CreateNoteComponent implements OnInit {
 
-  public flag: boolean = true;
-  public isPin: boolean = false;
+  @Output()
+  public getNoteList = new EventEmitter<any>();
+
+  public flag = true;
+  public isPin = false;
   noteDesc: any;
   noteTitle: any;
 
@@ -47,7 +50,7 @@ export class CreateNoteComponent implements OnInit {
       .subscribe(response => {
         this.responseData = response;
         this.openSnackBar('Dismiss');
-
+        this.getNoteList.emit();
       }, (error) => {
         this.responseData = error.error;
         this.openSnackBar('Dismiss');
