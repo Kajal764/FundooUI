@@ -26,8 +26,16 @@ export class NoteComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  notePin(): void {
-    this.isPin ? this.isPin = false : this.isPin = true;
+  notePin(note: INote): void {
+    this.noteService.deleteNote(note.note_Id, 'pinUnpin')
+      .subscribe(response => {
+        this.responseData = response;
+        this.openSnackBar('Dismiss');
+      }, error => {
+        this.responseData = error.error;
+        this.openSnackBar('Dismiss');
+      });
+    // this.isPin ? this.isPin = false : this.isPin = true;
   }
 
   openNotePopup(): void {

@@ -43,7 +43,6 @@ export class IconsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.noteType);
   }
 
   deleteNote(apiCall: string): void {

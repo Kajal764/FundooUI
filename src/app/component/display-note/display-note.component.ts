@@ -10,20 +10,30 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class DisplayNoteComponent implements OnInit {
 
   public flag = true;
-
+  public pinNotes = [];
   public notes = [];
   private message: string;
   noteType = 'note';
+
 
   constructor(private noteService: NoteService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
+    this.getNoteList();
+
+  }
+
+  openSnackBar(action): void {
+    this.snackBar.open(this.message, action, {duration: 4000});
+  }
+
+  private getNoteList(): void {
     this.noteService.getNotes('list')
       .subscribe(data => {
           this.notes = data;
-          console.log(this.notes);
           this.message = 'Note Fetch';
+          this.getPinNoteList();
           this.openSnackBar('Dismiss');
         },
         error => {
@@ -32,8 +42,14 @@ export class DisplayNoteComponent implements OnInit {
         });
   }
 
-  openSnackBar(action): void {
-    this.snackBar.open(this.message, action, {duration: 4000});
+  private getPinNoteList(): void {
+    this.noteService.getNotes('pinList')
+      .subscribe(data => {
+          this.pinNotes = data;
+        },
+        error => {
+          this.message = error.error.message;
+          this.openSnackBar('Dismiss');
+        });
   }
-
 }

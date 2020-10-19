@@ -1,15 +1,17 @@
 <mat-card [style.backgroundColor]="note.color" class="note">
-  <div fxLayout="row" fxLayoutAlign="space-between center">
-    <div class="border" fxLayout="column" class="takenote" (click)="openNotePopup()">
+  <div fxLayout="row" fxLayoutAlign="start center">
+    <div class="border" fxLayout="column" class="takenote"
+         fxLayout="row" fxLayoutAlign="space-between start" fxFlex="100"
+         (click)="openNotePopup()">
                 <textarea class="textArea" matTextareaAutosize
                           [(ngModel)]="note.title" [style.backgroundColor]="note.color"></textarea>
     </div>
     <div fxLayout="row" fxLayoutAlign="end start">
-      <button mat-icon-button class="pin-button">
-        <mat-icon *ngIf="!isPin" class="icon-take-note" matTooltip="Pin note" (click)="notePin()">
+      <button mat-icon-button class="pin-button" (click)="notePin(note)">
+        <mat-icon *ngIf="!note.pin" class="icon-take-note" matTooltip="Pin note">
           <img class="icon" src="../../../assets/unpinbar.svg"/>
         </mat-icon>
-        <mat-icon *ngIf="isPin" class="icon-take-note" matTooltip="Unpin note" (click)="notePin()">
+        <mat-icon *ngIf="note.pin" class="icon-take-note" matTooltip="Unpin note">
           <img class="icon" src="../../../assets/pinbar.svg"/>
         </mat-icon>
       </button>

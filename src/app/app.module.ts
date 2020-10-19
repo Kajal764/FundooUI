@@ -21,12 +21,15 @@ import {IconsComponent} from './component/icons/icons.component';
 import {DisplayNoteComponent} from './component/display-note/display-note.component';
 import {UpdateNoteComponent} from './component/update-note/update-note.component';
 import {TokenInterceptorService} from './service/token/token-interceptor.service';
-import { TrashComponent } from './component/trash/trash.component';
-import { NoteHomePageComponent } from './component/note-home-page/note-home-page.component';
-import { ArchiveComponent } from './component/archive/archive.component';
+import {TrashComponent} from './component/trash/trash.component';
+import {NoteHomePageComponent} from './component/note-home-page/note-home-page.component';
+import {ArchiveComponent} from './component/archive/archive.component';
+
+// @ts-ignore
 
 @NgModule({
   declarations: [
+
     AppComponent,
     LoginComponent,
     ForgotPasswordComponent,
@@ -41,6 +44,7 @@ import { ArchiveComponent } from './component/archive/archive.component';
     TrashComponent,
     NoteHomePageComponent,
     ArchiveComponent,
+
 
   ],
   imports: [
@@ -59,7 +63,7 @@ import { ArchiveComponent } from './component/archive/archive.component';
       provide: HTTP_INTERCEPTORS,
       useClass: TokenInterceptorService,
       multi: true
-    }
+    },
   ],
   bootstrap: [AppComponent]
 })
