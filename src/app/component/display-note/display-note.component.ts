@@ -1,6 +1,4 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
-import {NoteService} from '../../service/note/note.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
   selector: 'app-display-note',
@@ -10,16 +8,15 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class DisplayNoteComponent implements OnInit {
 
   @Output() public getNoteList = new EventEmitter<any>();
+  @Output() public getPinList = new EventEmitter<any>();
   @Input() public notes = [];
+  @Input() public pinNotes = [];
 
   public flag = true;
-  public pinNotes = [];
 
-  private message: string;
   noteType = 'note';
 
-
-  constructor(private noteService: NoteService, private snackBar: MatSnackBar) {
+  constructor() {
   }
 
   // tslint:disable-next-line:typedef
@@ -27,20 +24,4 @@ export class DisplayNoteComponent implements OnInit {
 
   }
 
-  openSnackBar(action): void {
-    this.getPinNoteList();
-    this.snackBar.open(this.message, action, {duration: 4000});
-  }
-
-
-  private getPinNoteList(): void {
-    this.noteService.getList('pinList')
-      .subscribe(data => {
-          this.pinNotes = data;
-        },
-        error => {
-          this.message = error.error.message;
-          this.openSnackBar('Dismiss');
-        });
-  }
 }

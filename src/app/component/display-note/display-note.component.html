@@ -3,7 +3,11 @@
   <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px"
        style="justify-content: center;padding: 0px 30px 10px 30px">
     <div *ngFor="let note of pinNotes" style="justify-content: center">
-      <app-note [note]="note" [noteType]="noteType"></app-note>
+      <app-note [note]="note"
+                [noteType]="noteType"
+                (getList)="getNoteList.emit()"
+                (getPinList)="getPinList.emit()">
+      </app-note>
     </div>
   </div>
 </div>
@@ -14,7 +18,10 @@
        style="justify-content: center;padding: 0px 30px 10px 30px">
 
     <div *ngFor="let note of notes" style="justify-content: center">
-      <app-note [note]="note" [noteType]="noteType"></app-note>
+      <app-note [note]="note" [noteType]="noteType"
+                (getList)="getNoteList.emit()"
+                (getPinList)="getPinList.emit()">
+      </app-note>
     </div>
   </div>
 </div>

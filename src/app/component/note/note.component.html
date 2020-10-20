@@ -24,7 +24,12 @@
                           [(ngModel)]="note.description"></textarea>
   </div>
   <app-icons class="note-select"
-             [noteType]="noteType" [note]="note" (setColor)="getUpdatedValue($event)">
+             (getList)="getList.emit()"
+             (getPinList)="getPinList.emit()"
+             (getArchiveList)="archiveList.emit()"
+             [noteType]="noteType"
+             [note]="note"
+             (setColor)="getUpdatedValue($event)">
   </app-icons>
 </mat-card>
 

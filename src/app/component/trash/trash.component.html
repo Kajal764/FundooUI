@@ -9,13 +9,15 @@
       <div fxLayout="row" fxLayoutAlign="space-between center">
         <div class="border" fxLayout="column" class="takenote">
                   <textarea class="textArea" matTextareaAutosize
-                            [(ngModel)]="trashNote.title" [style.backgroundColor]="trashNote.color"></textarea>
+                            [(ngModel)]="trashNote.title"
+                            [style.backgroundColor]="trashNote.color"></textarea>
         </div>
       </div>
       <div class="border" class="takenote" fxLayout="row" fxLayoutAlign="start start" style="padding-top: 5px">
                   <textarea class="textArea" style="font-size: 15px" [style.backgroundColor]="trashNote.color"
                             matTextareaAutosize
-                            [(ngModel)]="trashNote.description"></textarea>
+                            [(ngModel)]="trashNote.description">
+                  </textarea>
       </div>
       <div class="icon-div" class="note-select">
         <button mat-icon-button class="icon" (click)="deleteForever(trashNote)">

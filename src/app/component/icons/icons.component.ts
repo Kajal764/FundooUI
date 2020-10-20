@@ -2,15 +2,18 @@ import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 
-
 @Component({
   selector: 'app-icons',
   templateUrl: './icons.component.html',
   styleUrls: ['./icons.component.scss']
 })
+
 export class IconsComponent implements OnInit {
 
   @Output() setColor = new EventEmitter();
+  @Output() getList = new EventEmitter<any>();
+  @Output() getPinList = new EventEmitter<any>();
+  @Output() getArchiveList = new EventEmitter<any>();
   @Input() note: any;
   @Input() noteType: any;
 
@@ -23,14 +26,12 @@ export class IconsComponent implements OnInit {
       {color: '#fbbc04', name: 'Orange'},
       {color: '#fff475', name: 'Yellow'}
     ],
-
     [
       {color: '#ccff90', name: 'Green'},
       {color: '#a7ffeb', name: 'Teal'},
       {color: '#E0EEEE', name: 'Blue'},
       {color: '#aecbfa', name: 'Darkblue'}
     ],
-
     [
       {color: '#d7aefb', name: 'Purple'},
       {color: '#fdcfe8', name: 'Pink'},
@@ -50,6 +51,9 @@ export class IconsComponent implements OnInit {
       .subscribe(response => {
         this.responseData = response;
         this.openSnackBar('Dismiss');
+        this.getList.emit();
+        this.getPinList.emit();
+        this.getArchiveList.emit();
       }, error => {
         this.responseData = error.error;
         this.openSnackBar('Dismiss');

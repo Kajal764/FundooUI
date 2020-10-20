@@ -1,4 +1,4 @@
-import {Component, OnInit} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {INote} from '../note/note';
@@ -9,9 +9,12 @@ import {INote} from '../note/note';
   styleUrls: ['./archive.component.scss']
 })
 export class ArchiveComponent implements OnInit {
+
+  @Output() public getNoteList = new EventEmitter<any>();
   public archiveNoteList: INote[];
   private message: string;
   noteType = 'archive';
+
 
   constructor(private noteService: NoteService, private snackBar: MatSnackBar) {
   }

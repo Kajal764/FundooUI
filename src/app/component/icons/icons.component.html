@@ -20,8 +20,12 @@
   <mat-menu #colorlist="matMenu" yPosition="above">
     <div fxLayout="row" fxLayoutGap="5px" style="margin: 3px;padding-bottom: 0px" *ngFor="let colors of colorArray">
       <div *ngFor="let color of colors">
-        <button class="colors" [ngStyle]="{ 'background-color': color.color }"
-                (click)="colorEdit(color.color,note)" matTooltip="{{ color.name}}"></button>
+        <button
+          class="colors"
+          [ngStyle]="{ 'background-color': color.color }"
+          (click)="colorEdit(color.color,note)"
+          matTooltip="{{ color.name}}">
+        </button>
       </div>
     </div>
   </mat-menu>
@@ -39,7 +43,7 @@
   </button>
 
   <button mat-icon-button class="icon" *ngIf="noteType=='archive'">
-    <mat-icon matTooltip="Unarchive" (click)="deleteNote('archive')" >
+    <mat-icon matTooltip="Unarchive" (click)="deleteNote('archive')">
       <img class="icon" class="take-note-icon" src="../../../assets/unarchive-24px.svg"/>
     </mat-icon>
   </button>
