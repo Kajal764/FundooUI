@@ -22,7 +22,7 @@
                class="input-border"
                matInput placeholder="Create new Label"
                autocomplete="off"
-               maxlength="15"
+               maxlength="30"
                (click)="reverseFlag()">
       </div>
     </div>
@@ -62,8 +62,9 @@
         <button *ngIf="isLabelEdit==false" mat-icon-button matTooltip="add label" class="icon-label">
           <mat-icon class="icon">edit</mat-icon>
         </button>
+
         <button *ngIf="isLabelEdit==true" class="update"
-                mat-icon-button matTooltip="update label">
+                mat-icon-button matTooltip="update label" (click)="updateLabel(labelData)">
           <img id="button" src="../../../assets/check-24px.svg" class="icon"/>
         </button>
       </div>
@@ -72,8 +73,9 @@
 
   <mat-divider></mat-divider>
   <div fxLayout="row" fxLayoutAlign="end end" style="margin: 10px">
-    <button class="done" mat-button [mat-dialog-close]="label">
-      Done
+    <button class="done"
+            mat-button [mat-dialog-close]="label">
+       Done
     </button>
   </div>
 </div>

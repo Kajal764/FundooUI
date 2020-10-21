@@ -14,11 +14,9 @@ export class CreateLabelComponent implements OnInit {
   label: string;
   labelList = [];
 
-
   isLabelEdit = false;
   private message: any;
   private responseData: any;
-
 
   constructor(private labelService: LabelService,
               private snackBar: MatSnackBar,
@@ -30,7 +28,7 @@ export class CreateLabelComponent implements OnInit {
   }
 
   labelEdit(): void {
-    this.isLabelEdit = !this.isLabelEdit;
+    this.isLabelEdit = true;
   }
 
   reverseFlag(): void {
@@ -43,7 +41,38 @@ export class CreateLabelComponent implements OnInit {
       note_Id: 0,
       labelName: this.label
     };
-    this.labelService.createLabel(data)
+    this.callLabelService(data, 'create');
+    this.label = '';
+    this.isLabelEdit = false;
+  }
+
+  getLabelList(): void {
+    this.labelService.getList()
+      .subscribe(data => {
+          this.labelList = data;
+        },
+        error => {
+          this.responseData = error.error;
+          this.openSnackBar('Dismiss');
+        });
+    this.interactionService.sendList(this.labelList);
+  }
+
+  openSnackBar(action): void {
+    this.snackBar.open(this.responseData.message, action, {duration: 3000});
+  }
+
+  updateLabel(labelData: any): void {
+    const data = {
+      label_Id: labelData.label_Id,
+      note_Id: 0,
+      labelName: labelData.labelName
+    };
+    this.callLabelService(data, 'edit');
+  }
+
+  private callLabelService(data, url: string): void {
+    this.labelService.createLabel(data, url)
       .subscribe(response => {
         this.responseData = response;
         this.openSnackBar('Dismiss');
@@ -52,22 +81,5 @@ export class CreateLabelComponent implements OnInit {
         this.responseData = error.error;
         this.openSnackBar('Dismiss');
       });
-    this.label = '';
-  }
-
-  getLabelList(): void {
-    this.labelService.getList()
-      .subscribe(data => {
-          this.labelList = data;
-          this.interactionService.sendList(this.labelList);
-        },
-        error => {
-          this.responseData = error.error;
-          this.openSnackBar('Dismiss');
-        });
-  }
-
-  openSnackBar(action): void {
-    this.snackBar.open(this.responseData.message, action, {duration: 3000});
   }
 }
