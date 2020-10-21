@@ -6,8 +6,16 @@
   border: none;
   outline: none;
   border-radius: 8px;
+  padding: 24px;
 }
 
+//.mat-dialog-container {
+//  background-color: yellow;
+//}
+
+::ng-deep .mat-dialog-container {
+  //background-color: yellow;
+}
 .border {
   user-select: none;
   border-radius: 30px;
@@ -25,6 +33,10 @@
   color: rgb(173, 166, 166);
   border: none;
   outline: none;
+  padding-top: 0px;
   user-select: none;
 }
 
+.main-content{
+  padding: 10px 40px 10px 45px;
+}
