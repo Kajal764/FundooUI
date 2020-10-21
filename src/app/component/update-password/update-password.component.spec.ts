@@ -125,7 +125,6 @@ describe('UpdatePasswordComponent', () => {
     expect(errors.pattern).toBeTruthy();
   });
 
-
   it('password field correct value', () => {
     const password = component.resetPwForm.controls.confirmPassword;
     password.setValue('Asha@123');

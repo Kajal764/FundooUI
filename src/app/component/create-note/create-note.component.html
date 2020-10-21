@@ -1,6 +1,8 @@
-<div *ngIf="flag==true" fxLayout="row" fxFlex="100" fxLayout="column" (click)="addNote()"
+<div *ngIf="flag==true"  fxLayout="row" fxFlex="100" fxLayout="column" (click)="addNote()"
      fxLayoutAlign="space-around start">
-  <mat-card class="note-create" fxLayoutAlign="space-between center">
+  <mat-card class="note-create"
+            fxLayoutAlign="space-between center">
+
     <div data-text="Take a note..." class="border" id="noteTitle" fxLayout="column" contenteditable="true"
          class="maincard">
     </div>
@@ -25,17 +27,17 @@
 </div>
 
 <div *ngIf="flag==false" fxLayout="row" fxFlex="100" fxLayout="column" fxLayoutAlign="space-around start">
-  <mat-card class="note-create" fxLayout="column">
+  <mat-card class="note-create" fxLayout="column" [style.backgroundColor]="color">
     <div fxLayoutAlign="space-between center">
       <div class="border" fxLayout="column" class="takenote">
         <textarea class="textArea" matTextareaAutosize placeholder="Title" style="font-size: 15px"
-                  [(ngModel)]="noteTitle"></textarea>
+                  [(ngModel)]="noteTitle" [style.backgroundColor]="color"></textarea>
       </div>
       <button mat-icon-button class="pin-button">
-        <mat-icon *ngIf="!isPin" class="icon-take-note" matTooltip="Pin note" (click)="notePin()">
+        <mat-icon *ngIf="!pin" class="icon-take-note" matTooltip="Pin note" (click)="notePin()">
           <img class="ssicon" src="../../../assets/unpinbar.svg"/>
         </mat-icon>
-        <mat-icon *ngIf="isPin" class="icon-take-note" matTooltip="Unpin note" (click)="notePin()">
+        <mat-icon *ngIf="pin" class="icon-take-note" matTooltip="Unpin note" (click)="notePin()">
           <img class="icon" src="../../../assets/pinbar.svg"/>
         </mat-icon>
       </button>
@@ -43,7 +45,7 @@
 
     <div class="border" fxLayout="column" class="takenote">
       <textarea class="textArea" style="font-size: 14px" matTextareaAutosize placeholder="Take a note..."
-                [(ngModel)]="noteDesc"></textarea>
+                [(ngModel)]="noteDesc" [style.backgroundColor]="color"></textarea>
     </div>
 
     <!--    last div-->
@@ -59,11 +61,26 @@
             <img class="icon" class="take-note-icon" src="../../../assets/person_add-24px.svg"/>
           </mat-icon>
         </button>
-        <button mat-icon-button>
+        <button mat-icon-button [matMenuTriggerFor]="colorlist">
           <mat-icon matTooltip="Chnage color">
             <img class="icon" class="take-note-icon" src="../../../assets/color_lens-24px.svg"/>
           </mat-icon>
         </button>
+
+        <mat-menu #colorlist="matMenu" yPosition="above">
+          <div fxLayout="row" fxLayoutGap="5px" style="margin: 3px;padding-bottom: 0px"
+               *ngFor="let colors of colorArray">
+            <div *ngFor="let color of colors">
+              <button
+                class="colors"
+                [ngStyle]="{ 'background-color': color.color }"
+                (click)="colorEdit(color.color)"
+                matTooltip="{{ color.name}}">
+              </button>
+            </div>
+          </div>
+        </mat-menu>
+
         <button mat-icon-button>
           <mat-icon matTooltip="Add image">
             <img class="icon" class="take-note-icon" src="../../../assets/outline-image-24px.svg"/>
@@ -71,7 +88,9 @@
         </button>
         <button mat-icon-button>
           <mat-icon matTooltip="Archive">
-            <img class="icon" class="take-note-icon" src="../../../assets/archive-24px.svg"/>
+            <img class="icon" class="take-note-icon"
+                 src="../../../assets/archive-24px.svg"
+                 (click)="archiveNote()"/>
           </mat-icon>
         </button>
         <button mat-icon-button>

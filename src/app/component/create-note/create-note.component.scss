@@ -50,3 +50,16 @@
   user-select: none;
 }
 
+//color css
+.colors {
+  width: 25px;
+  height: 25px;
+  border-radius: 15px;
+  border-color: lavender;
+  outline: none;
+
+}
+.colors:hover{
+  border-color: grey;
+
+}
