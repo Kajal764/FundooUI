@@ -38,7 +38,6 @@ export class HttpclientService {
   }
 
   deleteData(url: string): Observable<any> {
-    console.log(url);
     return this.httpClient.delete(url)
       .pipe(catchError(this.handleError));
   }

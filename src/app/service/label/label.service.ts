@@ -25,5 +25,8 @@ export class LabelService {
     return this.httpclientService.getLabelList(this.url + this.label + 'list');
   }
 
+  deleteLabel(labelId: number, apiCall: string): Observable<any> {
+    return this.httpclientService.deleteData(`${this.url}${this.label}${apiCall}/${labelId}`);
+  }
 
 }

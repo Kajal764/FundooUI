@@ -50,12 +50,12 @@ export class CreateLabelComponent implements OnInit {
     this.labelService.getList()
       .subscribe(data => {
           this.labelList = data;
+          this.interactionService.sendList(this.labelList);
         },
         error => {
           this.responseData = error.error;
           this.openSnackBar('Dismiss');
         });
-    this.interactionService.sendList(this.labelList);
   }
 
   openSnackBar(action): void {
@@ -63,6 +63,7 @@ export class CreateLabelComponent implements OnInit {
   }
 
   updateLabel(labelData: any): void {
+    this.flag = !this.flag;
     const data = {
       label_Id: labelData.label_Id,
       note_Id: 0,
@@ -77,6 +78,21 @@ export class CreateLabelComponent implements OnInit {
         this.responseData = response;
         this.openSnackBar('Dismiss');
         this.getLabelList();
+      }, error => {
+        this.responseData = error.error;
+        this.openSnackBar('Dismiss');
+      });
+  }
+
+  deleteLabel(labelData: any): void {
+    this.labelService.deleteLabel(labelData.label_Id, 'delete')
+      .subscribe(response => {
+        this.responseData = response;
+        this.openSnackBar('Dismiss');
+        const index = this.labelList.indexOf(labelData);
+        if (index !== -1) {
+          this.labelList.splice(index, 1);
+        }
       }, error => {
         this.responseData = error.error;
         this.openSnackBar('Dismiss');
