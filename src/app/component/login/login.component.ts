@@ -66,7 +66,6 @@ export class LoginComponent implements OnInit {
           console.log(this.responseData);
           this.openSnackBar('Dismiss');
         });
-
   }
 
   // tslint:disable-next-line:typedef

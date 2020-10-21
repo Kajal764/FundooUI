@@ -1,16 +1,16 @@
-import { ComponentFixture, TestBed } from '@angular/core/testing';
+import {async, ComponentFixture, TestBed} from '@angular/core/testing';
 
-import { NoteComponent } from './note.component';
+import {NoteComponent} from './note.component';
 
-describe('NoteComponent', () => {
+xdescribe('NoteComponent', () => {
   let component: NoteComponent;
   let fixture: ComponentFixture<NoteComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ NoteComponent ]
+      declarations: [NoteComponent]
     })
-    .compileComponents();
+      .compileComponents();
   });
 
   beforeEach(() => {
@@ -22,4 +22,6 @@ describe('NoteComponent', () => {
   it('should create', () => {
     expect(component).toBeTruthy();
   });
+
+
 });

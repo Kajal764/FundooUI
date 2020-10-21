@@ -73,4 +73,5 @@ export class NoteComponent implements OnInit {
     getUpdatedValue($event: any): void {
         this.note.color = $event;
     }
+
 }
