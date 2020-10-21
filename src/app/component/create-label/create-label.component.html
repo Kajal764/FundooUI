@@ -1,0 +1,81 @@
+<div fxFlex="100" fxLayout="column" class="main-container">
+
+  <mat-card-title style="font-size: 15px">
+    Edit labels
+  </mat-card-title>
+
+  <div fxLayout="row">
+    <div *ngIf="flag==false">
+      <button class="icon" mat-icon-button matTooltip="Cancle" (click)="reverseFlag()">
+        <img src="../../../assets/close-24px.svg">
+      </button>
+    </div>
+    <div *ngIf="flag==true">
+      <button class="icon" mat-icon-button matTooltip="Create label" (click)="reverseFlag()">
+        <img src="../../../assets/add-24px.svg">
+      </button>
+    </div>
+
+    <div fxLayoutAlign="center center" style="padding-left: 7px;padding-right: 7px">
+      <div fxFlex="100">
+        <input [(ngModel)]="label"
+               class="input-border"
+               matInput placeholder="Create new Label"
+               autocomplete="off"
+               maxlength="15"
+               (click)="reverseFlag()">
+      </div>
+    </div>
+
+    <button mat-icon-button matTooltip="add label" (click)="addLabel()">
+      <img class="icon" src="../../../assets/check-24px.svg"/>
+    </button>
+  </div>
+
+  <!--  *********** Label list ************-->
+  <div>
+    <div *ngFor="let labelData of labelList">
+
+      <div fxLayout="row">
+        <div *ngIf="isLabelEdit==true">
+          <button class="icon" mat-icon-button matTooltip="Delete" (click)="reverseFlag()">
+            <img src="../../../assets/delete-24px.svg" class="icon">
+          </button>
+        </div>
+        <div *ngIf="isLabelEdit==false" class="icon-label">
+          <button class="icon" mat-icon-button matTooltip="Create label" (click)="reverseFlag()">
+            <img src="../../../assets/label-24px.svg" class="icon">
+          </button>
+        </div>
+
+        <div fxLayoutAlign="center center" style="padding-left: 7px;padding-right: 7px">
+          <div fxFlex="100">
+            <input class="input-border"
+                   [(ngModel)]="labelData.labelName"
+                   style="font-weight: 500"
+                   matInput placeholder="Create new Label"
+                   autocomplete="off" maxlength="15"
+                   (click)="labelEdit()">
+          </div>
+        </div>
+
+        <button *ngIf="isLabelEdit==false" mat-icon-button matTooltip="add label" class="icon-label">
+          <mat-icon class="icon">edit</mat-icon>
+        </button>
+        <button *ngIf="isLabelEdit==true" class="update"
+                mat-icon-button matTooltip="update label">
+          <img id="button" src="../../../assets/check-24px.svg" class="icon"/>
+        </button>
+      </div>
+    </div>
+
+  </div>
+
+
+  <mat-divider></mat-divider>
+  <div fxLayout="row" fxLayoutAlign="end end" style="margin: 10px">
+    <button class="done" mat-button [mat-dialog-close]="label" (click)="addLabel()">
+      Done
+    </button>
+  </div>
+</div>

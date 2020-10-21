@@ -3,6 +3,9 @@ import {MatSidenav} from '@angular/material/sidenav';
 import {Router} from '@angular/router';
 import {NoteService} from '../../service/note/note.service';
 import {InteractionService} from '../../service/search-data/interaction.service';
+import {MatDialog} from '@angular/material/dialog';
+import {UpdateNoteComponent} from '../update-note/update-note.component';
+import {CreateLabelComponent} from '../create-label/create-label.component';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,7 +29,8 @@ export class DashboardComponent implements OnInit {
 
   constructor(private router: Router,
               private noteService: NoteService,
-              private interactionService: InteractionService) {
+              private interactionService: InteractionService,
+              public dialog: MatDialog) {
   }
 
   toggle(): void {
@@ -68,5 +72,10 @@ export class DashboardComponent implements OnInit {
   searchData(searchValue: any): void {
     this.interactionService.sendData(searchValue);
     this.router.navigate(['home/search']);
+  }
+
+  openLabelPopup(): void {
+    const dialogRef = this.dialog.open(CreateLabelComponent,
+      {width: 'auto', panelClass: 'custom-box', data: {}});
   }
 }

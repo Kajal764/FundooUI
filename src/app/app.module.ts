@@ -24,7 +24,8 @@ import {TokenInterceptorService} from './service/token/token-interceptor.service
 import {TrashComponent} from './component/trash/trash.component';
 import {NoteHomePageComponent} from './component/note-home-page/note-home-page.component';
 import {ArchiveComponent} from './component/archive/archive.component';
-import { SearchComponent } from './component/search/search.component';
+import {SearchComponent} from './component/search/search.component';
+import { CreateLabelComponent } from './component/create-label/create-label.component';
 
 // @ts-ignore
 
@@ -46,6 +47,7 @@ import { SearchComponent } from './component/search/search.component';
     NoteHomePageComponent,
     ArchiveComponent,
     SearchComponent,
+    CreateLabelComponent,
 
   ],
   imports: [

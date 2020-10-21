@@ -21,7 +21,8 @@
        (click)="openNotePopup()">
                 <textarea class="textArea" style="font-size: 15px" [style.backgroundColor]="note.color"
                           matTextareaAutosize
-                          [(ngModel)]="note.description"></textarea>
+                          [(ngModel)]="note.description">
+                </textarea>
   </div>
   <app-icons class="note-select"
              (getList)="getList.emit()"

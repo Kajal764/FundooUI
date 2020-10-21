@@ -1,0 +1,23 @@
+.main-container{
+  padding: 13px;
+}
+
+.icon{
+    opacity: 0.6;
+}
+
+input {
+  outline: 0;
+  border-width: 0 0 1.5px;
+  border-color: transparent;
+}
+input:focus {
+  border-color: lightgray;
+}
+
+::placeholder {
+  font-size: 13px;
+  font-weight: bold;
+}
+
+

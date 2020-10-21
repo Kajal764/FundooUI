@@ -38,7 +38,6 @@ export class NoteHomePageComponent implements OnInit {
     this.noteService.getList('pinList')
       .subscribe(data => {
           this.pinNotes = data;
-          console.log(this.pinNotes);
         },
         error => {
           this.message = error.error.message;

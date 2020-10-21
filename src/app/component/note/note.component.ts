@@ -38,7 +38,6 @@ export class NoteComponent implements OnInit {
         this.responseData = error.error;
         this.openSnackBar('Dismiss');
       });
-    // this.isPin ? this.isPin = false : this.isPin = true;
   }
 
   openNotePopup(): void {
@@ -63,6 +62,7 @@ export class NoteComponent implements OnInit {
         });
 
     });
+
   }
 
   openSnackBar(action): void {

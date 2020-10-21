@@ -17,7 +17,7 @@ export class NoteService {
   }
 
   createNote(data: { note_id: number; description: any; title: any }): Observable<any> {
-    return this.httpclientService.addNote(data, this.url + this.note + 'create');
+    return this.httpclientService.addData(data, this.url + this.note + 'create');
   }
 
   getList(apiUrl: string): Observable<INote[]> {

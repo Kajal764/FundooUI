@@ -80,10 +80,6 @@ mat-sidenav {
   user-select: none;
 }
 
-//.side-nav-list {
-//  border-radius: 0px 25px 25px 0px;
-//
-//}
 
 .full-width {
   margin-left: 40px;
@@ -133,4 +129,15 @@ mat-sidenav {
   border-radius: 0px 25px 25px 0px;
 
 }
+
+//popup label box
+
+::ng-deep {
+  .custom-box > mat-dialog-container {
+    padding: 0px;
+    overflow-x: hidden;
+    //border-radius: 5px;
+  }
+}
+
 

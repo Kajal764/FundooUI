@@ -3,6 +3,7 @@ import {HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {INote} from '../../component/note/note';
+import {ILabel} from '../../component/create-label/ILabel';
 
 @Injectable({
   providedIn: 'root'
@@ -16,7 +17,7 @@ export class HttpclientService {
     return throwError(error);
   }
 
-  addNote(data: { note_id: number; description: any; title: any }, url: string): Observable<any> {
+  addData(data: { note_id: number; description: any; title: any }, url: string): Observable<any> {
     return this.httpClient.post(url, data)
       .pipe(catchError(this.handleError));
   }
@@ -39,6 +40,11 @@ export class HttpclientService {
   deleteData(url: string): Observable<any> {
     console.log(url);
     return this.httpClient.delete(url)
+      .pipe(catchError(this.handleError));
+  }
+
+  getLabelList(url: string): Observable<ILabel[]> {
+    return this.httpClient.get<ILabel[]>(url)
       .pipe(catchError(this.handleError));
   }
 }
