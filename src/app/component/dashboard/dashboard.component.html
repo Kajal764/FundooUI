@@ -80,7 +80,16 @@
         <span class="full-width" *ngIf="isExpanded || isShowing">Reminders</span>
       </a>
 
-      <a mat-list-item routerLinkActive="active-list-item"  (click)="openLabelPopup()">
+      <mat-nav-list>
+        <div *ngFor="let labelData of labelList">
+          <a mat-list-item routerLinkActive="active-list-item">
+            <mat-icon style="margin-left: 11px">label_outline</mat-icon>
+            <span class="full-width" *ngIf="isExpanded || isShowing">{{labelData.labelName}}</span>
+          </a>
+        </div>
+      </mat-nav-list>
+
+      <a mat-list-item routerLinkActive="active-list-item" (click)="openLabelPopup()">
         <mat-icon style="margin-left: 11px">edit</mat-icon>
         <span class="full-width" *ngIf="isExpanded || isShowing">Edit labels</span>
       </a>
@@ -97,7 +106,6 @@
     </mat-nav-list>
   </mat-sidenav>
   <mat-sidenav-content>
-<!--    <app-note [note]="searchList" [noteType]="noteType"></app-note>-->
     <router-outlet></router-outlet>
   </mat-sidenav-content>
 </mat-sidenav-container>

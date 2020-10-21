@@ -2,6 +2,7 @@ import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {LabelService} from '../../service/label/label.service';
 import {log} from 'util';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {InteractionService} from '../../service/search-data/interaction.service';
 
 @Component({
   selector: 'app-create-label',
@@ -19,12 +20,13 @@ export class CreateLabelComponent implements OnInit {
   private responseData: any;
 
 
-  constructor(private labelService: LabelService, private snackBar: MatSnackBar) {
+  constructor(private labelService: LabelService,
+              private snackBar: MatSnackBar,
+              private interactionService: InteractionService) {
   }
 
   ngOnInit(): void {
     this.getLabelList();
-
   }
 
   labelEdit(): void {
@@ -57,7 +59,7 @@ export class CreateLabelComponent implements OnInit {
     this.labelService.getList()
       .subscribe(data => {
           this.labelList = data;
-          this.labelList.reverse();
+          this.interactionService.sendList(this.labelList);
         },
         error => {
           this.responseData = error.error;

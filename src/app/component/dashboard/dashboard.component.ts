@@ -4,8 +4,9 @@ import {Router} from '@angular/router';
 import {NoteService} from '../../service/note/note.service';
 import {InteractionService} from '../../service/search-data/interaction.service';
 import {MatDialog} from '@angular/material/dialog';
-import {UpdateNoteComponent} from '../update-note/update-note.component';
 import {CreateLabelComponent} from '../create-label/create-label.component';
+import {ILabel} from '../create-label/ILabel';
+import {LabelService} from '../../service/label/label.service';
 
 @Component({
   selector: 'app-dashboard',
@@ -26,11 +27,14 @@ export class DashboardComponent implements OnInit {
   emailId = 'kajalw1998@gmail.com';
   search: string;
   noteType: 'note';
+  labelList: ILabel[];
+  private responseData: any;
 
   constructor(private router: Router,
               private noteService: NoteService,
               private interactionService: InteractionService,
-              public dialog: MatDialog) {
+              public dialog: MatDialog,
+              private labelService: LabelService) {
   }
 
   toggle(): void {
@@ -38,6 +42,20 @@ export class DashboardComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.getSubscribeList();
+    this.getLabelList();
+
+  }
+
+  getLabelList(): void {
+    this.labelService.getList()
+      .subscribe(data => {
+          this.labelList = data;
+          this.interactionService.sendList(this.labelList);
+        },
+        error => {
+          this.responseData = error.error;
+        });
   }
 
   refresh(): void {
@@ -77,5 +95,12 @@ export class DashboardComponent implements OnInit {
   openLabelPopup(): void {
     const dialogRef = this.dialog.open(CreateLabelComponent,
       {width: 'auto', panelClass: 'custom-box', data: {}});
+  }
+
+  private getSubscribeList(): void {
+    this.interactionService.labelData$
+      .subscribe(data => {
+        this.labelList = data;
+      });
   }
 }

@@ -1,6 +1,7 @@
 import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {InteractionService} from '../../service/search-data/interaction.service';
 
 @Component({
   selector: 'app-create-note',
@@ -14,7 +15,6 @@ export class CreateNoteComponent implements OnInit {
   @Output() setColor = new EventEmitter();
 
   public flag = true;
-  public isPin = false;
   public pin = false;
   noteDesc: any;
   noteTitle: any;
@@ -47,7 +47,8 @@ export class CreateNoteComponent implements OnInit {
   };
   private archive = false;
 
-  constructor(private noteService: NoteService, private snackBar: MatSnackBar) {
+  constructor(private noteService: NoteService,
+              private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
@@ -73,7 +74,6 @@ export class CreateNoteComponent implements OnInit {
       archive: this.archive,
       pin: this.pin
     };
-    console.log(data);
     this.noteService.createNote(data)
       .subscribe(response => {
         this.responseData = response;
