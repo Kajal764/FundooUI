@@ -4,6 +4,8 @@ import {MatDialog} from '@angular/material/dialog';
 import {UpdateNoteComponent} from '../update-note/update-note.component';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {$e} from 'codelyzer/angular/styles/chars';
+import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
 
 @Component({
   selector: 'app-note',
@@ -18,6 +20,9 @@ export class NoteComponent implements OnInit {
   @Output() getPinList = new EventEmitter<any>();
   @Output() archiveList = new EventEmitter<any>();
   private responseData: any;
+
+  public label: INote;
+  public labelList: INote [];
 
   constructor(public dialog: MatDialog,
               private noteService: NoteService,
@@ -44,6 +49,12 @@ export class NoteComponent implements OnInit {
     const dialogRef = this.dialog.open(UpdateNoteComponent,
       {width: '500px', panelClass: 'custom-box', data: this.note});
 
+    // const sub = dialogRef.componentInstance.onAdd.subscribe(() => {
+    //   // do something
+    // });
+
+    // dialogRef.componentInstance.onAdd
+
     dialogRef.afterClosed().subscribe(data => {
       const updatedNote = {
         note_id: data.note_Id,
@@ -60,18 +71,18 @@ export class NoteComponent implements OnInit {
           this.responseData = error.error;
           this.openSnackBar('Dismiss');
         });
-
     });
-
   }
 
   openSnackBar(action): void {
     this.snackBar.open(this.responseData.message, action, {duration: 4000});
   }
 
-
   getUpdatedValue($event: any): void {
     this.note.color = $event;
   }
 
+  removeMapping(noteId: number, labelId: number): void {
+
+  }
 }

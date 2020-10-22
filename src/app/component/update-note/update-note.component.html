@@ -23,13 +23,24 @@
                           [(ngModel)]="note.description" [style.backgroundColor]="note.color"></textarea>
   </div>
 
+  <mat-chip-list
+    class="example-chip"
+    cdkDropListOrientation="horizontal">
+
+    <mat-chip class="example-box" cdkDrag
+              *ngFor="let labelData of note.labelList">
+      <div matLine><small>{{labelData.labelName}}</small></div>
+      <mat-icon matChipRemove (click)="removeMapping(note.note_Id, labelData.label_Id)">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
+
   <div fxLayout="row" fxLayoutAlign="space-between center">
-    <app-icons></app-icons>
+    <app-icons [note]="note">
+    </app-icons>
     <div>
       <button mat-flat-button [mat-dialog-close]="note" [style.backgroundColor]="note.color">Close</button>
     </div>
   </div>
-
 
   <mat-dialog-content>
 

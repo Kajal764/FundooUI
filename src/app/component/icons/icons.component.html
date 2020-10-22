@@ -18,7 +18,8 @@
   </button>
 
   <mat-menu #colorlist="matMenu" yPosition="above">
-    <div fxLayout="row" fxLayoutGap="5px" style="margin: 3px;padding-bottom: 0px" *ngFor="let colors of colorArray">
+    <div fxLayout="row" fxLayoutGap="5px" style="margin: 3px;padding-bottom: 0px"
+         *ngFor="let colors of colorArray">
       <div *ngFor="let color of colors">
         <button
           class="colors"
@@ -58,9 +59,22 @@
     <button mat-menu-item>
       <span (click)="deleteNote('delete')">Delete note</span>
     </button>
-    <button mat-menu-item>
+    <button mat-menu-item [matMenuTriggerFor]="labelMenu" (click)="$event.stopPropagation()">
       <span>Add label</span>
     </button>
   </mat-menu>
+
+  <mat-menu #labelMenu="matMenu" yPosition="above" (click)="$event.stopPropagation()">
+    <div *ngFor="let labelData of labelList " style="padding: 5px 10px 5px 10px ">
+      <div fxLayout="row">
+        <mat-checkbox
+          (click)="$event.stopPropagation()"
+          (change)="mapLabel($event,labelData,note)">
+          {{labelData.labelName}}
+        </mat-checkbox>
+      </div>
+    </div>
+  </mat-menu>
+
 </div>
 

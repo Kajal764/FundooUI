@@ -37,7 +37,6 @@ export class NoteHomePageComponent implements OnInit {
         });
   }
 
-
   public getPinNoteList(): void {
     this.noteService.getList('pinList')
       .subscribe(data => {

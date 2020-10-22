@@ -1,6 +1,10 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {InteractionService} from '../../service/search-data/interaction.service';
+import {LabelService} from '../../service/label/label.service';
+import {ILabel} from '../create-label/ILabel';
+import {MatCheckboxChange} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-icons',
@@ -14,8 +18,11 @@ export class IconsComponent implements OnInit {
   @Output() getList = new EventEmitter<any>();
   @Output() getPinList = new EventEmitter<any>();
   @Output() getArchiveList = new EventEmitter<any>();
+  onAdd = new EventEmitter();
+
   @Input() note: any;
   @Input() noteType: any;
+
 
   private responseData: any;
 
@@ -39,11 +46,18 @@ export class IconsComponent implements OnInit {
       {color: '#e8eaed', name: 'Gray'}
     ]
   ];
+  public labelList: ILabel[];
 
-  constructor(private noteService: NoteService, private snackBar: MatSnackBar) {
+  constructor(private noteService: NoteService,
+              private snackBar: MatSnackBar,
+              private interactionService: InteractionService,
+              private labelService: LabelService) {
   }
 
   ngOnInit(): void {
+    this.getSubscribeList();
+    this.getLabelList();
+
   }
 
   deleteNote(apiCall: string): void {
@@ -79,4 +93,45 @@ export class IconsComponent implements OnInit {
         this.openSnackBar('Dismiss');
       });
   }
+
+  mapLabel(matCheckboxChange: MatCheckboxChange, labelData: ILabel, note: any): void {
+    if (matCheckboxChange.checked) {
+      const data = {
+        label_Id: labelData.label_Id,
+        note_Id: note.note_Id,
+        labelName: labelData.labelName
+      };
+      this.labelService.postLabel(data, 'noteLabel')
+        .subscribe(response => {
+          this.responseData = response;
+          this.getList.emit();
+          this.getPinList.emit();
+          this.getArchiveList.emit();
+          this.onAdd.emit();
+          this.openSnackBar('Dismiss');
+        }, error => {
+          this.responseData = error.error;
+          this.openSnackBar('Dismiss');
+        });
+    }
+  }
+
+  getLabelList(): void {
+    this.labelService.getList()
+      .subscribe(data => {
+          this.labelList = data;
+          this.interactionService.sendList(this.labelList);
+        },
+        error => {
+          this.responseData = error.error;
+        });
+  }
+
+  private getSubscribeList(): void {
+    this.interactionService.labelData$
+      .subscribe(data => {
+        this.labelList = data;
+      });
+  }
+
 }

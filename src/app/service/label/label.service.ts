@@ -17,7 +17,7 @@ export class LabelService {
   constructor(private httpclientService: HttpclientService) {
   }
 
-  createLabel(data, url: string): Observable<any> {
+  postLabel(data, url: string): Observable<any> {
     return this.httpclientService.addData(data, this.url + this.label + url);
   }
 

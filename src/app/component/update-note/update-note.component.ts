@@ -20,4 +20,7 @@ export class UpdateNoteComponent implements OnInit {
     this.isPin ? this.isPin = false : this.isPin = true;
   }
 
+  removeMapping(noteId: number, labelId: number): void {
+
+  }
 }

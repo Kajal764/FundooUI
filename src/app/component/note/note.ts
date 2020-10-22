@@ -8,4 +8,8 @@ export interface INote {
   collaborateNote: boolean;
   trash: boolean;
   pin: boolean;
+  labelList: [{
+    label_Id: number,
+    labelName: string
+  }];
 }

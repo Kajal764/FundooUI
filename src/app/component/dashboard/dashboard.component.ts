@@ -58,6 +58,13 @@ export class DashboardComponent implements OnInit {
         });
   }
 
+  private getSubscribeList(): void {
+    this.interactionService.labelData$
+      .subscribe(data => {
+        this.labelList = data;
+      });
+  }
+
   refresh(): void {
     this.isRefresh ? this.isRefresh = false : this.isRefresh = true;
   }
@@ -97,10 +104,5 @@ export class DashboardComponent implements OnInit {
       {width: 'auto', panelClass: 'custom-box', data: {}});
   }
 
-  private getSubscribeList(): void {
-    this.interactionService.labelData$
-      .subscribe(data => {
-        this.labelList = data;
-      });
-  }
+
 }

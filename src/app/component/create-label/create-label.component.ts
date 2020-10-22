@@ -57,10 +57,6 @@ export class CreateLabelComponent implements OnInit {
       .subscribe(data => {
           this.labelList = data;
           this.interactionService.sendList(this.labelList);
-          // this.labelList.map(value => {
-          //   this.list.map(value1 => value1.map(data => console.log(data)));
-          // });
-          // console.log(this.list);
         },
         error => {
           this.responseData = error.error;
@@ -83,7 +79,7 @@ export class CreateLabelComponent implements OnInit {
   }
 
   private callLabelService(data, url: string): void {
-    this.labelService.createLabel(data, url)
+    this.labelService.postLabel(data, url)
       .subscribe(response => {
         this.responseData = response;
         this.openSnackBar('Dismiss');

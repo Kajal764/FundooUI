@@ -14,10 +14,30 @@ import {MatListModule} from '@angular/material/list';
 import {MatGridListModule} from '@angular/material/grid-list';
 import {MatDialogModule} from '@angular/material/dialog';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatCheckboxModule} from '@angular/material/checkbox';
+import {MatChipsModule} from '@angular/material/chips';
 
-const MaterialComponents = [MatButtonModule, MatFormFieldModule, MatFormFieldModule, MatInputModule, MatCardModule,
-  MatIconModule, MatSnackBarModule, MatToolbarModule, MatAutocompleteModule, MatSidenavModule, MatTooltipModule,
-  MatMenuModule, MatListModule, MatGridListModule, MatDialogModule, MatDividerModule];
+const MaterialComponents =
+  [
+    MatButtonModule,
+    MatFormFieldModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatCardModule,
+    MatIconModule,
+    MatSnackBarModule,
+    MatToolbarModule,
+    MatAutocompleteModule,
+    MatSidenavModule,
+    MatTooltipModule,
+    MatMenuModule,
+    MatListModule,
+    MatGridListModule,
+    MatDialogModule,
+    MatDividerModule,
+    MatCheckboxModule,
+    MatChipsModule
+  ];
 
 @NgModule({
   imports: [MaterialComponents],

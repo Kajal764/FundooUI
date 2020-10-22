@@ -29,3 +29,10 @@
 }
 
 
+::ng-deep .mat-checkbox .mat-checkbox-frame {
+  border-color: black;
+}
+
+::ng-deep .mat-checkbox-checked .mat-checkbox-background {
+  background-color: navy !important;
+}
