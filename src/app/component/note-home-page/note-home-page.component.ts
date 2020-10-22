@@ -14,6 +14,9 @@ export class NoteHomePageComponent implements OnInit {
   noteType = 'note';
   public pinNotes: INote[];
 
+  public isPinNote = 0;
+  public isOtherNote = 0;
+
   constructor(private noteService: NoteService) {
   }
 
@@ -27,6 +30,7 @@ export class NoteHomePageComponent implements OnInit {
       .subscribe(data => {
           this.noteList = data;
           this.noteList.reverse();
+          this.isOtherNote = this.noteList.length;
         },
         error => {
           this.message = error.error.message;
@@ -38,6 +42,7 @@ export class NoteHomePageComponent implements OnInit {
     this.noteService.getList('pinList')
       .subscribe(data => {
           this.pinNotes = data;
+          this.isPinNote = this.pinNotes.length;
         },
         error => {
           this.message = error.error.message;

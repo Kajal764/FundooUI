@@ -1,7 +1,9 @@
-<app-create-note (getNoteList)="getAllNote()"  (getPinList)="getPinNoteList()"></app-create-note>
+<app-create-note (getNoteList)="getAllNote()" (getPinList)="getPinNoteList()"></app-create-note>
 <app-display-note
   [notes]="noteList"
   [pinNotes]="pinNotes"
+  [isOtherNote]="isOtherNote"
+  [isPinNote]="isPinNote"
   (getNoteList)="getAllNote()"
   (getPinList)="getPinNoteList()">
 </app-display-note>

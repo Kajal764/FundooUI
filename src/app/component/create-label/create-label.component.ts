@@ -14,6 +14,12 @@ export class CreateLabelComponent implements OnInit {
   label: string;
   labelList = [];
 
+  // list = [[{
+  //   labelName: '',
+  //   label_Id: 0,
+  //   isEdit: false
+  // }]];
+
   isLabelEdit = false;
   private message: any;
   private responseData: any;
@@ -51,6 +57,10 @@ export class CreateLabelComponent implements OnInit {
       .subscribe(data => {
           this.labelList = data;
           this.interactionService.sendList(this.labelList);
+          // this.labelList.map(value => {
+          //   this.list.map(value1 => value1.map(data => console.log(data)));
+          // });
+          // console.log(this.list);
         },
         error => {
           this.responseData = error.error;

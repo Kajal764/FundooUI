@@ -12,6 +12,10 @@ export class DisplayNoteComponent implements OnInit {
   @Input() public notes = [];
   @Input() public pinNotes = [];
 
+  @Input() public isOtherNote;
+  @Input() public isPinNote;
+
+
   public flag = true;
 
   noteType = 'note';

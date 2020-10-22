@@ -27,7 +27,6 @@ export class ArchiveComponent implements OnInit {
     this.noteService.getList('archiveList')
       .subscribe(data => {
           this.archiveNoteList = data;
-          console.log(this.archiveNoteList);
           this.message = 'Note Fetch';
           this.snackBar.open(this.message, 'Dismiss', {duration: 4000});
         },

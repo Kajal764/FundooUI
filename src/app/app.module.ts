@@ -48,7 +48,6 @@ import { CreateLabelComponent } from './component/create-label/create-label.comp
     ArchiveComponent,
     SearchComponent,
     CreateLabelComponent,
-
   ],
   imports: [
     BrowserModule,
