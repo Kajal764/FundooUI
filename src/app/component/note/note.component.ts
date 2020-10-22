@@ -1,11 +1,10 @@
-import {Component, Input, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 import {INote} from './note';
 import {MatDialog} from '@angular/material/dialog';
 import {UpdateNoteComponent} from '../update-note/update-note.component';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
-import {$e} from 'codelyzer/angular/styles/chars';
-import {CdkDragDrop, moveItemInArray} from '@angular/cdk/drag-drop';
+import {LabelService} from '../../service/label/label.service';
 
 @Component({
   selector: 'app-note',
@@ -26,7 +25,8 @@ export class NoteComponent implements OnInit {
 
   constructor(public dialog: MatDialog,
               private noteService: NoteService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private labelService: LabelService) {
   }
 
   ngOnInit(): void {
@@ -48,12 +48,6 @@ export class NoteComponent implements OnInit {
   openNotePopup(): void {
     const dialogRef = this.dialog.open(UpdateNoteComponent,
       {width: '500px', panelClass: 'custom-box', data: this.note});
-
-    // const sub = dialogRef.componentInstance.onAdd.subscribe(() => {
-    //   // do something
-    // });
-
-    // dialogRef.componentInstance.onAdd
 
     dialogRef.afterClosed().subscribe(data => {
       const updatedNote = {
@@ -83,6 +77,21 @@ export class NoteComponent implements OnInit {
   }
 
   removeMapping(noteId: number, labelId: number): void {
+    const data = {
+      note_Id: noteId,
+      label_Id: labelId
+    };
+    this.labelService.postLabel(data, 'removeLabel')
+      .subscribe(response => {
+        this.responseData = response;
+        this.getList.emit();
+        this.getPinList.emit();
+        this.archiveList.emit();
+        this.openSnackBar('Dismiss');
+      }, error => {
+        this.responseData = error.error;
+        this.openSnackBar('Dismiss');
+      });
 
   }
 }
