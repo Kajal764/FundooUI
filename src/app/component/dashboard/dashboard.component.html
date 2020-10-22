@@ -82,7 +82,7 @@
 
       <mat-nav-list>
         <div *ngFor="let labelData of labelList">
-          <a mat-list-item routerLinkActive="active-list-item">
+        <a mat-list-item routerLinkActive="active-list-item" (click)="redirectToMapNote(labelData)">
             <mat-icon style="margin-left: 11px">label_outline</mat-icon>
             <span class="full-width" *ngIf="isExpanded || isShowing">{{labelData.labelName}}</span>
           </a>

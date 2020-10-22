@@ -105,4 +105,8 @@ export class DashboardComponent implements OnInit {
   }
 
 
+  redirectToMapNote(labelData: ILabel): void {
+    this.interactionService.sendObject(labelData);
+    this.router.navigate(['home/label-map']);
+  }
 }

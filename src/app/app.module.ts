@@ -26,6 +26,7 @@ import {NoteHomePageComponent} from './component/note-home-page/note-home-page.c
 import {ArchiveComponent} from './component/archive/archive.component';
 import {SearchComponent} from './component/search/search.component';
 import { CreateLabelComponent } from './component/create-label/create-label.component';
+import { MapLabelNoteComponent } from './component/map-label-note/map-label-note.component';
 
 // @ts-ignore
 
@@ -48,6 +49,7 @@ import { CreateLabelComponent } from './component/create-label/create-label.comp
     ArchiveComponent,
     SearchComponent,
     CreateLabelComponent,
+    MapLabelNoteComponent,
   ],
   imports: [
     BrowserModule,

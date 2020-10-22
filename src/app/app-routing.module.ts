@@ -11,6 +11,7 @@ import {TrashComponent} from './component/trash/trash.component';
 import {ArchiveComponent} from './component/archive/archive.component';
 import {SearchComponent} from './component/search/search.component';
 import {CreateLabelComponent} from './component/create-label/create-label.component';
+import {MapLabelNoteComponent} from './component/map-label-note/map-label-note.component';
 
 const routes: Routes = [
   {
@@ -59,6 +60,10 @@ const routes: Routes = [
       {
         path: 'archive',
         component: ArchiveComponent
+      },
+      {
+        path: 'label-map',
+        component: MapLabelNoteComponent
       }
     ]
   },
