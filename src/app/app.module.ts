@@ -27,6 +27,7 @@ import {ArchiveComponent} from './component/archive/archive.component';
 import {SearchComponent} from './component/search/search.component';
 import { CreateLabelComponent } from './component/create-label/create-label.component';
 import { MapLabelNoteComponent } from './component/map-label-note/map-label-note.component';
+import { NgxMasonryModule } from 'ngx-masonry';
 
 // @ts-ignore
 
