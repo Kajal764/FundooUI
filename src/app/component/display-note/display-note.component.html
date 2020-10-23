@@ -1,67 +1,32 @@
-<!--<div class="main-div" fxLayout="column" style="padding-top: 30px">-->
-<!--  <mat-card-subtitle *ngIf="isPinNote> 0">PINNED</mat-card-subtitle>-->
-<!--  <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px"-->
-<!--       style="justify-content: center;padding: 0px 30px 10px 30px">-->
-<!--    <div *ngFor="let note of pinNotes" style="justify-content: center">-->
-<!--      <app-note [note]="note"-->
-<!--                [noteType]="noteType"-->
-<!--                (getList)="getNoteList.emit()"-->
-<!--                (getPinList)="getPinList.emit()">-->
-<!--      </app-note>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-
-<!--<div class="main-div" fxLayout="column">-->
-<!--  <mat-card-subtitle *ngIf="isOtherNote>0">OTHERS</mat-card-subtitle>-->
-<!--  <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px"-->
-<!--       style="justify-content: center;padding: 0px 30px 10px 30px">-->
-
-<!--    <div *ngFor="let note of notes" style="justify-content: center">-->
-<!--      <app-note [note]="note"-->
-<!--                [noteType]="noteType"-->
-<!--                (getList)="getNoteList.emit()"-->
-<!--                (getPinList)="getPinList.emit()">-->
-<!--      </app-note>-->
-<!--    </div>-->
-<!--  </div>-->
-<!--</div>-->
-<div class="main-content">
-  <mat-card-subtitle *ngIf="isPinNote> 0">PINNED</mat-card-subtitle>
-  <div class="grid">
-    <div *ngFor="let note of pinNotes">
-      <app-note class="grid-item"
-                [note]="note"
-                [noteType]="noteType"
-                (getList)="getNoteList.emit()"
-                (getPinList)="getPinList.emit()">
-      </app-note>
+<div style="padding-top: 30px; padding-left: 13%; overflow: hidden;">
+  <mat-card-subtitle *ngIf="isPinNote> 0" style="margin-bottom: 10px">PINNED</mat-card-subtitle>
+  <ngx-masonry [options]="{ gutter: 10 }">
+    <div class="grid-note">
+      <div ngxMasonryItem class="masonry-item" *ngFor="let note of pinNotes">
+        <app-note class="grid-item-note"
+                  [note]="note"
+                  [noteType]="noteType"
+                  (getList)="getNoteList.emit()"
+                  (getPinList)="getPinList.emit()">
+        </app-note>
+      </div>
     </div>
-  </div>
+  </ngx-masonry>
 </div>
 
 
-<div class="second-content">
+<div style="padding-top: 30px; padding-left: 13%; overflow: hidden;">
   <mat-card-subtitle *ngIf="isOtherNote>0">OTHERS</mat-card-subtitle>
-  <div class="grid-note">
-    <div *ngFor="let note of notes">
-      <app-note class="grid-item-note"
-                [note]="note"
-                [noteType]="noteType"
-                (getList)="getNoteList.emit()"
-                (getPinList)="getPinList.emit()">
-      </app-note>
+  <ngx-masonry [options]="{ gutter: 10 }">
+    <div class="grid-note">
+      <div ngxMasonryItem class="masonry-item" *ngFor="let note of notes">
+        <app-note class="grid-item-note"
+                  [note]="note"
+                  [noteType]="noteType"
+                  (getList)="getNoteList.emit()"
+                  (getPinList)="getPinList.emit()">
+        </app-note>
+      </div>
     </div>
-  </div>
+  </ngx-masonry>
 </div>
-
-
-<!--<masonry>-->
-<!--  <masonry-brick class="brick" *ngFor="let note of notes">-->
-<!--    <app-note [note]="note"-->
-<!--      [noteType]="noteType"-->
-<!--      (getList)="getNoteList.emit()"-->
-<!--      (getPinList)="getPinList.emit()">-->
-<!--    </app-note>-->
-<!--  </masonry-brick>-->
-<!--</masonry> `-->

@@ -1,5 +1,4 @@
-import {Component, EventEmitter, Input, OnInit, Output, ViewChild} from '@angular/core';
-import Masonry from 'masonry-layout';
+import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
   selector: 'app-display-note',
@@ -24,23 +23,7 @@ export class DisplayNoteComponent implements OnInit {
   constructor() {
   }
 
-  // tslint:disable-next-line:typedef
-  ngOnInit() {
-    window.onload = () => {
-      const grid = document.querySelector('.grid');
-      const gridNote = document.querySelector('.grid-note');
-
-      const masonry = new Masonry(grid, {
-        itemSelector: '.grid-item',
-        gutter: 10,
-        column: 3
-      });
-      const masonry1 = new Masonry(gridNote, {
-        itemSelector: '.grid-item-note',
-        gutter: 10,
-        column: 3
-      });
-    };
+  ngOnInit(): void {
 
   }
 

@@ -1,15 +1,17 @@
-<!--<span *ngIf="!isNotePresent" style="margin-left: 35%;padding-top: 500px"> Note not map on this label</span>-->
 
 <div fxLayoutAlign='center center' class="trash" fxLayout='row'
      style="padding-top: 50px;font-size: 20px;color: gray">
   Note not map on this label.
 </div>
 
-<div class="main-div" fxLayout="row" fxLayoutAlign='center center'>
+<div style="padding-top: 30px; padding-left: 13%; overflow: hidden;">
+  <ngx-masonry [options]="{ gutter: 10 }">
   <div fxLayout.xs="column" fxLayout="row wrap" fxLayoutGap="10px"
        style="justify-content: center;padding: 35px 30px 10px 30px">
-    <div *ngFor="let note of noteList" style="justify-content: center">
+    <div *ngFor="let note of noteList" style="justify-content: center" ngxMasonryItem class="masonry-item">
       <app-note [note]="note" [noteType]="noteType" style="height: 400px"></app-note>
     </div>
   </div>
+  </ngx-masonry>
 </div>
+

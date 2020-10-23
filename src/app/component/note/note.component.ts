@@ -92,6 +92,5 @@ export class NoteComponent implements OnInit {
         this.responseData = error.error;
         this.openSnackBar('Dismiss');
       });
-
   }
 }
