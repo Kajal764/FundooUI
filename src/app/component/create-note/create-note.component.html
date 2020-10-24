@@ -48,90 +48,132 @@
                 [(ngModel)]="noteDesc" [style.backgroundColor]="color"></textarea>
     </div>
 
-    <mat-chip-list
-      class="example-chip"
-      cdkDropListOrientation="horizontal">
-      <mat-chip class="example-box" cdkDrag
-                *ngFor="let labelData of noteLabelList">
-        <div matLine><small>{{labelData.labelName}}</small></div>
-        <mat-icon matChipRemove (click)="removeMapping(labelData)">cancel</mat-icon>
-      </mat-chip>
-    </mat-chip-list>
+    <div *ngIf="dateTime!=null" style="padding-top: 10px">
+      <div fxLayout="row" fxLayout="row wrap">
+        <mat-chip-list class="chip">
 
-    <!--    last div-->
-    <div fxLayout="row" fxLayoutAlign="space-between center">
-      <div>
-        <button mat-icon-button>
-          <mat-icon class="icon-take-note" matTooltip="Remind me">
-            <img class="icon" class="take-note-icon" src="../../../assets/reminder.svg"/>
-          </mat-icon>
-        </button>
-        <button mat-icon-button>
-          <mat-icon matTooltip="Collaborator">
-            <img class="icon" class="take-note-icon" src="../../../assets/person_add-24px.svg"/>
-          </mat-icon>
-        </button>
-        <button mat-icon-button [matMenuTriggerFor]="colorlist">
-          <mat-icon matTooltip="Chnage color">
-            <img class="icon" class="take-note-icon" src="../../../assets/color_lens-24px.svg"/>
-          </mat-icon>
-        </button>
-
-        <mat-menu #colorlist="matMenu" yPosition="above">
-          <div fxLayout="row" fxLayoutGap="5px" style="margin: 3px;padding-bottom: 0px"
-               *ngFor="let colors of colorArray">
-            <div *ngFor="let color of colors">
-              <button
-                class="colors"
-                [ngStyle]="{ 'background-color': color.color }"
-                (click)="colorEdit(color.color)"
-                matTooltip="{{ color.name}}">
-              </button>
-            </div>
+          <div *ngIf="
+            (todaydate | date: 'shortDate') ==
+              (dateTime | date: 'shortDate') && dateTime != '' ">
+            <mat-chip>Today {{ dateTime | date: "shortTime" }}
+              <mat-icon matChipRemove (click)="removeReminder()">cancel</mat-icon>
+            </mat-chip>
           </div>
-        </mat-menu>
 
-        <button mat-icon-button>
-          <mat-icon matTooltip="Add image">
-            <img class="icon" class="take-note-icon" src="../../../assets/outline-image-24px.svg"/>
-          </mat-icon>
-        </button>
-        <button mat-icon-button>
-          <mat-icon matTooltip="Archive">
-            <img class="icon" class="take-note-icon"
-                 src="../../../assets/archive-24px.svg"
-                 (click)="archiveNote()"/>
-          </mat-icon>
-        </button>
-        <button mat-icon-button [matMenuTriggerFor]="menu">
-          <mat-icon matTooltip="More">
-            <img class="icon" class="take-note-icon" src="../../../assets/more_vert-24px.svg"/>
-          </mat-icon>
-        </button>
-
-        <mat-menu #menu="matMenu">
-          <button mat-menu-item [matMenuTriggerFor]="labelMenu" (click)="$event.stopPropagation()">
-            <span>Add label</span>
-          </button>
-        </mat-menu>
-
-        <mat-menu #labelMenu="matMenu" yPosition="above" (click)="$event.stopPropagation()">
-          <div *ngFor="let labelData of labelList " style="padding: 5px 10px 5px 10px ">
-            <div fxLayout="row">
-              <mat-checkbox
-                (click)="$event.stopPropagation()"
-                (change)="mapLabel($event,labelData)">
-                {{labelData.labelName}}
-              </mat-checkbox>
-            </div>
+          <div *ngIf="
+            (tomorrow | date: 'shortDate') ==
+              (dateTime | date: 'shortDate') &&dateTime != ''
+          ">
+            <mat-chip>Tomorrow {{ dateTime | date: "shortTime" }}
+              <mat-icon matChipRemove (click)="removeReminder()">cancel</mat-icon>
+            </mat-chip>
           </div>
-        </mat-menu>
 
-      </div>
-      <div>
-        <button mat-flat-button (click)="createNote()">Close</button>
+          <div *ngIf="
+            (tomorrow | date: 'shortDate') !=
+              (dateTime | date: 'shortDate') &&
+            (todaydate | date: 'shortDate') !=
+              (dateTime | date: 'shortDate') &&
+            dateTime!= ''
+          ">
+            <mat-chip>{{dateTime | date: "short" }}
+              <mat-icon matChipRemove (click)="removeReminder()">cancel</mat-icon>
+            </mat-chip>
+          </div>
+        </mat-chip-list>
       </div>
     </div>
+
+          <mat-chip-list
+            class="example-chip"
+            cdkDropListOrientation="horizontal">
+            <mat-chip class="example-box" cdkDrag
+                      *ngFor="let labelData of noteLabelList">
+              <div matLine><small>{{labelData.labelName}}</small></div>
+              <mat-icon matChipRemove (click)="removeMapping(labelData)">cancel</mat-icon>
+            </mat-chip>
+          </mat-chip-list>
+
+          <!--    last div-->
+          <div fxLayout="row" fxLayoutAlign="space-between center">
+            <div>
+              <button mat-icon-button [matMenuTriggerFor]="remindme">
+                <mat-icon class="icon-take-note" matTooltip="Remind me">
+                  <img class="icon" class="take-note-icon" src="../../../assets/reminder.svg"/>
+                </mat-icon>
+              </button>
+
+              <mat-menu #remindme="matMenu" class="matmenu" yPosition="below">
+                <app-reminder
+                  (getDateAndTime)="getUpdatedValue($event)"
+                  [noteType]="noteType"></app-reminder>
+              </mat-menu>
+              <button mat-icon-button>
+                <mat-icon matTooltip="Collaborator">
+                  <img class="icon" class="take-note-icon" src="../../../assets/person_add-24px.svg"/>
+                </mat-icon>
+              </button>
+              <button mat-icon-button [matMenuTriggerFor]="colorlist">
+                <mat-icon matTooltip="Chnage color">
+                  <img class="icon" class="take-note-icon" src="../../../assets/color_lens-24px.svg"/>
+                </mat-icon>
+              </button>
+
+              <mat-menu #colorlist="matMenu" yPosition="above">
+                <div fxLayout="row" fxLayoutGap="5px" style="margin: 3px;padding-bottom: 0px"
+                     *ngFor="let colors of colorArray">
+                  <div *ngFor="let color of colors">
+                    <button
+                      class="colors"
+                      [ngStyle]="{ 'background-color': color.color }"
+                      (click)="colorEdit(color.color)"
+                      matTooltip="{{ color.name}}">
+                    </button>
+                  </div>
+                </div>
+              </mat-menu>
+
+              <button mat-icon-button>
+                <mat-icon matTooltip="Add image">
+                  <img class="icon" class="take-note-icon" src="../../../assets/outline-image-24px.svg"/>
+                </mat-icon>
+              </button>
+              <button mat-icon-button>
+                <mat-icon matTooltip="Archive">
+                  <img class="icon" class="take-note-icon"
+                       src="../../../assets/archive-24px.svg"
+                       (click)="archiveNote()"/>
+                </mat-icon>
+              </button>
+              <button mat-icon-button [matMenuTriggerFor]="menu">
+                <mat-icon matTooltip="More">
+                  <img class="icon" class="take-note-icon" src="../../../assets/more_vert-24px.svg"/>
+                </mat-icon>
+              </button>
+
+              <mat-menu #menu="matMenu">
+                <button mat-menu-item [matMenuTriggerFor]="labelMenu" (click)="$event.stopPropagation()">
+                  <span>Add label</span>
+                </button>
+              </mat-menu>
+
+              <mat-menu #labelMenu="matMenu" yPosition="above" (click)="$event.stopPropagation()">
+                <div *ngFor="let labelData of labelList " style="padding: 5px 10px 5px 10px ">
+                  <div fxLayout="row">
+                    <mat-checkbox
+                      (click)="$event.stopPropagation()"
+                      (change)="mapLabel($event,labelData)">
+                      {{labelData.labelName}}
+                    </mat-checkbox>
+                  </div>
+                </div>
+              </mat-menu>
+
+            </div>
+            <div>
+              <button mat-flat-button (click)="createNote()">Close</button>
+            </div>
+          </div>
   </mat-card>
 </div>
 

@@ -11,10 +11,14 @@ import {MatSnackBar} from '@angular/material/snack-bar';
 export class ReminderComponent implements OnInit {
 
   @Input() note: any;
+  @Input() noteType: string;
   @Output() getList = new EventEmitter<any>();
   @Output() getPinList = new EventEmitter<any>();
   @Output() getArchiveList = new EventEmitter<any>();
+  @Output() getDateAndTime = new EventEmitter();
+
   selectedTime = '19:00';
+
 
   responseData: any;
   reminderShow = true;
@@ -53,38 +57,47 @@ export class ReminderComponent implements OnInit {
       this.isEdit = true;
       const hours = Number(this.timeSet.slice(0, 2));
       const minute = Number(this.timeSet.slice(3, 5));
-      this.data = {
-        note_Id: this.note.note_Id,
-        remainder: new Date(
-          this.defaultTime.getFullYear(),
-          this.defaultTime.getMonth(),
-          this.defaultTime.getDate(),
-          hours,
-          minute,
-          0,
-          0
-        )
-      };
-    });
-  }
 
+      const updateDate = new Date(
+        this.defaultTime.getFullYear(),
+        this.defaultTime.getMonth(),
+        this.defaultTime.getDate(),
+        hours,
+        minute,
+        0,
+        0
+      );
+      this.getDateAndTime.emit(updateDate);
+      if (this.noteType !== 'reminder') {
+        this.data = {
+          note_Id: this.note.note_Id,
+          remainder: updateDate
+        };
+      }
+    });
+
+  }
 
   // tslint:disable-next-line:max-line-length
   setReminder(reminder: { timeCount: number; dayCount: number; time: string; day: string } | { timeCount: number; dayCount: number; time: string; day: string }): void {
     this.isEdit = true;
-    this.data = {
-      note_Id: this.note.note_Id,
-      remainder: new Date(
-        this.currentDate.getFullYear(),
-        this.currentDate.getMonth(),
-        this.currentDate.getDate() + reminder.dayCount,
-        reminder.timeCount,
-        this.currentDate.getMinutes(),
-        0,
-        0
-      )
-    };
-    this.saveReminder();
+    const updateDate = new Date(
+      this.currentDate.getFullYear(),
+      this.currentDate.getMonth(),
+      this.currentDate.getDate() + reminder.dayCount,
+      reminder.timeCount,
+      this.currentDate.getMinutes(),
+      0,
+      0
+    );
+    this.getDateAndTime.emit(updateDate);
+    if (this.noteType !== 'reminder') {
+      this.data = {
+        note_Id: this.note.note_Id,
+        remainder: updateDate
+      };
+      this.saveReminder();
+    }
   }
 
   openSnackBar(action): void {
@@ -95,9 +108,8 @@ export class ReminderComponent implements OnInit {
     this.reminderShow = !this.reminderShow;
   }
 
-
   saveReminder(): void {
-    if (this.isEdit) {
+    if (this.isEdit && this.noteType !== 'reminder') {
       this.noteService.putData(this.data, 'reminder')
         .subscribe(response => {
           this.responseData = response;

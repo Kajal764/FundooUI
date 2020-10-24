@@ -32,6 +32,7 @@ import {AmazingTimePickerModule} from 'amazing-time-picker';
 import {ReminderComponent} from './component/reminder/reminder.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
+import {ReminderNoteComponent} from './component/reminder-note/reminder-note.component';
 
 // @ts-ignore
 
@@ -56,6 +57,7 @@ import {MatNativeDateModule} from '@angular/material/core';
     CreateLabelComponent,
     MapLabelNoteComponent,
     ReminderComponent,
+    ReminderNoteComponent,
 
   ],
   imports: [

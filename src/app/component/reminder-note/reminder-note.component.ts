@@ -1,31 +1,31 @@
-import {Component, EventEmitter, OnInit, Output} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NoteService} from '../../service/note/note.service';
-import {MatSnackBar} from '@angular/material/snack-bar';
 import {INote} from '../note/note';
+import {MatSnackBar} from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-archive',
-  templateUrl: './archive.component.html',
-  styleUrls: ['./archive.component.scss']
+  selector: 'app-reminder-note',
+  templateUrl: './reminder-note.component.html',
+  styleUrls: ['./reminder-note.component.scss']
 })
-export class ArchiveComponent implements OnInit {
-
-  @Output() public getNoteList = new EventEmitter<any>();
-  public archiveNoteList: INote[];
+export class ReminderNoteComponent implements OnInit {
+  public reminderNoteList: INote[];
   private message: string;
-  noteType = 'archive';
+  noteType = 'note';
 
   constructor(private noteService: NoteService, private snackBar: MatSnackBar) {
   }
 
   ngOnInit(): void {
-    this.archiveNote();
+    this.remainderNote();
   }
 
-  private archiveNote(): void {
-    this.noteService.getList('archiveList')
+
+  private remainderNote(): void {
+    this.noteService.getList('reminder')
       .subscribe(data => {
-          this.archiveNoteList = data;
+          this.reminderNoteList = data;
+          console.log(this.reminderNoteList);
           this.message = 'Note Fetch';
           this.snackBar.open(this.message, 'Dismiss', {duration: 4000});
         },
@@ -34,4 +34,5 @@ export class ArchiveComponent implements OnInit {
           this.snackBar.open(this.message, 'Dismiss', {duration: 4000});
         });
   }
+
 }

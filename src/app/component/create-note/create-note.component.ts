@@ -50,9 +50,20 @@ export class CreateNoteComponent implements OnInit {
   };
   private archive = false;
   public labelList: ILabel[];
-  // public noteLabelList: ILabel[];
-
+  noteType = 'reminder';
   noteLabelList: ILabel[] = [];
+  public dateTime: any;
+
+  todaydate = new Date();
+  tomorrow = new Date(
+    this.todaydate.getFullYear(),
+    this.todaydate.getMonth(),
+    this.todaydate.getDate() + 1,
+    0,
+    0,
+    0,
+    0
+  );
 
 
   constructor(private noteService: NoteService,
@@ -75,7 +86,9 @@ export class CreateNoteComponent implements OnInit {
   }
 
   // tslint:disable-next-line:typedef
-  createNote() {
+
+
+  createNote(): void {
     const data = {
       note_id: 0,
       title: this.noteTitle,
@@ -83,9 +96,9 @@ export class CreateNoteComponent implements OnInit {
       color: this.color,
       archive: this.archive,
       pin: this.pin,
-      labelList: this.noteLabelList
+      labelList: this.noteLabelList,
+      remainder: this.dateTime
     };
-    console.log('response ', data);
     this.noteService.createNote(data)
       .subscribe(response => {
         this.responseData = response;
@@ -155,5 +168,13 @@ export class CreateNoteComponent implements OnInit {
     if (index !== -1) {
       this.noteLabelList.splice(index, 1);
     }
+  }
+
+  getUpdatedValue(dateTime: any): void {
+    this.dateTime = dateTime;
+  }
+
+  removeReminder(): void {
+    this.dateTime = null;
   }
 }

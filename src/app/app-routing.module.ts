@@ -12,6 +12,7 @@ import {ArchiveComponent} from './component/archive/archive.component';
 import {SearchComponent} from './component/search/search.component';
 import {CreateLabelComponent} from './component/create-label/create-label.component';
 import {MapLabelNoteComponent} from './component/map-label-note/map-label-note.component';
+import {ReminderNoteComponent} from './component/reminder-note/reminder-note.component';
 
 const routes: Routes = [
   {
@@ -64,6 +65,10 @@ const routes: Routes = [
       {
         path: 'label-map',
         component: MapLabelNoteComponent
+      },
+      {
+        path: 'reminder-note',
+        component: ReminderNoteComponent
       }
     ]
   },
