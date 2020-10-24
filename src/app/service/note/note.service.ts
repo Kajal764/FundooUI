@@ -39,5 +39,15 @@ export class NoteService {
   permanentDelete(noteId: number): Observable<any> {
     return this.httpclientService.deleteData(this.url + this.note + 'trash/' + noteId);
   }
+
+  putData(data: { note_Id: any; remainder: string }, url: string): Observable<any> {
+    return this.httpclientService.setReminder(data, this.url + this.note + url);
+
+  }
+
+
+  deleteReminder(noteId: number): Observable<any> {
+    return this.httpclientService.deleteData(this.url + this.note + 'reminder/' + noteId);
+  }
 }
 

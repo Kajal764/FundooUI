@@ -46,4 +46,9 @@ export class HttpclientService {
     return this.httpClient.get<ILabel[]>(url)
       .pipe(catchError(this.handleError));
   }
+
+  setReminder(data: { note_Id: any; remainder: string }, url: string): Observable<any> {
+    return this.httpClient.put(url, data)
+      .pipe(catchError(this.handleError));
+  }
 }

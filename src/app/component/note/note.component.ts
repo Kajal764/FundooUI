@@ -22,6 +22,16 @@ export class NoteComponent implements OnInit {
 
   public label: INote;
   public labelList: INote [];
+  todaydate = new Date();
+  tomorrow = new Date(
+    this.todaydate.getFullYear(),
+    this.todaydate.getMonth(),
+    this.todaydate.getDate() + 1,
+    0,
+    0,
+    0,
+    0
+  );
 
   constructor(public dialog: MatDialog,
               private noteService: NoteService,
@@ -82,6 +92,20 @@ export class NoteComponent implements OnInit {
       label_Id: labelId
     };
     this.labelService.postLabel(data, 'removeLabel')
+      .subscribe(response => {
+        this.responseData = response;
+        this.getList.emit();
+        this.getPinList.emit();
+        this.archiveList.emit();
+        this.openSnackBar('Dismiss');
+      }, error => {
+        this.responseData = error.error;
+        this.openSnackBar('Dismiss');
+      });
+  }
+
+  removeReminder(noteId: number): void {
+    this.noteService.deleteReminder(noteId)
       .subscribe(response => {
         this.responseData = response;
         this.getList.emit();

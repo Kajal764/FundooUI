@@ -1,0 +1,66 @@
+<div *ngIf="reminderShow" class="reminder-list">
+  <div class="title">Reminder</div>
+  <div *ngFor="let reminder of reminderList">
+    <div fxLayoutAlign="space-between center">
+      <button mat-menu-item (click)="setReminder(reminder)">
+        <div fxLayout="row" fxLayoutAlign="space-between center">
+          <div>{{reminder.day}}</div>
+          <div fxFlexOffset="20">
+            {{reminder.time}}
+          </div>
+        </div>
+      </button>
+    </div>
+  </div>
+  <div>
+    <div>
+      <button overlapTrigger="true" (click)="$event.stopPropagation()" (click)="reminderShow = false"
+              mat-menu-item>
+        <div fxLayout="row">
+          <div fxLayoutAlign="space-around center" (click)="$event.stopPropagation()">
+            <img src="../../../assets/watch_later-24px.svg"/>
+          </div>
+          <div fxFlexOffset="5">Pick date & time</div>
+        </div>
+      </button>
+    </div>
+  </div>
+</div>
+
+<div *ngIf="reminderShow==false" class="pick-date-container" style="width: 250px">
+  <div>
+    <button overlapTrigger="true" mat-menu-item>
+      <div fxLayout="row" (click)="$event.stopPropagation()">
+        <div fxLayoutAlign="space-between center" (click)="$event.stopPropagation()" (click)="toggle()">
+          <img src="../../../assets/keyboard_backspace-24px.svg"/>
+        </div>
+        <div fxFlexOffset="6">Pick date & time</div>
+      </div>
+    </button>
+  </div>
+  <mat-divider></mat-divider>
+
+  <div fxLayout="column" fxLayoutAlign="space-around center" style="padding-top: 20px">
+    <mat-form-field class="example-full-width">
+      <div fxLayout="row" fxLayoutAlign="space-around center">
+        <input matInput [min]="defaultTime" [matDatepicker]="picker"
+               placeholder="Choose a date"
+               [(ngModel)]="defaultTime"/>
+        <mat-datepicker-toggle matSuffix [for]="picker">
+          <mat-icon matDatepickerToggleIcon>keyboard_arrow_down</mat-icon>
+        </mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </div>
+      <div style="padding-top: 10px">
+        <button (click)="open()" (click)="$event.stopPropagation()" mat-flat-button color="primary">time</button>
+        <input type="time" value="{{selectedTime}}">
+      </div>
+    </mat-form-field>
+  </div>
+
+  <div fxLayout="row" fxLayoutAlign="end end">
+    <button mat-button (click)="saveReminder()">
+      Save
+    </button>
+  </div>
+</div>

@@ -77,6 +77,7 @@ export class CreateNoteComponent implements OnInit {
     this.noteService.createNote(data)
       .subscribe(response => {
         this.responseData = response;
+        console.log(this.responseData);
         this.getNoteList.emit();
         this.getPinList.emit();
         this.openSnackBar('Dismiss');

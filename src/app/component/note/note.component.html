@@ -1,4 +1,3 @@
-
 <mat-card [style.backgroundColor]="note.color" class="note">
   <div fxLayout="row" fxLayoutAlign="start center">
     <div class="border" fxLayout="column" class="takenote"
@@ -25,16 +24,56 @@
                           [(ngModel)]="note.description">
                 </textarea>
   </div>
-    <mat-chip-list
-      class="example-chip"
-      cdkDropListOrientation="horizontal">
 
-      <mat-chip class="example-box" cdkDrag
-                *ngFor="let labelData of note.labelList">
-        <div matLine><small>{{labelData.labelName}}</small></div>
-        <mat-icon matChipRemove (click)="removeMapping(note.note_Id, labelData.label_Id)">cancel</mat-icon>
-      </mat-chip>
-    </mat-chip-list>
+
+  <div *ngIf="note.remainder!=null" style="padding-top: 10px">
+    <div fxLayout="row" fxLayout="row wrap">
+      <mat-chip-list class="chip">
+
+        <div *ngIf="
+            (todaydate | date: 'shortDate') ==
+              (note.remainder | date: 'shortDate') && note.remainder != '' ">
+          <mat-chip>Today {{ note.remainder | date: "shortTime" }}
+            <mat-icon matChipRemove (click)="removeReminder(note.note_Id)">cancel</mat-icon>
+          </mat-chip>
+        </div>
+
+        <div *ngIf="
+            (tomorrow | date: 'shortDate') ==
+              (note.remainder | date: 'shortDate') && note.remainder != ''
+          ">
+          <mat-chip>Tomorrow {{ note.remainder | date: "shortTime" }}
+            <mat-icon matChipRemove (click)="removeReminder(note.note_Id)">cancel</mat-icon>
+          </mat-chip>
+        </div>
+
+        <div *ngIf="
+            (tomorrow | date: 'shortDate') !=
+              (note.remainder | date: 'shortDate') &&
+            (todaydate | date: 'shortDate') !=
+              (note.remainder | date: 'shortDate') &&
+            note.remainder != ''
+          ">
+          <mat-chip>{{ note.remainder | date: "short" }}
+            <mat-icon matChipRemove (click)="removeReminder(note.note_Id)">cancel</mat-icon>
+          </mat-chip>
+        </div>
+
+
+      </mat-chip-list>
+    </div>
+  </div>
+
+  <mat-chip-list
+    class="example-chip"
+    cdkDropListOrientation="horizontal">
+
+    <mat-chip class="example-box" cdkDrag
+              *ngFor="let labelData of note.labelList">
+      <div matLine><small>{{labelData.labelName}}</small></div>
+      <mat-icon matChipRemove (click)="removeMapping(note.note_Id, labelData.label_Id)">cancel</mat-icon>
+    </mat-chip>
+  </mat-chip-list>
 
   <app-icons class="note-select"
              (getList)="getList.emit()"

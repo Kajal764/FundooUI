@@ -25,9 +25,13 @@ import {TrashComponent} from './component/trash/trash.component';
 import {NoteHomePageComponent} from './component/note-home-page/note-home-page.component';
 import {ArchiveComponent} from './component/archive/archive.component';
 import {SearchComponent} from './component/search/search.component';
-import { CreateLabelComponent } from './component/create-label/create-label.component';
-import { MapLabelNoteComponent } from './component/map-label-note/map-label-note.component';
+import {CreateLabelComponent} from './component/create-label/create-label.component';
+import {MapLabelNoteComponent} from './component/map-label-note/map-label-note.component';
 import {NgxMasonryModule} from 'ngx-masonry';
+import {AmazingTimePickerModule} from 'amazing-time-picker';
+import {ReminderComponent} from './component/reminder/reminder.component';
+import {MatDatepickerModule} from '@angular/material/datepicker';
+import {MatNativeDateModule} from '@angular/material/core';
 
 // @ts-ignore
 
@@ -51,6 +55,8 @@ import {NgxMasonryModule} from 'ngx-masonry';
     SearchComponent,
     CreateLabelComponent,
     MapLabelNoteComponent,
+    ReminderComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -61,7 +67,10 @@ import {NgxMasonryModule} from 'ngx-masonry';
     AppRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgxMasonryModule
+    NgxMasonryModule,
+    AmazingTimePickerModule,
+    MatDatepickerModule,
+    MatNativeDateModule
   ],
   providers: [UserService,
     AuthGuard,

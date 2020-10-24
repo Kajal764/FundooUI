@@ -1,9 +1,17 @@
 <div fxLayout="row" fxLayoutAlign="start center" fxFlex="60" class="icon-div">
-  <button mat-icon-button class="icon">
+  <button mat-icon-button class="icon" [matMenuTriggerFor]="remindme">
     <mat-icon class="icon-take-note" matTooltip="Remind me" style="padding-left: 0px">
       <img class="icon" class="take-note-icon" src="../../../assets/reminder.svg"/>
     </mat-icon>
   </button>
+
+  <mat-menu #remindme="matMenu" class="matmenu" yPosition="below">
+    <app-reminder [note]="note"
+                  (getList)="getList.emit()"
+                  (getPinList)="getPinList.emit()"
+                  (getArchiveList)="getArchiveList.emit()">
+    </app-reminder>
+  </mat-menu>
 
   <button mat-icon-button class="icon">
     <mat-icon matTooltip="Collaborator">
