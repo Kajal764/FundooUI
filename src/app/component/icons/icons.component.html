@@ -73,14 +73,37 @@
   </mat-menu>
 
   <mat-menu #labelMenu="matMenu" yPosition="above" (click)="$event.stopPropagation()">
-    <div *ngFor="let labelData of labelList " style="padding: 5px 10px 5px 10px ">
-      <div fxLayout="row">
-        <mat-checkbox
-          (click)="$event.stopPropagation()"
-          (change)="mapLabel($event,labelData,note)">
-          {{labelData.labelName}}
-        </mat-checkbox>
+    <div fxLayout='column' (click)="$event.stopPropagation()">
+      <div style="margin: 3px">Label note</div>
+      <div fxFlex="100">
+        <input matInput
+               [(ngModel)]="labelValue"
+               placeholder="Enter label name"
+               class="input-border"
+               maxlength="30"
+               (ngModelChange)="labelCreate($event)">
       </div>
+    </div>
+
+    <div *ngIf="!isLabelCreate">
+      <div *ngFor="let labelData of labelList " style="padding: 5px 10px 5px 10px ">
+        <div fxLayout="row">
+          <mat-checkbox
+            (click)="$event.stopPropagation()"
+            (change)="mapLabel($event,labelData,note)">
+            {{labelData.labelName}}
+          </mat-checkbox>
+        </div>
+      </div>
+    </div>
+
+    <div *ngIf="isLabelCreate">
+      <button mat-menu-item (click)="$event.stopPropagation()">
+        {{labelName}}
+        <span style="font-weight: bold;padding-left: 3px" (click)="createLabel(labelName)">
+      Create
+        </span>
+      </button>
     </div>
   </mat-menu>
 

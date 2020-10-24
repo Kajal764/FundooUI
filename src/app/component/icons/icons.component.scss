@@ -23,7 +23,8 @@
   outline: none;
 
 }
-.colors:hover{
+
+.colors:hover {
   border-color: grey;
 
 }
@@ -35,6 +36,21 @@
 
 ::ng-deep .mat-checkbox-checked .mat-checkbox-background {
   background-color: navy !important;
+}
+
+input {
+  outline: 0;
+  border-width: 0 0 1.5px;
+  border-color: transparent;
+}
+
+input:focus {
+  border-color: lightgray;
+}
+
+::placeholder {
+  font-size: 13px;
+  font-weight: bold;
 }
 
 

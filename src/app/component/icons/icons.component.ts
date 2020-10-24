@@ -48,17 +48,27 @@ export class IconsComponent implements OnInit {
   ];
   public labelList: ILabel[];
 
+  labelValue: string;
+  public isLabelCreate = false;
+  public labelName = '';
+
   constructor(private noteService: NoteService,
               private snackBar: MatSnackBar,
               private interactionService: InteractionService,
               private labelService: LabelService) {
   }
 
+  labelCreate(labelName: any): void {
+    this.isLabelCreate = true;
+    this.labelName = labelName;
+    labelName.stopPropagation();
+  }
+
   ngOnInit(): void {
     this.getSubscribeList();
     this.getLabelList();
-
   }
+
 
   deleteNote(apiCall: string): void {
     this.noteService.deleteNote(this.note.note_Id, apiCall)
@@ -133,5 +143,25 @@ export class IconsComponent implements OnInit {
         this.labelList = data;
       });
   }
+
+  createLabel(labelName: string): void {
+    const data = {
+      label_Id: 0,
+      note_Id: 0,
+      labelName
+    };
+    this.labelService.postLabel(data, 'create')
+      .subscribe(response => {
+        this.responseData = response;
+        this.openSnackBar('Dismiss');
+        this.labelValue = '';
+        this.getLabelList();
+        this.isLabelCreate = false;
+      }, error => {
+        this.responseData = error.error;
+        this.openSnackBar('Dismiss');
+      });
+  }
+
 
 }
