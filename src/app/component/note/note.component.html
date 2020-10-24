@@ -64,16 +64,19 @@
     </div>
   </div>
 
-  <mat-chip-list
-    class="example-chip"
-    cdkDropListOrientation="horizontal">
+  <div style="padding-top: 10px">
+    <mat-chip-list
+      class="example-chip"
+      cdkDropListOrientation="horizontal">
 
-    <mat-chip class="example-box" cdkDrag
-              *ngFor="let labelData of note.labelList">
-      <div matLine><small>{{labelData.labelName}}</small></div>
-      <mat-icon matChipRemove (click)="removeMapping(note.note_Id, labelData.label_Id)">cancel</mat-icon>
-    </mat-chip>
-  </mat-chip-list>
+      <mat-chip class="example-box" cdkDrag
+                *ngFor="let labelData of note.labelList">
+        <div matLine><small>{{labelData.labelName}}</small></div>
+        <mat-icon matChipRemove (click)="removeMapping(note.note_Id, labelData.label_Id)">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+  </div>
+
 
   <app-icons class="note-select"
              (getList)="getList.emit()"

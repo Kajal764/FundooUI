@@ -2,6 +2,9 @@ import {Component, OnInit, Output, EventEmitter} from '@angular/core';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {InteractionService} from '../../service/search-data/interaction.service';
+import {LabelService} from '../../service/label/label.service';
+import {ILabel} from '../create-label/ILabel';
+import {MatCheckboxChange} from '@angular/material/checkbox';
 
 @Component({
   selector: 'app-create-note',
@@ -46,15 +49,22 @@ export class CreateNoteComponent implements OnInit {
     message: String
   };
   private archive = false;
+  public labelList: ILabel[];
+  // public noteLabelList: ILabel[];
+
+  noteLabelList: ILabel[] = [];
+
 
   constructor(private noteService: NoteService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              public labelService: LabelService,
+              public interactionService: InteractionService) {
   }
 
   ngOnInit(): void {
+    this.getLabelList();
+    this.getSubscribeList();
   }
-
-  // tslint:disable-next-line:typedef
 
   addNote(): void {
     this.flag = !this.flag;
@@ -72,12 +82,13 @@ export class CreateNoteComponent implements OnInit {
       description: this.noteDesc,
       color: this.color,
       archive: this.archive,
-      pin: this.pin
+      pin: this.pin,
+      labelList: this.noteLabelList
     };
+    console.log('response ', data);
     this.noteService.createNote(data)
       .subscribe(response => {
         this.responseData = response;
-        console.log(this.responseData);
         this.getNoteList.emit();
         this.getPinList.emit();
         this.openSnackBar('Dismiss');
@@ -90,6 +101,7 @@ export class CreateNoteComponent implements OnInit {
     this.pin = false;
     this.color = '#fff';
     this.archive = false;
+    this.noteLabelList = [];
   }
 
   openSnackBar(action): void {
@@ -104,5 +116,44 @@ export class CreateNoteComponent implements OnInit {
 
   archiveNote(): void {
     this.archive ? this.archive = false : this.archive = true;
+  }
+
+  getLabelList(): void {
+    this.labelService.getList()
+      .subscribe(data => {
+          this.labelList = data;
+          this.interactionService.sendList(this.labelList);
+        },
+        error => {
+          this.responseData = error.error;
+        });
+  }
+
+  private getSubscribeList(): void {
+    this.interactionService.labelData$
+      .subscribe(data => {
+        this.labelList = data;
+      });
+  }
+
+  mapLabel(matCheckboxChange: MatCheckboxChange, labelData: ILabel): void {
+    if (matCheckboxChange.checked) {
+      const index = this.noteLabelList.indexOf(labelData);
+      if (index === -1) {
+        this.noteLabelList.push(labelData);
+      }
+    } else {
+      const index = this.noteLabelList.indexOf(labelData);
+      if (index !== -1) {
+        this.noteLabelList.splice(index, 1);
+      }
+    }
+  }
+
+  removeMapping(label: ILabel): void {
+    const index = this.noteLabelList.indexOf(label);
+    if (index !== -1) {
+      this.noteLabelList.splice(index, 1);
+    }
   }
 }

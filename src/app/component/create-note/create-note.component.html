@@ -1,4 +1,4 @@
-<div *ngIf="flag==true"  fxLayout="row" fxFlex="100" fxLayout="column" (click)="addNote()"
+<div *ngIf="flag==true" fxLayout="row" fxFlex="100" fxLayout="column" (click)="addNote()"
      fxLayoutAlign="space-around start">
   <mat-card class="note-create"
             fxLayoutAlign="space-between center">
@@ -48,6 +48,16 @@
                 [(ngModel)]="noteDesc" [style.backgroundColor]="color"></textarea>
     </div>
 
+    <mat-chip-list
+      class="example-chip"
+      cdkDropListOrientation="horizontal">
+      <mat-chip class="example-box" cdkDrag
+                *ngFor="let labelData of noteLabelList">
+        <div matLine><small>{{labelData.labelName}}</small></div>
+        <mat-icon matChipRemove (click)="removeMapping(labelData)">cancel</mat-icon>
+      </mat-chip>
+    </mat-chip-list>
+
     <!--    last div-->
     <div fxLayout="row" fxLayoutAlign="space-between center">
       <div>
@@ -93,11 +103,30 @@
                  (click)="archiveNote()"/>
           </mat-icon>
         </button>
-        <button mat-icon-button>
+        <button mat-icon-button [matMenuTriggerFor]="menu">
           <mat-icon matTooltip="More">
             <img class="icon" class="take-note-icon" src="../../../assets/more_vert-24px.svg"/>
           </mat-icon>
         </button>
+
+        <mat-menu #menu="matMenu">
+          <button mat-menu-item [matMenuTriggerFor]="labelMenu" (click)="$event.stopPropagation()">
+            <span>Add label</span>
+          </button>
+        </mat-menu>
+
+        <mat-menu #labelMenu="matMenu" yPosition="above" (click)="$event.stopPropagation()">
+          <div *ngFor="let labelData of labelList " style="padding: 5px 10px 5px 10px ">
+            <div fxLayout="row">
+              <mat-checkbox
+                (click)="$event.stopPropagation()"
+                (change)="mapLabel($event,labelData)">
+                {{labelData.labelName}}
+              </mat-checkbox>
+            </div>
+          </div>
+        </mat-menu>
+
       </div>
       <div>
         <button mat-flat-button (click)="createNote()">Close</button>
