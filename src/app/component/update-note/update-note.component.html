@@ -34,6 +34,50 @@
     </mat-chip>
   </mat-chip-list>
 
+  <!--  ************ Reminder *****************-->
+  <div *ngIf="note.remainder!=null" style="padding-top: 10px">
+    <div fxLayout="row" fxLayout="row wrap">
+      <mat-chip-list class="chip">
+
+        <div *ngIf="
+            (todaydate | date: 'shortDate') ==
+              (note.remainder | date: 'shortDate') && note.remainder != '' ">
+          <mat-chip>Today {{ note.remainder | date: "shortTime" }}
+            <mat-icon matChipRemove (click)="removeReminder(note.note_Id)">cancel</mat-icon>
+          </mat-chip>
+        </div>
+
+        <div *ngIf="
+            (tomorrow | date: 'shortDate') ==
+              (note.remainder | date: 'shortDate') && note.remainder != ''
+          ">
+          <mat-chip>Tomorrow {{ note.remainder | date: "shortTime" }}
+            <mat-icon matChipRemove (click)="removeReminder(note.note_Id)">cancel</mat-icon>
+          </mat-chip>
+        </div>
+
+        <div *ngIf="
+            (tomorrow | date: 'shortDate') !=
+              (note.remainder | date: 'shortDate') &&
+            (todaydate | date: 'shortDate') !=
+              (note.remainder | date: 'shortDate') &&
+            note.remainder != ''">
+          <mat-chip>{{ note.remainder | date: "short" }}
+            <mat-icon matChipRemove (click)="removeReminder(note.note_Id)">cancel</mat-icon>
+          </mat-chip>
+        </div>
+      </mat-chip-list>
+    </div>
+  </div>
+
+  <mat-list role="list" fxLayout="row">
+    <div *ngFor="let user of userCollabList" style="margin: 2px">
+      <div *ngIf="loginUser != user.email">
+        <ngx-avatar [size]="30" name="{{user.firstName}}"></ngx-avatar>
+      </div>
+    </div>
+  </mat-list>
+
   <div fxLayout="row" fxLayoutAlign="space-between center">
     <app-icons [note]="note">
     </app-icons>

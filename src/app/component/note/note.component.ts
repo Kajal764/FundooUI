@@ -79,6 +79,8 @@ export class NoteComponent implements OnInit {
           this.responseData = response;
           this.openSnackBar('Dismiss');
           this.getList.emit();
+          this.getPinList.emit();
+          this.archiveList.emit();
 
         }, (error) => {
           this.responseData = error.error;
