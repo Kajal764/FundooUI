@@ -27,5 +27,4 @@ export class GridViewNoteComponent implements OnInit {
   }
 
 
-
 }

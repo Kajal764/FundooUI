@@ -1,4 +1,4 @@
-import {Component, Inject, OnInit} from '@angular/core';
+import {Component, Inject, OnInit, EventEmitter} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {INote} from '../note/note';
 import {NoteService} from '../../service/note/note.service';
@@ -17,6 +17,10 @@ export class CollaboratorComponent implements OnInit {
   private responseData: any;
   public collabUserList: IUser[];
   private isFalse = false;
+  public list: [{ id: number; firstName: string; lastName: string; email: string; varified: boolean }];
+  private loginUser: string;
+
+  public user: IUser;
 
   constructor(@Inject(MAT_DIALOG_DATA) public note: INote,
               private noteService: NoteService,
@@ -24,9 +28,13 @@ export class CollaboratorComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    console.log(this.note);
+    this.loginUser = localStorage.getItem('email');
+    this.note.userList.map(value => {
+      if (value.email === this.loginUser) {
+        this.user = value;
+      }
+    });
     this.getCollaboratorList();
-
   }
 
   addUser(): void {
@@ -58,7 +66,6 @@ export class CollaboratorComponent implements OnInit {
     this.noteService.getUserList(`collaborateUser/${this.note.note_Id}`)
       .subscribe(data => {
           this.collabUserList = data.reverse();
-          this.collabUserList.pop();
         },
         error => {
           this.responseData = error.error;

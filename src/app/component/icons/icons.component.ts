@@ -172,5 +172,11 @@ export class IconsComponent implements OnInit {
       panelClass: 'custom-box',
       data: note
     });
+
+    dialogRef.afterClosed().subscribe(() => {
+      this.getList.emit();
+      this.getPinList.emit();
+      this.getArchiveList.emit();
+    });
   }
 }

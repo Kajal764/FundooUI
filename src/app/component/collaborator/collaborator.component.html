@@ -1,75 +1,78 @@
-<!--<div fxFlex="100" fxLayout="column">-->
-<!--  <div fxLayoutAlign="start start" style="padding: 15px">-->
-<!--    <mat-card-title style="font-size: 20px">Collaborators</mat-card-title>-->
-<!--  </div>-->
-<!--  <mat-divider></mat-divider>-->
+<div fxFlex="100" fxLayout="column">
+  <div fxLayoutAlign="start start" style="padding: 15px">
+    <mat-card-title style="font-size: 20px">Collaborators</mat-card-title>
+  </div>
+  <mat-divider></mat-divider>
 
-  <!--  &lt;!&ndash;  ************* Owner info *************&ndash;&gt;-->
-  <!--  <div fxLayout="row" class="user-div">-->
-  <!--    <div fxFlex="13">-->
-  <!--      <button-->
-  <!--        [ngStyle]="{'background-image':'url(' +'../../../assets/avatar.PNG'+ ')','background-size':'cover','width':'47px','height':'47px','margin-left':'10px'}"-->
-  <!--        matTooltip="Profile" mat-mini-fab>-->
-  <!--      </button>-->
-  <!--    </div>-->
-  <!--    <div fxFlex='70' fxLayout="column">-->
-  <!--      <div style="font-size: 17px;font-weight: 440">-->
-  <!--        {{note.userList[0].firstName}} {{note.userList[0].lastName}} <span-->
-  <!--        style="color: gray;font-size: 13px">(Owner)</span>-->
-  <!--      </div>-->
-  <!--      <div fxLayout="row" style="color: gray;font-size: 15px">-->
-  <!--        {{note.userList[0].email}}-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
+  <!--  ************* Owner info *************-->
+  <div fxLayout="row" class="user-div">
+    <div fxFlex="13">
+      <button
+        [ngStyle]="{'background-image':'url(' +'../../../assets/avatar.PNG'+ ')','background-size':'cover','width':'42px','height':'42px','margin-left':'10px'}"
+        matTooltip="Profile" mat-mini-fab>
+      </button>
+    </div>
+    <div fxFlex='70' fxLayout="column">
+      <div style="font-size: 17px;font-weight: 440">
+        {{user.firstName}} {{user.lastName}}
+        <span style="color: gray;font-size: 13px">(Owner)</span>
+      </div>
+      <div fxLayout="row" style="color: gray;font-size: 15px">
+        {{user.email}}
+      </div>
+    </div>
+  </div>
 
-  <!--  &lt;!&ndash;  &lt;!&ndash;  *************** collab user ***************&ndash;&gt;&ndash;&gt;-->
+  <!--  &lt;!&ndash;  *************** collab user ***************&ndash;&gt;-->
 
-  <!--  <div *ngFor="let user of collabUserList">-->
-  <!--    <div fxLayout="row">-->
-  <!--      <div fxFlex="90" style="margin-left: 10px;margin-top: 10px" (click)="isChangeCross()">-->
-  <!--        <div fxFlex="13">-->
-  <!--          <ngx-avatar name="{{user.firstName}}"></ngx-avatar>-->
-  <!--        </div>-->
-  <!--        <div fxFlex='65' fxLayout="column">-->
-  <!--          <div style="font-size: 17px;font-weight: 440">{{user.firstName}} {{user.lastName}}</div>-->
-  <!--          <div fxLayout="row" style="color: gray;font-size: 15px">{{user.email}}</div>-->
-  <!--        </div>-->
-  <!--      </div>-->
-  <!--      <div fxFlex="10" *ngIf="isFalse" (click)="removeCollabUser(user)">-->
-  <!--        <button mat-icon-button><img src="../../../assets/close-24px.svg"></button>-->
-  <!--      </div>-->
-  <!--    </div>-->
-  <!--  </div>-->
+  <div *ngFor="let data of collabUserList">
+    <div *ngIf="data.email !== user.email">
+      <div fxLayout="row">
+        <div fxFlex="90" style="margin-left: 10px;margin-top: 10px" (click)="isChangeCross()">
+          <div fxFlex="13">
+            <ngx-avatar size="40" name="{{data.firstName}}"></ngx-avatar>
+          </div>
+          <div fxFlex='65' fxLayout="column">
+            <div style="font-size: 17px;font-weight: 440">{{data.firstName}} {{data.lastName}}</div>
+            <div fxLayout="row" style="color: gray;font-size: 15px">{{data.email}}</div>
+          </div>
+        </div>
+        <div fxFlex="10" *ngIf="isFalse" (click)="removeCollabUser(data)">
+          <button mat-icon-button><img src="../../../assets/close-24px.svg"></button>
+        </div>
+      </div>
+    </div>
+
+  </div>
 
 
-  <!--  <div fxLayout="row" class="user-input">-->
-  <!--    <div fxFlex="12">-->
-  <!--      <ngx-avatar name="User"></ngx-avatar>-->
-  <!--    </div>-->
-  <!--    <div fxFlex='78' fxLayout="row">-->
-  <!--      <input [(ngModel)]="email"-->
-  <!--             matInput-->
-  <!--             placeholder="Person or email to share with"-->
-  <!--             autocomplete="off"-->
-  <!--             (click)="isChange()">-->
-  <!--    </div>-->
-  <!--    <div *ngIf="isCorrect">-->
-  <!--      <button mat-icon-button style="color: gray">-->
-  <!--        <img src="../../../assets/check-24px.svg" (click)="addUser()">-->
-  <!--      </button>-->
-  <!--    </div>-->
-  <!--  </div>-->
-  <!--  <br>-->
-  <!--  <mat-divider></mat-divider>-->
+  <div fxLayout="row" class="user-input">
+    <div fxFlex="12">
+      <ngx-avatar size="40" name="User"></ngx-avatar>
+    </div>
+    <div fxFlex='78' fxLayout="row">
+      <input [(ngModel)]="email"
+             matInput
+             placeholder="Person or email to share with"
+             autocomplete="off"
+             (click)="isChange()">
+    </div>
+    <div *ngIf="isCorrect">
+      <button mat-icon-button style="color: gray">
+        <img src="../../../assets/check-24px.svg" (click)="addUser()">
+      </button>
+    </div>
+  </div>
+  <br>
+  <mat-divider></mat-divider>
 
-  <!--  <div class="button-background" fxFlex="100">-->
-  <!--    <div class="button" fxLayout="row" fxLayoutGap="5%" fxFlex="80">-->
-  <!--      <button mat-button [mat-dialog-close] fxLayoutGap="5%">Cancel</button>-->
-  <!--      <button mat-button [mat-dialog-close] fxLayoutGap="5%">Save</button>-->
-  <!--    </div>-->
-  <!--  </div>-->
+  <div class="button-background" fxFlex="100">
+    <div class="button" fxLayout="row" fxLayoutGap="5%" fxFlex="80">
+      <button mat-button [mat-dialog-close] fxLayoutGap="5%">Cancel</button>
+      <button mat-button [mat-dialog-close] fxLayoutGap="5%">Save</button>
+    </div>
+  </div>
 
-<!--</div>-->
+</div>
 
 

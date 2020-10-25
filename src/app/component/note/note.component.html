@@ -74,8 +74,10 @@
   </div>
 
   <mat-list role="list" fxLayout="row">
-    <div *ngFor="let user of collaUserList" style="margin: 2px">
-      <ngx-avatar [size]="30" name="{{user.firstName}}"></ngx-avatar>
+    <div *ngFor="let user of userCollabList" style="margin: 2px">
+      <div *ngIf="loginUser != user.email">
+        <ngx-avatar [size]="30" name="{{user.firstName}}"></ngx-avatar>
+      </div>
     </div>
   </mat-list>
 

@@ -53,10 +53,10 @@ export class LoginComponent implements OnInit {
       email: this.email.value,
       password: this.password.value
     };
-
     this.userService.login(data)
       .subscribe((response: HttpResponse<any>) => {
           localStorage.setItem('token', `Bearer ${response.headers.get('AuthorizeToken')}`);
+          localStorage.setItem('email', data.email);
           this.responseData = response.body;
           this.openSnackBar('Dismiss');
           this.redirectToDashboard();

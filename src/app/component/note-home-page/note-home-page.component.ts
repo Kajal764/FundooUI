@@ -32,7 +32,6 @@ export class NoteHomePageComponent implements OnInit {
     this.interactionService.gridData$
       .subscribe(data => {
         this.isGridView = data;
-        console.log(this.isGridView);
       });
   }
 
