@@ -5,6 +5,7 @@ import {UpdateNoteComponent} from '../update-note/update-note.component';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {LabelService} from '../../service/label/label.service';
+import {InteractionService} from '../../service/search-data/interaction.service';
 
 @Component({
   selector: 'app-note',
@@ -15,6 +16,8 @@ export class NoteComponent implements OnInit {
 
   @Input() public note: INote;
   @Input() public noteType: string;
+  public isGridView = false;
+
   @Output() getList = new EventEmitter<any>();
   @Output() getPinList = new EventEmitter<any>();
   @Output() archiveList = new EventEmitter<any>();
@@ -32,14 +35,28 @@ export class NoteComponent implements OnInit {
     0,
     0
   );
+  public collaUserList: [{ id: number; firstName: string; lastName: string; email: string; varified: boolean }];
 
   constructor(public dialog: MatDialog,
               private noteService: NoteService,
               private snackBar: MatSnackBar,
-              private labelService: LabelService) {
+              private labelService: LabelService,
+              private interactionService: InteractionService) {
   }
 
   ngOnInit(): void {
+    console.log(this.isGridView);
+    this.collaUserList = this.note.userList;
+    this.collaUserList.pop();
+    this.gridView();
+  }
+
+  private gridView(): void {
+    this.interactionService.gridData$
+      .subscribe(data => {
+        this.isGridView = data;
+        console.log(this.isGridView);
+      });
   }
 
   notePin(note: INote): void {

@@ -1,3 +1,5 @@
+import {IUser} from '../collaborator/IUser';
+
 export interface INote {
   note_Id: number;
   title: string;
@@ -11,5 +13,12 @@ export interface INote {
   labelList: [{
     label_Id: number,
     labelName: string
+  }];
+  userList: [{
+    id: number;
+    firstName: string;
+    lastName: string;
+    email: string;
+    varified: boolean;
   }];
 }

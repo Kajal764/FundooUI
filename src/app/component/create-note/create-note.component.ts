@@ -99,7 +99,7 @@ export class CreateNoteComponent implements OnInit {
       labelList: this.noteLabelList,
       remainder: this.dateTime
     };
-    this.noteService.createNote(data)
+    this.noteService.createNote(data, 'create')
       .subscribe(response => {
         this.responseData = response;
         this.getNoteList.emit();

@@ -14,12 +14,6 @@ export class CreateLabelComponent implements OnInit {
   label: string;
   labelList = [];
 
-  // list = [[{
-  //   labelName: '',
-  //   label_Id: 0,
-  //   isEdit: false
-  // }]];
-
   isLabelEdit = false;
   private message: any;
   private responseData: any;

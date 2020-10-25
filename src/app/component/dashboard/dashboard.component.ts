@@ -71,6 +71,7 @@ export class DashboardComponent implements OnInit {
 
   grid(): void {
     this.isGrid ? this.isGrid = false : this.isGrid = true;
+    this.interactionService.sendBoolean(this.isGrid);
   }
 
   mouseenter(): void {

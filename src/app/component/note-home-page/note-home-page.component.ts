@@ -1,6 +1,7 @@
-import {AfterViewInit, Component, OnInit} from '@angular/core';
+import {Component, OnInit} from '@angular/core';
 import {NoteService} from '../../service/note/note.service';
 import {INote} from '../note/note';
+import {InteractionService} from '../../service/search-data/interaction.service';
 
 @Component({
   selector: 'app-note-home-page',
@@ -16,19 +17,30 @@ export class NoteHomePageComponent implements OnInit {
 
   public isPinNote = 0;
   public isOtherNote = 0;
+  public isGridView: boolean;
 
-  constructor(private noteService: NoteService) {
+  constructor(private noteService: NoteService, private interactionService: InteractionService) {
   }
 
   ngOnInit(): void {
     this.getAllNote();
     this.getPinNoteList();
+    this.gridView();
+  }
+
+  private gridView(): void {
+    this.interactionService.gridData$
+      .subscribe(data => {
+        this.isGridView = data;
+        console.log(this.isGridView);
+      });
   }
 
   public getAllNote(): void {
     this.noteService.getList('list')
       .subscribe(data => {
           this.noteList = data;
+          console.log(this.noteList);
           this.noteList.reverse();
           this.isOtherNote = this.noteList.length;
         },

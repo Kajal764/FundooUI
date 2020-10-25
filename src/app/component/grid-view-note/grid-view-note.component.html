@@ -1,0 +1,24 @@
+<div class="main-div" fxLayout="column" style="justify-content: center;padding: 5% 15% 0% 15% ">
+  <mat-card-subtitle *ngIf="isPinNote> 0">PINNED</mat-card-subtitle>
+  <div *ngFor="let note of pinNotes" style="justify-content: center">
+    <div>
+      <app-note [note]="note"
+                [noteType]="noteType"
+                (getList)="getNoteList.emit()"
+                (getPinList)="getPinList.emit()">
+      </app-note>
+    </div>
+  </div>
+</div>
+
+
+<div class="main-div" fxLayout="column" style="justify-content: center;padding: 5% 15% 5% 15% ">
+  <mat-card-subtitle *ngIf="isOtherNote>0">OTHERS</mat-card-subtitle>
+  <div *ngFor="let note of notes" style="justify-content: center">
+    <app-note [note]="note"
+              [noteType]="noteType"
+              (getList)="getNoteList.emit()"
+              (getPinList)="getPinList.emit()">
+    </app-note>
+  </div>
+</div>

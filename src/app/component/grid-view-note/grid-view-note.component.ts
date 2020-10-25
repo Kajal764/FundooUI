@@ -1,11 +1,11 @@
 import {Component, EventEmitter, Input, OnInit, Output} from '@angular/core';
 
 @Component({
-  selector: 'app-display-note',
-  templateUrl: './display-note.component.html',
-  styleUrls: ['./display-note.component.scss']
+  selector: 'app-grid-view-note',
+  templateUrl: './grid-view-note.component.html',
+  styleUrls: ['./grid-view-note.component.scss']
 })
-export class DisplayNoteComponent implements OnInit {
+export class GridViewNoteComponent implements OnInit {
 
   @Output() public getNoteList = new EventEmitter<any>();
   @Output() public getPinList = new EventEmitter<any>();
@@ -27,5 +27,5 @@ export class DisplayNoteComponent implements OnInit {
   }
 
 
-}
 
+}

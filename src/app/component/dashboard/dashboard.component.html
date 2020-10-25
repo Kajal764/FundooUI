@@ -31,8 +31,8 @@
 
     <button fxHide.xs="100" mat-icon-button color="basic" id="grid" matTooltip="Grid view">
       <mat-icon id="gridlist">
-        <img *ngIf="isGrid" src="../../../assets/outline-view_agenda-24px.svg" (click)="grid()">
-        <img *ngIf="!isGrid" src="../../../assets/fourgrid.svg" (click)="grid()">
+        <img *ngIf="!isGrid" src="../../../assets/outline-view_agenda-24px.svg" (click)="grid()">
+        <img *ngIf="isGrid" src="../../../assets/fourgrid.svg" (click)="grid()">
       </mat-icon>
     </button>
     <button mat-mini-fab
@@ -82,7 +82,7 @@
 
       <mat-nav-list>
         <div *ngFor="let labelData of labelList">
-        <a mat-list-item routerLinkActive="active-list-item" (click)="redirectToMapNote(labelData)">
+          <a mat-list-item routerLinkActive="active-list-item" (click)="redirectToMapNote(labelData)">
             <mat-icon style="margin-left: 11px">label_outline</mat-icon>
             <span class="full-width" *ngIf="isExpanded || isShowing">{{labelData.labelName}}</span>
           </a>

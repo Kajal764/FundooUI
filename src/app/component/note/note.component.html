@@ -1,4 +1,4 @@
-<mat-card [style.backgroundColor]="note.color" class="note">
+<div [style.backgroundColor]="note.color" class="note">
   <div fxLayout="row" fxLayoutAlign="start center">
     <div class="border" fxLayout="column" class="takenote"
          fxLayout="row" fxLayoutAlign="space-between start" fxFlex="100"
@@ -24,7 +24,6 @@
                           [(ngModel)]="note.description">
                 </textarea>
   </div>
-
 
   <div *ngIf="note.remainder!=null" style="padding-top: 10px">
     <div fxLayout="row" fxLayout="row wrap">
@@ -52,14 +51,11 @@
               (note.remainder | date: 'shortDate') &&
             (todaydate | date: 'shortDate') !=
               (note.remainder | date: 'shortDate') &&
-            note.remainder != ''
-          ">
+            note.remainder != ''">
           <mat-chip>{{ note.remainder | date: "short" }}
             <mat-icon matChipRemove (click)="removeReminder(note.note_Id)">cancel</mat-icon>
           </mat-chip>
         </div>
-
-
       </mat-chip-list>
     </div>
   </div>
@@ -77,6 +73,11 @@
     </mat-chip-list>
   </div>
 
+  <mat-list role="list" fxLayout="row">
+    <div *ngFor="let user of collaUserList" style="margin: 2px">
+      <ngx-avatar [size]="30" name="{{user.firstName}}"></ngx-avatar>
+    </div>
+  </mat-list>
 
   <app-icons class="note-select"
              (getList)="getList.emit()"
@@ -86,5 +87,6 @@
              [note]="note"
              (setColor)="getUpdatedValue($event)">
   </app-icons>
-</mat-card>
+</div>
+
 

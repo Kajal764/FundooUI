@@ -3,6 +3,9 @@ import {HttpclientService} from '../http/httpclient.service';
 import {environment} from '../../../environments/environment';
 import {Observable} from 'rxjs';
 import {INote} from '../../component/note/note';
+import {IUser} from '../../component/collaborator/IUser';
+
+// import {IUser} from '../../component/collaborator/IUser';
 
 @Injectable({
   providedIn: 'root'
@@ -16,8 +19,8 @@ export class NoteService {
   constructor(private httpclientService: HttpclientService) {
   }
 
-  createNote(data: { note_id: number; description: any; title: any }): Observable<any> {
-    return this.httpclientService.addData(data, this.url + this.note + 'create');
+  createNote(data, apiUrl: string): Observable<any> {
+    return this.httpclientService.addData(data, this.url + this.note + apiUrl);
   }
 
   getList(apiUrl: string): Observable<INote[]> {
@@ -42,12 +45,18 @@ export class NoteService {
 
   putData(data: { note_Id: any; remainder: string }, url: string): Observable<any> {
     return this.httpclientService.setReminder(data, this.url + this.note + url);
-
   }
-
 
   deleteReminder(noteId: number): Observable<any> {
     return this.httpclientService.deleteData(this.url + this.note + 'reminder/' + noteId);
+  }
+
+  getUserList(url: string): Observable<IUser[]> {
+    return this.httpclientService.getUserList(this.url + this.note + url);
+  }
+
+  removeCollabUser(data: { note_Id: number; email: string }, url: string): Observable<any> {
+    return this.httpclientService.removeCollab(data,`${this.url}${this.note}/${url}`);
   }
 }
 

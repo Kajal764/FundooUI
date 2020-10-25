@@ -14,6 +14,10 @@ export class InteractionService {
   private searchDataSource = new Subject<string>();
   searchData$ = this.searchDataSource.asObservable();
 
+  private gridDataSource = new Subject<boolean>();
+  gridData$ = this.gridDataSource.asObservable();
+
+
   private labelDataSource = new Subject<ILabel>();
   labelDataObj$ = this.labelDataSource.asObservable();
 
@@ -30,6 +34,10 @@ export class InteractionService {
 
   sendList(value: any[]): void {
     this.labelSource.next(value);
+  }
+
+  sendBoolean(value: boolean): void {
+    this.gridDataSource.next(value);
   }
 
 }

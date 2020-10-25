@@ -4,6 +4,7 @@ import {Observable, throwError} from 'rxjs';
 import {catchError} from 'rxjs/operators';
 import {INote} from '../../component/note/note';
 import {ILabel} from '../../component/create-label/ILabel';
+import {IUser} from '../../component/collaborator/IUser';
 
 @Injectable({
   providedIn: 'root'
@@ -24,6 +25,11 @@ export class HttpclientService {
 
   getList(url: string): Observable<INote[]> {
     return this.httpClient.get<INote[]>(url)
+      .pipe(catchError(this.handleError));
+  }
+
+  getUserList(url: string): Observable<IUser[]> {
+    return this.httpClient.get<IUser[]>(url)
       .pipe(catchError(this.handleError));
   }
 
@@ -50,5 +56,9 @@ export class HttpclientService {
   setReminder(data: { note_Id: any; remainder: string }, url: string): Observable<any> {
     return this.httpClient.put(url, data)
       .pipe(catchError(this.handleError));
+  }
+
+  removeCollab(data: { note_Id: number; email: string }, url: string): Observable<any> {
+    return this.httpClient.put(url, data).pipe(catchError(this.handleError));;
   }
 }

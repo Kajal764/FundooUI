@@ -1,7 +1,16 @@
 
-.mat-card {
+//.mat-card {
+//  margin-top: 10px;
+//  width: 200px;
+//  border: 1px solid lightgray;
+//  transition: none !important;
+//  box-shadow: none !important;
+//  border-radius: 8px;
+//}
+
+.note {
   margin-top: 10px;
-  width: 200px;
+  padding: 10px 10px 10px 20px;
   border: 1px solid lightgray;
   transition: none !important;
   box-shadow: none !important;
@@ -48,5 +57,4 @@
     border-radius: 10px;
   }
 }
-
 

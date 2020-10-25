@@ -1,4 +1,4 @@
-<div style="padding-top: 30px; padding-left: 13%; overflow: hidden;">
+<div style="padding-top: 30px; padding-left: 13%; padding-right: 13%; overflow: hidden;">
   <mat-card-subtitle *ngIf="isPinNote> 0" style="margin-bottom: 10px">PINNED</mat-card-subtitle>
   <ngx-masonry [options]="{ gutter: 10 }">
     <div class="grid-note">
@@ -14,8 +14,7 @@
   </ngx-masonry>
 </div>
 
-
-<div style="padding-top: 30px; padding-left: 13%; overflow: hidden;">
+<div style="padding-top: 30px; padding-left: 13%; padding-bottom: 5%; overflow: hidden;">
   <mat-card-subtitle *ngIf="isOtherNote>0">OTHERS</mat-card-subtitle>
   <ngx-masonry [options]="{ gutter: 10 }">
     <div class="grid-note">

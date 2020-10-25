@@ -5,6 +5,9 @@ import {InteractionService} from '../../service/search-data/interaction.service'
 import {LabelService} from '../../service/label/label.service';
 import {ILabel} from '../create-label/ILabel';
 import {MatCheckboxChange} from '@angular/material/checkbox';
+import {MatDialog} from '@angular/material/dialog';
+import {INote} from '../note/note';
+import {CollaboratorComponent} from '../collaborator/collaborator.component';
 
 @Component({
   selector: 'app-icons',
@@ -18,9 +21,8 @@ export class IconsComponent implements OnInit {
   @Output() getList = new EventEmitter<any>();
   @Output() getPinList = new EventEmitter<any>();
   @Output() getArchiveList = new EventEmitter<any>();
-  onAdd = new EventEmitter();
 
-  @Input() note: any;
+  @Input() note: INote;
   @Input() noteType: any;
 
 
@@ -55,7 +57,8 @@ export class IconsComponent implements OnInit {
   constructor(private noteService: NoteService,
               private snackBar: MatSnackBar,
               private interactionService: InteractionService,
-              private labelService: LabelService) {
+              private labelService: LabelService,
+              public dialog: MatDialog) {
   }
 
   labelCreate(labelName: any): void {
@@ -117,7 +120,6 @@ export class IconsComponent implements OnInit {
           this.getList.emit();
           this.getPinList.emit();
           this.getArchiveList.emit();
-          this.onAdd.emit();
           this.openSnackBar('Dismiss');
         }, error => {
           this.responseData = error.error;
@@ -164,4 +166,11 @@ export class IconsComponent implements OnInit {
   }
 
 
+  openCollaborator(note: any): void {
+    const dialogRef = this.dialog.open(CollaboratorComponent, {
+      width: '500px',
+      panelClass: 'custom-box',
+      data: note
+    });
+  }
 }

@@ -33,12 +33,15 @@ import {ReminderComponent} from './component/reminder/reminder.component';
 import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule} from '@angular/material/core';
 import {ReminderNoteComponent} from './component/reminder-note/reminder-note.component';
+import {CollaboratorComponent} from './component/collaborator/collaborator.component';
+import {AvatarModule} from 'ngx-avatar';
+import { GridViewNoteComponent } from './component/grid-view-note/grid-view-note.component';
 
 // @ts-ignore
 
+// @ts-ignore
 @NgModule({
   declarations: [
-
     AppComponent,
     LoginComponent,
     ForgotPasswordComponent,
@@ -58,7 +61,8 @@ import {ReminderNoteComponent} from './component/reminder-note/reminder-note.com
     MapLabelNoteComponent,
     ReminderComponent,
     ReminderNoteComponent,
-
+    CollaboratorComponent,
+    GridViewNoteComponent
   ],
   imports: [
     BrowserModule,
@@ -72,7 +76,8 @@ import {ReminderNoteComponent} from './component/reminder-note/reminder-note.com
     NgxMasonryModule,
     AmazingTimePickerModule,
     MatDatepickerModule,
-    MatNativeDateModule
+    MatNativeDateModule,
+    AvatarModule
   ],
   providers: [UserService,
     AuthGuard,
