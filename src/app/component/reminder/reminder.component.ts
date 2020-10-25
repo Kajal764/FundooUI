@@ -17,7 +17,7 @@ export class ReminderComponent implements OnInit {
   @Output() getArchiveList = new EventEmitter<any>();
   @Output() getDateAndTime = new EventEmitter();
 
-  selectedTime = '19:00';
+
 
 
   responseData: any;
@@ -33,8 +33,7 @@ export class ReminderComponent implements OnInit {
     {day: 'Tomorrow', time: '8:00 AM', dayCount: 1, timeCount: '08'},
     {day: 'Next week', time: '8:00 AM', dayCount: 7, timeCount: '08'},
   ];
-  private timeSet: string;
-
+  public timeSet = '10:00';
   constructor(private noteService: NoteService,
               private snackBar: MatSnackBar,
               private atp: AmazingTimePickerService) {
@@ -45,7 +44,7 @@ export class ReminderComponent implements OnInit {
 
   open(): void {
     const amazingTimePicker = this.atp.open({
-      time: this.selectedTime,
+      time: this.timeSet,
       theme: 'dark',
       arrowStyle: {
         background: 'red',
@@ -75,7 +74,6 @@ export class ReminderComponent implements OnInit {
         };
       }
     });
-
   }
 
   // tslint:disable-next-line:max-line-length
@@ -109,7 +107,7 @@ export class ReminderComponent implements OnInit {
   }
 
   saveReminder(): void {
-    if (this.isEdit && this.noteType !== 'reminder') {
+    if (this.isEdit && this.noteType !== 'reminder' || this.defaultTime !== new Date()) {
       this.noteService.putData(this.data, 'reminder')
         .subscribe(response => {
           this.responseData = response;

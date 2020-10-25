@@ -22,3 +22,12 @@
   z-index: 10000000 !important;
 }
 
+
+input {
+  outline: 0;
+  border-width: 0 0 1.5px;
+  border-color: transparent;
+}
+input:focus {
+  border-color: lightgray;
+}
