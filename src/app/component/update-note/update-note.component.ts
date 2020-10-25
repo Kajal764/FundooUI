@@ -47,7 +47,7 @@ export class UpdateNoteComponent implements OnInit {
     this.noteService.deleteReminder(noteId)
       .subscribe(response => {
         this.responseData = response;
-        }, error => {
+      }, error => {
         this.responseData = error.error;
       });
   }

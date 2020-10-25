@@ -4,6 +4,7 @@ import {INote} from '../note/note';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {IUser} from './IUser';
+import {UserService} from '../../service/user/user.service';
 
 @Component({
   selector: 'app-collaborator',
@@ -16,7 +17,7 @@ export class CollaboratorComponent implements OnInit {
   isCorrect = false;
   private responseData: any;
   public collabUserList: IUser[];
-  private isFalse = false;
+  public isFalse = false;
   public list: [{ id: number; firstName: string; lastName: string; email: string; varified: boolean }];
   private loginUser: string;
 
@@ -94,4 +95,6 @@ export class CollaboratorComponent implements OnInit {
       });
 
   }
+
+
 }

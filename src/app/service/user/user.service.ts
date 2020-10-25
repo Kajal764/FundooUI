@@ -3,6 +3,7 @@ import {environment} from '../../../environments/environment';
 import {Observable, throwError} from 'rxjs';
 import {HttpBackend, HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
+import {IUser} from '../../component/collaborator/IUser';
 
 @Injectable({
   providedIn: 'root'
@@ -50,4 +51,10 @@ export class UserService {
     return !!localStorage.getItem('token');
   }
 
+  getLoginUser(email: string): Observable<IUser> {
+    const apiUrl: string = this.baseUrl + this.user + 'user-data/' + email;
+    // @ts-ignore
+    return this.httpClient.get(apiUrl);
+
+  }
 }

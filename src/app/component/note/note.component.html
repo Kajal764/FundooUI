@@ -39,8 +39,7 @@
 
         <div *ngIf="
             (tomorrow | date: 'shortDate') ==
-              (note.remainder | date: 'shortDate') && note.remainder != ''
-          ">
+              (note.remainder | date: 'shortDate') && note.remainder != ''">
           <mat-chip>Tomorrow {{ note.remainder | date: "shortTime" }}
             <mat-icon matChipRemove (click)="removeReminder(note.note_Id)">cancel</mat-icon>
           </mat-chip>

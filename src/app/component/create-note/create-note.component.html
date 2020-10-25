@@ -1,179 +1,271 @@
-<div *ngIf="flag==true" fxLayout="row" fxFlex="100" fxLayout="column" (click)="addNote()"
-     fxLayoutAlign="space-around start">
-  <mat-card class="note-create"
-            fxLayoutAlign="space-between center">
+<div *ngIf="isCollabDiv===false">
 
-    <div data-text="Take a note..." class="border" id="noteTitle" fxLayout="column" contenteditable="true"
-         class="maincard">
-    </div>
-    <div fxLayout="row" fxLayoutAlign="end start">
-      <button mat-icon-button>
-        <mat-icon class="icon-take-note" matTooltip="New List">
-          <img class="icon" src="../../../assets/check_box-24px.svg"/>
-        </mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon matTooltip="New note with drawing">
-          <img class="icon" src="../../../assets/outline-brush-24px.svg"/>
-        </mat-icon>
-      </button>
-      <button mat-icon-button>
-        <mat-icon matTooltip="New note with image">
-          <img class="icon" src="../../../assets/outline-image-24px.svg"/>
-        </mat-icon>
-      </button>
-    </div>
-  </mat-card>
-</div>
+  <div *ngIf="flag==true" fxLayout="row" fxFlex="100" fxLayout="column" (click)="addNote()"
+       fxLayoutAlign="space-around start">
+    <mat-card class="note-create"
+              fxLayoutAlign="space-between center">
 
-<div *ngIf="flag==false" fxLayout="row" fxFlex="100" fxLayout="column" fxLayoutAlign="space-around start">
-  <mat-card class="note-create" fxLayout="column" [style.backgroundColor]="color">
-    <div fxLayoutAlign="space-between center">
-      <div class="border" fxLayout="column" class="takenote">
+      <div data-text="Take a note..." class="border" id="noteTitle" fxLayout="column" contenteditable="true"
+           class="maincard">
+      </div>
+      <div fxLayout="row" fxLayoutAlign="end start">
+        <button mat-icon-button>
+          <mat-icon class="icon-take-note" matTooltip="New List">
+            <img class="icon" src="../../../assets/check_box-24px.svg"/>
+          </mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon matTooltip="New note with drawing">
+            <img class="icon" src="../../../assets/outline-brush-24px.svg"/>
+          </mat-icon>
+        </button>
+        <button mat-icon-button>
+          <mat-icon matTooltip="New note with image">
+            <img class="icon" src="../../../assets/outline-image-24px.svg"/>
+          </mat-icon>
+        </button>
+      </div>
+    </mat-card>
+  </div>
+
+  <div *ngIf="flag==false" fxLayout="row" fxFlex="100" fxLayout="column" fxLayoutAlign="space-around start">
+    <mat-card class="note-create" fxLayout="column" [style.backgroundColor]="color">
+      <div fxLayoutAlign="space-between center">
+        <div class="border" fxLayout="column" class="takenote">
         <textarea class="textArea" matTextareaAutosize placeholder="Title" style="font-size: 15px"
                   [(ngModel)]="noteTitle" [style.backgroundColor]="color"></textarea>
+        </div>
+        <button mat-icon-button class="pin-button">
+          <mat-icon *ngIf="!pin" class="icon-take-note" matTooltip="Pin note" (click)="notePin()">
+            <img class="ssicon" src="../../../assets/unpinbar.svg"/>
+          </mat-icon>
+          <mat-icon *ngIf="pin" class="icon-take-note" matTooltip="Unpin note" (click)="notePin()">
+            <img class="icon" src="../../../assets/pinbar.svg"/>
+          </mat-icon>
+        </button>
       </div>
-      <button mat-icon-button class="pin-button">
-        <mat-icon *ngIf="!pin" class="icon-take-note" matTooltip="Pin note" (click)="notePin()">
-          <img class="ssicon" src="../../../assets/unpinbar.svg"/>
-        </mat-icon>
-        <mat-icon *ngIf="pin" class="icon-take-note" matTooltip="Unpin note" (click)="notePin()">
-          <img class="icon" src="../../../assets/pinbar.svg"/>
-        </mat-icon>
-      </button>
-    </div>
 
-    <div class="border" fxLayout="column" class="takenote">
+      <div class="border" fxLayout="column" class="takenote">
       <textarea class="textArea" style="font-size: 14px" matTextareaAutosize placeholder="Take a note..."
                 [(ngModel)]="noteDesc" [style.backgroundColor]="color"></textarea>
-    </div>
+      </div>
 
-    <div *ngIf="dateTime!=null" style="padding-top: 10px">
-      <div fxLayout="row" fxLayout="row wrap">
-        <mat-chip-list class="chip">
-
-          <div *ngIf="
-            (todaydate | date: 'shortDate') ==
-              (dateTime | date: 'shortDate') && dateTime != '' ">
-            <mat-chip>Today {{ dateTime | date: "shortTime" }}
-              <mat-icon matChipRemove (click)="removeReminder()">cancel</mat-icon>
-            </mat-chip>
+          <div *ngIf="collobUser != null">
+            <ngx-avatar [size]="30" name="{{collobUser.firstName}}"></ngx-avatar>
           </div>
 
-          <div *ngIf="
+      <div *ngIf="dateTime!=null" style="padding-top: 10px">
+        <div fxLayout="row" fxLayout="row wrap">
+          <mat-chip-list class="chip">
+
+            <div *ngIf="
+            (todaydate | date: 'shortDate') ==
+              (dateTime | date: 'shortDate') && dateTime != '' ">
+              <mat-chip>Today {{ dateTime | date: "shortTime" }}
+                <mat-icon matChipRemove (click)="removeReminder()">cancel</mat-icon>
+              </mat-chip>
+            </div>
+
+            <div *ngIf="
             (tomorrow | date: 'shortDate') ==
               (dateTime | date: 'shortDate') &&dateTime != ''
           ">
-            <mat-chip>Tomorrow {{ dateTime | date: "shortTime" }}
-              <mat-icon matChipRemove (click)="removeReminder()">cancel</mat-icon>
-            </mat-chip>
-          </div>
+              <mat-chip>Tomorrow {{ dateTime | date: "shortTime" }}
+                <mat-icon matChipRemove (click)="removeReminder()">cancel</mat-icon>
+              </mat-chip>
+            </div>
 
-          <div *ngIf="
+            <div *ngIf="
             (tomorrow | date: 'shortDate') !=
               (dateTime | date: 'shortDate') &&
             (todaydate | date: 'shortDate') !=
               (dateTime | date: 'shortDate') &&
             dateTime!= ''
           ">
-            <mat-chip>{{dateTime | date: "short" }}
-              <mat-icon matChipRemove (click)="removeReminder()">cancel</mat-icon>
-            </mat-chip>
-          </div>
+              <mat-chip>{{dateTime | date: "short" }}
+                <mat-icon matChipRemove (click)="removeReminder()">cancel</mat-icon>
+              </mat-chip>
+            </div>
+          </mat-chip-list>
+        </div>
+      </div>
+
+      <div style="padding-top: 10px">
+        <mat-chip-list
+          class="example-chip"
+          cdkDropListOrientation="horizontal">
+          <mat-chip class="example-box" cdkDrag
+                    *ngFor="let labelData of noteLabelList">
+            <div matLine><small>{{labelData.labelName}}</small></div>
+            <mat-icon matChipRemove (click)="removeMapping(labelData)">cancel</mat-icon>
+          </mat-chip>
         </mat-chip-list>
       </div>
-    </div>
 
-          <mat-chip-list
-            class="example-chip"
-            cdkDropListOrientation="horizontal">
-            <mat-chip class="example-box" cdkDrag
-                      *ngFor="let labelData of noteLabelList">
-              <div matLine><small>{{labelData.labelName}}</small></div>
-              <mat-icon matChipRemove (click)="removeMapping(labelData)">cancel</mat-icon>
-            </mat-chip>
-          </mat-chip-list>
 
-          <!--    last div-->
-          <div fxLayout="row" fxLayoutAlign="space-between center">
-            <div>
-              <button mat-icon-button [matMenuTriggerFor]="remindme">
-                <mat-icon class="icon-take-note" matTooltip="Remind me">
-                  <img class="icon" class="take-note-icon" src="../../../assets/reminder.svg"/>
-                </mat-icon>
-              </button>
+      <!--    Icons    -->
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <button mat-icon-button [matMenuTriggerFor]="remindme">
+            <mat-icon class="icon-take-note" matTooltip="Remind me">
+              <img class="icon" class="take-note-icon" src="../../../assets/reminder.svg"/>
+            </mat-icon>
+          </button>
 
-              <mat-menu #remindme="matMenu" class="matmenu" yPosition="below">
-                <app-reminder
-                  (getDateAndTime)="getUpdatedValue($event)"
-                  [noteType]="noteType"></app-reminder>
-              </mat-menu>
-              <button mat-icon-button>
-                <mat-icon matTooltip="Collaborator">
-                  <img class="icon" class="take-note-icon" src="../../../assets/person_add-24px.svg"/>
-                </mat-icon>
-              </button>
-              <button mat-icon-button [matMenuTriggerFor]="colorlist">
-                <mat-icon matTooltip="Chnage color">
-                  <img class="icon" class="take-note-icon" src="../../../assets/color_lens-24px.svg"/>
-                </mat-icon>
-              </button>
+          <mat-menu #remindme="matMenu" class="matmenu" yPosition="below">
+            <app-reminder
+              (getDateAndTime)="getUpdatedValue($event)"
+              [noteType]="noteType"></app-reminder>
+          </mat-menu>
 
-              <mat-menu #colorlist="matMenu" yPosition="above">
-                <div fxLayout="row" fxLayoutGap="5px" style="margin: 3px;padding-bottom: 0px"
-                     *ngFor="let colors of colorArray">
-                  <div *ngFor="let color of colors">
-                    <button
-                      class="colors"
-                      [ngStyle]="{ 'background-color': color.color }"
-                      (click)="colorEdit(color.color)"
-                      matTooltip="{{ color.name}}">
-                    </button>
-                  </div>
-                </div>
-              </mat-menu>
+          <button mat-icon-button (click)="collabFlag()">
+            <mat-icon matTooltip="Collaborator">
+              <img class="icon" class="take-note-icon" src="../../../assets/person_add-24px.svg"/>
+            </mat-icon>
+          </button>
 
-              <button mat-icon-button>
-                <mat-icon matTooltip="Add image">
-                  <img class="icon" class="take-note-icon" src="../../../assets/outline-image-24px.svg"/>
-                </mat-icon>
-              </button>
-              <button mat-icon-button>
-                <mat-icon matTooltip="Archive">
-                  <img class="icon" class="take-note-icon"
-                       src="../../../assets/archive-24px.svg"
-                       (click)="archiveNote()"/>
-                </mat-icon>
-              </button>
-              <button mat-icon-button [matMenuTriggerFor]="menu">
-                <mat-icon matTooltip="More">
-                  <img class="icon" class="take-note-icon" src="../../../assets/more_vert-24px.svg"/>
-                </mat-icon>
-              </button>
+          <button mat-icon-button [matMenuTriggerFor]="colorlist">
+            <mat-icon matTooltip="Chnage color">
+              <img class="icon" class="take-note-icon" src="../../../assets/color_lens-24px.svg"/>
+            </mat-icon>
+          </button>
 
-              <mat-menu #menu="matMenu">
-                <button mat-menu-item [matMenuTriggerFor]="labelMenu" (click)="$event.stopPropagation()">
-                  <span>Add label</span>
+          <mat-menu #colorlist="matMenu" yPosition="above">
+            <div fxLayout="row" fxLayoutGap="5px" style="margin: 3px;padding-bottom: 0px"
+                 *ngFor="let colors of colorArray">
+              <div *ngFor="let color of colors">
+                <button
+                  class="colors"
+                  [ngStyle]="{ 'background-color': color.color }"
+                  (click)="colorEdit(color.color)"
+                  matTooltip="{{ color.name}}">
                 </button>
-              </mat-menu>
-
-              <mat-menu #labelMenu="matMenu" yPosition="above" (click)="$event.stopPropagation()">
-                <div *ngFor="let labelData of labelList " style="padding: 5px 10px 5px 10px ">
-                  <div fxLayout="row">
-                    <mat-checkbox
-                      (click)="$event.stopPropagation()"
-                      (change)="mapLabel($event,labelData)">
-                      {{labelData.labelName}}
-                    </mat-checkbox>
-                  </div>
-                </div>
-              </mat-menu>
-
+              </div>
             </div>
-            <div>
-              <button mat-flat-button (click)="createNote()">Close</button>
+          </mat-menu>
+
+          <button mat-icon-button>
+            <mat-icon matTooltip="Add image">
+              <img class="icon" class="take-note-icon" src="../../../assets/outline-image-24px.svg"/>
+            </mat-icon>
+          </button>
+          <button mat-icon-button>
+            <mat-icon matTooltip="Archive">
+              <img class="icon" class="take-note-icon"
+                   src="../../../assets/archive-24px.svg"
+                   (click)="archiveNote()"/>
+            </mat-icon>
+          </button>
+          <button mat-icon-button [matMenuTriggerFor]="menu">
+            <mat-icon matTooltip="More">
+              <img class="icon" class="take-note-icon" src="../../../assets/more_vert-24px.svg"/>
+            </mat-icon>
+          </button>
+
+          <mat-menu #menu="matMenu">
+            <button mat-menu-item [matMenuTriggerFor]="labelMenu" (click)="$event.stopPropagation()">
+              <span>Add label</span>
+            </button>
+          </mat-menu>
+
+          <mat-menu #labelMenu="matMenu" yPosition="above" (click)="$event.stopPropagation()">
+            <div *ngFor="let labelData of labelList " style="padding: 5px 10px 5px 10px ">
+              <div fxLayout="row">
+                <mat-checkbox
+                  (click)="$event.stopPropagation()"
+                  (change)="mapLabel($event,labelData)">
+                  {{labelData.labelName}}
+                </mat-checkbox>
+              </div>
+            </div>
+          </mat-menu>
+
+        </div>
+        <div>
+          <button mat-flat-button (click)="createNote()">Close</button>
+        </div>
+      </div>
+    </mat-card>
+  </div>
+</div>
+
+
+<div *ngIf="isCollabDiv==true">
+  <div fxLayout="row" fxFlex="100" fxLayout="column" fxLayoutAlign="space-around start">
+    <mat-card class="note-collab" fxLayout="column" style="padding: 0px">
+      <div fxFlex="100" fxLayout="column">
+        <div fxLayoutAlign="start start" style="padding: 15px 0px 0px 15px">
+          <mat-card-title style="font-size: 20px">Collaborators</mat-card-title>
+        </div>
+        <mat-divider></mat-divider>
+
+        <!--  ************* Owner info *************-->
+        <div fxLayout="row" class="user-div">
+          <div fxFlex="13">
+            <button
+              [ngStyle]="{'background-image':'url(' +'../../../assets/avatar.PNG'+ ')','background-size':'cover','width':'42px','height':'42px','margin-left':'10px'}"
+              matTooltip="Profile" mat-mini-fab>
+            </button>
+          </div>
+          <div fxFlex='70' fxLayout="column">
+            <div style="font-size: 17px;font-weight: 440">
+              {{userLogin.firstName}} {{userLogin.lastName}}
+              <span style="color: gray;font-size: 13px">(Owner)</span>
+            </div>
+            <div fxLayout="row" style="color: gray;font-size: 15px">
+              {{userLogin.email}}
             </div>
           </div>
-  </mat-card>
+        </div>
+
+        <!--  &lt;!&ndash;  *************** collab user ***************&ndash;&gt;-->
+
+        <div *ngIf="collobUser != null">
+          <div fxLayout="row">
+            <div fxFlex="90" style="margin-left: 10px;margin-top: 10px" (click)="isChangeCross()">
+              <div fxFlex="13">
+                <ngx-avatar size="40" name="{{collobUser.firstName}}"></ngx-avatar>
+              </div>
+              <div fxFlex='65' fxLayout="column">
+                <div style="font-size: 17px;font-weight: 440">{{collobUser.firstName}} {{collobUser.lastName}}</div>
+                <div fxLayout="row" style="color: gray;font-size: 15px">{{collobUser.email}}</div>
+              </div>
+            </div>
+            <div fxFlex="10" *ngIf="isFalse" (click)="removeCollabUser()">
+              <button mat-icon-button><img src="../../../assets/close-24px.svg"></button>
+            </div>
+          </div>
+        </div>
+
+
+        <div fxLayout="row" class="user-input">
+          <div fxFlex="12">
+            <ngx-avatar size="40" name="User"></ngx-avatar>
+          </div>
+          <div fxFlex='78' fxLayout="row">
+            <input [(ngModel)]="email"
+                   matInput
+                   placeholder="Person or email to share with"
+                   autocomplete="off"
+                   (click)="isChange()">
+          </div>
+          <div *ngIf="isCorrect">
+            <button mat-icon-button style="color: gray">
+              <img src="../../../assets/check-24px.svg" (click)="addUser()">
+            </button>
+          </div>
+        </div>
+        <br>
+        <mat-divider></mat-divider>
+        <div class="button-background" fxFlex="100">
+          <div class="button" fxLayout="row" fxLayoutGap="5%" fxFlex="80">
+            <button mat-button fxLayoutGap="5%" (click)="close()">Cancel</button>
+            <button mat-button fxLayoutGap="5%" (click)="close()">Save</button>
+          </div>
+        </div>
+      </div>
+    </mat-card>
+
+  </div>
 </div>
 

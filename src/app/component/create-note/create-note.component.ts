@@ -1,10 +1,12 @@
-import {Component, OnInit, Output, EventEmitter} from '@angular/core';
+import {Component, EventEmitter, OnInit, Output} from '@angular/core';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {InteractionService} from '../../service/search-data/interaction.service';
 import {LabelService} from '../../service/label/label.service';
 import {ILabel} from '../create-label/ILabel';
 import {MatCheckboxChange} from '@angular/material/checkbox';
+import {UserService} from '../../service/user/user.service';
+import {IUser} from '../collaborator/IUser';
 
 @Component({
   selector: 'app-create-note',
@@ -22,6 +24,9 @@ export class CreateNoteComponent implements OnInit {
   noteDesc: any;
   noteTitle: any;
   color = '#fff';
+  public userLogin: IUser;
+  isCorrect = false;
+  public isFalse = false;
 
   colorArray = [
     [
@@ -53,6 +58,8 @@ export class CreateNoteComponent implements OnInit {
   noteType = 'reminder';
   noteLabelList: ILabel[] = [];
   public dateTime: any;
+  public isCollabDiv = false;
+  email: any;
 
   todaydate = new Date();
   tomorrow = new Date(
@@ -64,15 +71,19 @@ export class CreateNoteComponent implements OnInit {
     0,
     0
   );
+  private userEmail: any;
+  private collobUser: IUser;
 
 
   constructor(private noteService: NoteService,
               private snackBar: MatSnackBar,
               public labelService: LabelService,
-              public interactionService: InteractionService) {
+              public interactionService: InteractionService,
+              private userService: UserService) {
   }
 
   ngOnInit(): void {
+    this.getLoginUser();
     this.getLabelList();
     this.getSubscribeList();
   }
@@ -87,6 +98,10 @@ export class CreateNoteComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
 
+  isChange(): void {
+    this.isCorrect = true;
+  }
+
 
   createNote(): void {
     const data = {
@@ -97,7 +112,8 @@ export class CreateNoteComponent implements OnInit {
       archive: this.archive,
       pin: this.pin,
       labelList: this.noteLabelList,
-      remainder: this.dateTime
+      remainder: this.dateTime,
+      collaborateUser: this.collobUser.email
     };
     this.noteService.createNote(data, 'create')
       .subscribe(response => {
@@ -115,6 +131,9 @@ export class CreateNoteComponent implements OnInit {
     this.color = '#fff';
     this.archive = false;
     this.noteLabelList = [];
+    this.email = '';
+    this.collobUser = null;
+    this.dateTime = null;
   }
 
   openSnackBar(action): void {
@@ -176,5 +195,45 @@ export class CreateNoteComponent implements OnInit {
 
   removeReminder(): void {
     this.dateTime = null;
+  }
+
+
+  collabFlag(): void {
+    this.isCollabDiv = true;
+  }
+
+  private getLoginUser(): void {
+    this.userService.getLoginUser(localStorage.getItem('email'))
+      .subscribe(data => {
+          this.userLogin = data;
+        },
+        error => {
+          this.responseData = error.error;
+          this.openSnackBar('Dismiss');
+        });
+  }
+
+  addUser(): void {
+    this.userService.getLoginUser(this.email)
+      .subscribe(data => {
+          this.collobUser = data;
+          this.email = '';
+        },
+        error => {
+          this.responseData = error.error;
+          this.openSnackBar('Dismiss');
+        });
+  }
+
+  close(): void {
+    this.isCollabDiv = false;
+  }
+
+  isChangeCross(): void {
+    this.isFalse = true;
+  }
+
+  removeCollabUser(): void {
+    this.collobUser = null;
   }
 }
