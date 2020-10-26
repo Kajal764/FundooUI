@@ -50,9 +50,9 @@
                 [(ngModel)]="noteDesc" [style.backgroundColor]="color"></textarea>
       </div>
 
-          <div *ngIf="collobUser != null">
-            <ngx-avatar [size]="30" name="{{collobUser.firstName}}"></ngx-avatar>
-          </div>
+      <div *ngIf="collobUser != null">
+        <ngx-avatar [size]="30" name="{{collobUser.firstName}}"></ngx-avatar>
+      </div>
 
       <div *ngIf="dateTime!=null" style="padding-top: 10px">
         <div fxLayout="row" fxLayout="row wrap">
@@ -115,7 +115,8 @@
           <mat-menu #remindme="matMenu" class="matmenu" yPosition="below">
             <app-reminder
               (getDateAndTime)="getUpdatedValue($event)"
-              [noteType]="noteType"></app-reminder>
+              [noteType]="noteType">
+            </app-reminder>
           </mat-menu>
 
           <button mat-icon-button (click)="collabFlag()">

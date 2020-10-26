@@ -73,6 +73,7 @@ export class CreateNoteComponent implements OnInit {
   );
   private userEmail: any;
   private collobUser: IUser;
+  private emailIfCollab = null;
 
 
   constructor(private noteService: NoteService,
@@ -113,7 +114,7 @@ export class CreateNoteComponent implements OnInit {
       pin: this.pin,
       labelList: this.noteLabelList,
       remainder: this.dateTime,
-      collaborateUser: this.collobUser.email
+      collaborateUser: this.emailIfCollab
     };
     this.noteService.createNote(data, 'create')
       .subscribe(response => {
@@ -217,6 +218,7 @@ export class CreateNoteComponent implements OnInit {
     this.userService.getLoginUser(this.email)
       .subscribe(data => {
           this.collobUser = data;
+          this.emailIfCollab = this.collobUser.email;
           this.email = '';
         },
         error => {

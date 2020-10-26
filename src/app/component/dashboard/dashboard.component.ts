@@ -29,6 +29,7 @@ export class DashboardComponent implements OnInit {
   noteType: 'note';
   labelList: ILabel[];
   private responseData: any;
+  public imgUrl = '../../../assets/avatar4.jpg';
 
   constructor(private router: Router,
               private noteService: NoteService,
@@ -109,5 +110,31 @@ export class DashboardComponent implements OnInit {
   redirectToMapNote(labelData: ILabel): void {
     this.interactionService.sendObject(labelData);
     this.router.navigate(['home/label-map']);
+  }
+
+
+  // onSelectFile(event): void {
+  //   if (event.target.files) {
+  //     const reader = new FileReader();
+  //     reader.readAsDataURL(event.target.files[0]);
+  //     reader.onload = (ev: any) => {
+  //       console.log(ev.target.result);
+  //       this.imgUrl = ev.target.result;
+  //     };
+  //   }
+  // }
+
+  fileToUpload: any;
+  // imageUrl: any;
+
+  handleFileInput(file: FileList) {
+    this.fileToUpload = file.item(0);
+
+    //Show image preview
+    let reader = new FileReader();
+    reader.onload = (event: any) => {
+      this.imgUrl = event.target.result;
+    };
+    reader.readAsDataURL(this.fileToUpload);
   }
 }

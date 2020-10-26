@@ -31,7 +31,9 @@
   <div>
     <button overlapTrigger="true" mat-menu-item>
       <div fxLayout="row" (click)="$event.stopPropagation()">
-        <div fxLayoutAlign="space-between center" (click)="$event.stopPropagation()" (click)="toggle()">
+        <div fxLayoutAlign="space-between center"
+             (click)="$event.stopPropagation()"
+             (click)="toggle()">
           <img src="../../../assets/keyboard_backspace-24px.svg"/>
         </div>
         <div fxFlexOffset="6">Pick date & time</div>
@@ -51,15 +53,18 @@
         </mat-datepicker-toggle>
         <mat-datepicker #picker color="warn"></mat-datepicker>
       </div>
-      <div style="padding-top: 10px">
-        <button (click)="open()" (click)="$event.stopPropagation()" mat-flat-button color="warn">time</button>
-        <input type="time" value="{{timeSet}}" style="padding-left: 5px" (click)="$event.stopPropagation()">
+      <div style="padding-top: 10px" (click)="$event.stopPropagation()">
+        <button (click)="open()" (click)="$event.stopPropagation()"
+                mat-flat-button color="warn">time
+        </button>
+        <input type="time" value="{{timeSet}}" style="padding-left: 5px"
+               (click)="$event.stopPropagation()">
       </div>
     </mat-form-field>
   </div>
 
   <div fxLayout="row" fxLayoutAlign="end end">
-    <button mat-button (click)="saveReminder()">
+    <button *ngIf="noteType != 'reminder'" mat-button (click)="saveReminder()">
       Save
     </button>
   </div>

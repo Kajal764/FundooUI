@@ -32,7 +32,9 @@
         <div *ngIf="
             (todaydate | date: 'shortDate') ==
               (note.remainder | date: 'shortDate') && note.remainder != '' ">
-          <mat-chip>Today {{ note.remainder | date: "shortTime" }}
+          <mat-chip>
+            <img src="../../../assets/watch_later-24px.svg" style="width: 20px;padding-right: 3px">
+            Today {{ note.remainder | date: "shortTime" }}
             <mat-icon matChipRemove (click)="removeReminder(note.note_Id)">cancel</mat-icon>
           </mat-chip>
         </div>
@@ -40,7 +42,9 @@
         <div *ngIf="
             (tomorrow | date: 'shortDate') ==
               (note.remainder | date: 'shortDate') && note.remainder != ''">
-          <mat-chip>Tomorrow {{ note.remainder | date: "shortTime" }}
+          <mat-chip>
+            <img src="../../../assets/watch_later-24px.svg" style="width: 20px;padding-right: 3px">
+            Tomorrow {{ note.remainder | date: "shortTime" }}
             <mat-icon matChipRemove (click)="removeReminder(note.note_Id)">cancel</mat-icon>
           </mat-chip>
         </div>
@@ -51,7 +55,9 @@
             (todaydate | date: 'shortDate') !=
               (note.remainder | date: 'shortDate') &&
             note.remainder != ''">
-          <mat-chip>{{ note.remainder | date: "short" }}
+          <mat-chip>
+            <img src="../../../assets/watch_later-24px.svg" style="width: 20px;padding-right: 3px">
+            {{ note.remainder | date: "short" }}
             <mat-icon matChipRemove (click)="removeReminder(note.note_Id)">cancel</mat-icon>
           </mat-chip>
         </div>
@@ -64,7 +70,7 @@
       class="example-chip"
       cdkDropListOrientation="horizontal">
 
-      <mat-chip class="example-box" cdkDrag
+      <mat-chip class="example-box" cdkDrag style="background-color: lightblue;color: whitesmoke"
                 *ngFor="let labelData of note.labelList">
         <div matLine><small>{{labelData.labelName}}</small></div>
         <mat-icon matChipRemove (click)="removeMapping(note.note_Id, labelData.label_Id)">cancel</mat-icon>

@@ -36,26 +36,37 @@
       </mat-icon>
     </button>
     <button mat-mini-fab
-            [ngStyle]="{'background-image':'url(' +'../../../assets/avatar.PNG'+ ')','background-size':'cover','margin':'10px'}"
+            [ngStyle]="{'background-image':'url(' +imgUrl+ ')','background-size':'cover','margin':'10px'}"
             [matMenuTriggerFor]="menu1">
     </button>
 
-    <mat-menu #menu1="matMenu" fxLayout="row" fxLayoutAlign="end start">
+    <mat-menu #menu1="matMenu" fxLayout="row" fxLayoutAlign="end start" (click)="$event.stopPropagation()">
       <div class="profile-div">
-        <button
-          [ngStyle]="{'background-image':'url(' +'../../../assets/avatar.PNG'+ ')','background-size':'cover','width':'75px','height':'75px','margin-left':'53px'}"
-          matTooltip="Fundoo Account" mat-mini-fab>
-          <div mat-raised-button class="change">change</div>
+        <button (click)="$event.stopPropagation()"
+                [ngStyle]="{'background-image':'url(' +imgUrl+ ')','background-size':'cover','width':'75px','height':'75px','margin-left':'53px'}"
+                matTooltip="Fundoo Account" mat-mini-fab>
         </button>
-        <div>
-          <div class="profileName">
-            {{username}}
-          </div>
-          <div class="profileEmail">
-            {{emailId}}
-          </div>
+
+        <!--        <input (click)="$event.stopPropagation()"-->
+        <!--               [ngStyle]="{'background-image':'url(' +imgUrl+ ')','background-size':'cover','width':'75px','height':'75px','margin-left':'53px'}"-->
+        <!--               matTooltip="Fundoo Account" mat-mini-fab>-->
+        <!--        <img width="100%" *ngIf="imgUrl" [src]="imgUrl" class="image" >-->
+        <!--        <input #Image type="file"-->
+        <!--               (change)="handleFileInput($event.target.files)"-->
+        <!--               (click)="$event.stopPropagation()"/>-->
+
+        <!--        <input type="file"-->
+        <!--               (click)="$event.stopPropagation()"-->
+        <!--               (change)="onSelectFile($event)">-->
+        <!--        <div>-->
+        <div class="profileName">
+          {{username}}
+        </div>
+        <div class="profileEmail">
+          {{emailId}}
         </div>
       </div>
+      <!--      </div>-->
       <button class="signout" mat-flat-button color="primary" (click)="signOut()">
         Sign out
       </button>

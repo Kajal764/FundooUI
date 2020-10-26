@@ -17,9 +17,6 @@ export class ReminderComponent implements OnInit {
   @Output() getArchiveList = new EventEmitter<any>();
   @Output() getDateAndTime = new EventEmitter();
 
-
-
-
   responseData: any;
   reminderShow = true;
   private data: { note_Id: any; remainder: any };
@@ -34,6 +31,7 @@ export class ReminderComponent implements OnInit {
     {day: 'Next week', time: '8:00 AM', dayCount: 7, timeCount: '08'},
   ];
   public timeSet = '10:00';
+
   constructor(private noteService: NoteService,
               private snackBar: MatSnackBar,
               private atp: AmazingTimePickerService) {
@@ -72,6 +70,7 @@ export class ReminderComponent implements OnInit {
           note_Id: this.note.note_Id,
           remainder: updateDate
         };
+        // this.saveReminder();
       }
     });
   }
@@ -94,7 +93,7 @@ export class ReminderComponent implements OnInit {
         note_Id: this.note.note_Id,
         remainder: updateDate
       };
-      this.saveReminder();
+      // this.saveReminder();
     }
   }
 

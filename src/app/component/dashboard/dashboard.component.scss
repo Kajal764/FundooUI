@@ -59,7 +59,7 @@
 }
 
 @media only screen and (max-width: 410px) {
-  .google-keep-logo{
+  .google-keep-logo {
     visibility: hidden;
   }
 }
@@ -139,3 +139,9 @@ mat-sidenav {
 }
 
 
+.image {
+  background-size: cover;
+  width: 75px;
+  height: 75px;
+  margin-left: 53px
+}
