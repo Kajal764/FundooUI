@@ -4,7 +4,6 @@ import {INote} from '../note/note';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {IUser} from './IUser';
-import {UserService} from '../../service/user/user.service';
 
 @Component({
   selector: 'app-collaborator',
@@ -20,7 +19,7 @@ export class CollaboratorComponent implements OnInit {
   public isFalse = false;
   public list: [{ id: number; firstName: string; lastName: string; email: string; varified: boolean }];
   private loginUser: string;
-
+  isProgress = false;
   public user: IUser;
   private image: string;
 
@@ -41,6 +40,7 @@ export class CollaboratorComponent implements OnInit {
   }
 
   addUser(): void {
+    this.isProgress = true;
     const data = {
       note_Id: this.note.note_Id,
       email: this.email
@@ -50,6 +50,8 @@ export class CollaboratorComponent implements OnInit {
         this.responseData = response;
         this.openSnackBar('Dismiss');
         this.getCollaboratorList();
+        this.isProgress = false;
+
       }, (error) => {
         this.responseData = error.error;
         this.openSnackBar('Dismiss');

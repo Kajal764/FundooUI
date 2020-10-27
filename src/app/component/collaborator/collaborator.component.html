@@ -1,4 +1,4 @@
-<div fxFlex="100" fxLayout="column">
+<div fxFlex="100" fxLayout="column" *ngIf="!isProgress">
   <div fxLayoutAlign="start start" style="padding: 15px">
     <mat-card-title style="font-size: 20px">Collaborators</mat-card-title>
   </div>
@@ -68,4 +68,8 @@
   </div>
 </div>
 
+
+<div *ngIf="isProgress" style="overflow:hidden; margin-left: 200px;height: 110px">
+  <mat-spinner></mat-spinner>
+</div>
 

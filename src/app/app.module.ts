@@ -36,6 +36,7 @@ import {ReminderNoteComponent} from './component/reminder-note/reminder-note.com
 import {CollaboratorComponent} from './component/collaborator/collaborator.component';
 import {AvatarModule} from 'ngx-avatar';
 import { GridViewNoteComponent } from './component/grid-view-note/grid-view-note.component';
+import {MatProgressSpinner, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 
 // @ts-ignore
 
@@ -77,7 +78,8 @@ import { GridViewNoteComponent } from './component/grid-view-note/grid-view-note
     AmazingTimePickerModule,
     MatDatepickerModule,
     MatNativeDateModule,
-    AvatarModule
+    AvatarModule,
+    MatProgressSpinnerModule
   ],
   providers: [UserService,
     AuthGuard,
