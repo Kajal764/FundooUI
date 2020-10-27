@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Observable, throwError} from 'rxjs';
-import {HttpBackend, HttpClient, HttpErrorResponse} from '@angular/common/http';
+import {HttpBackend, HttpClient, HttpErrorResponse, HttpEvent, HttpRequest} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {IUser} from '../../component/collaborator/IUser';
 
@@ -55,6 +55,25 @@ export class UserService {
     const apiUrl: string = this.baseUrl + this.user + 'user-data/' + email;
     // @ts-ignore
     return this.httpClient.get(apiUrl);
+  }
 
+  // postFile(fileToUpload: File): Observable<any> {
+  //   const apiUrl: string = this.baseUrl + this.user + 'uploadFile';
+  //   const formData: FormData = new FormData();
+  //   formData.append('file', fileToUpload, fileToUpload.name);
+  //   return this.httpClient.post(apiUrl, fileToUpload, {observe: 'response'});
+  // }
+
+  pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
+    const formdata: FormData = new FormData();
+    formdata.append('file', file);
+    const apiUrl: string = this.baseUrl + this.user + 'uploadFile';
+
+    const req = new HttpRequest('POST', apiUrl, formdata, {
+      reportProgress: true,
+      responseType: 'text'
+    });
+
+    return this.httpClient.request(req);
   }
 }

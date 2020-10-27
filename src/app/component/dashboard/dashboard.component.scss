@@ -85,8 +85,9 @@ mat-sidenav {
 }
 
 .profile-div {
-  width: 180px;
-  height: 150px;
+  overflow: hidden;
+  width: 250px;
+  height: 300px;
   padding: 15px;
 }
 
@@ -105,16 +106,13 @@ mat-sidenav {
 }
 
 .signout {
-  margin-left: 65px;
+  margin-left: 70px;
+  margin-top: 10px;
 }
 
 .mat-sidenav-content {
   background-color: white;
 }
-
-//.input:focus {
-//  box-shadow: 0 0 0 10px red;
-//}
 
 @media only screen and (max-width: 420px) {
   .full-width {
@@ -134,14 +132,14 @@ mat-sidenav {
   .custom-box > mat-dialog-container {
     padding: 0px;
     overflow-x: hidden;
-    //border-radius: 5px;
   }
 }
 
-
 .image {
   background-size: cover;
-  width: 75px;
-  height: 75px;
-  margin-left: 53px
+  width: 50px;
+  height: 50px;
+  padding-left: 10px;
+
 }
+

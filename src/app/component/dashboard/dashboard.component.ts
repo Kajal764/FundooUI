@@ -7,6 +7,9 @@ import {MatDialog} from '@angular/material/dialog';
 import {CreateLabelComponent} from '../create-label/create-label.component';
 import {ILabel} from '../create-label/ILabel';
 import {LabelService} from '../../service/label/label.service';
+import {UserService} from '../../service/user/user.service';
+import {MatSnackBar} from '@angular/material/snack-bar';
+import {IUser} from '../collaborator/IUser';
 
 @Component({
   selector: 'app-dashboard',
@@ -14,10 +17,9 @@ import {LabelService} from '../../service/label/label.service';
   styleUrls: ['./dashboard.component.scss']
 })
 export class DashboardComponent implements OnInit {
-
   @ViewChild('sidenav')
   sidenav: MatSidenav;
-
+  public userLogin: IUser;
   isExpanded = true;
   isShowing = false;
   message = 'Fundoo';
@@ -30,12 +32,16 @@ export class DashboardComponent implements OnInit {
   labelList: ILabel[];
   private responseData: any;
   public imgUrl = '../../../assets/avatar4.jpg';
+  selectedFiles: FileList;
+  private currentFileUpload: File;
 
   constructor(private router: Router,
               private noteService: NoteService,
               private interactionService: InteractionService,
               public dialog: MatDialog,
-              private labelService: LabelService) {
+              private labelService: LabelService,
+              private userService: UserService,
+              private snackBar: MatSnackBar) {
   }
 
   toggle(): void {
@@ -45,7 +51,7 @@ export class DashboardComponent implements OnInit {
   ngOnInit(): void {
     this.getSubscribeList();
     this.getLabelList();
-
+    this.getLoginUser();
   }
 
   getLabelList(): void {
@@ -106,35 +112,46 @@ export class DashboardComponent implements OnInit {
       {width: 'auto', panelClass: 'custom-box', data: {}});
   }
 
-
   redirectToMapNote(labelData: ILabel): void {
     this.interactionService.sendObject(labelData);
     this.router.navigate(['home/label-map']);
   }
 
-
-  // onSelectFile(event): void {
-  //   if (event.target.files) {
-  //     const reader = new FileReader();
-  //     reader.readAsDataURL(event.target.files[0]);
-  //     reader.onload = (ev: any) => {
-  //       console.log(ev.target.result);
-  //       this.imgUrl = ev.target.result;
-  //     };
-  //   }
-  // }
-
-  fileToUpload: any;
-  // imageUrl: any;
-
-  handleFileInput(file: FileList) {
-    this.fileToUpload = file.item(0);
-
-    //Show image preview
-    let reader = new FileReader();
-    reader.onload = (event: any) => {
-      this.imgUrl = event.target.result;
+  onSelectFile(event: Event): void {
+    // @ts-ignore
+    this.selectedFiles = event.target.files;
+    const reader = new FileReader();
+    reader.onload = (ev: any) => {
+      this.imgUrl = ev.target.result;
     };
-    reader.readAsDataURL(this.fileToUpload);
+    reader.readAsDataURL(this.selectedFiles.item(0));
+  }
+
+  uploadImage(): void {
+    this.currentFileUpload = this.selectedFiles.item(0);
+    this.userService.pushFileToStorage(this.currentFileUpload)
+      .subscribe(data => {
+          this.responseData = data;
+          localStorage.setItem('image', this.imgUrl);
+          this.openSnackBar('Dismiss', 'Profile uploaded');
+        },
+        error => {
+          this.responseData = error.error;
+          this.openSnackBar('Dismiss', 'Error uploading profile');
+        });
+  }
+
+  openSnackBar(action, message): void {
+    this.snackBar.open(message, action, {duration: 3000});
+  }
+
+  private getLoginUser(): void {
+    this.userService.getLoginUser(localStorage.getItem('email'))
+      .subscribe(data => {
+          this.userLogin = data;
+        },
+        error => {
+          this.responseData = error.error;
+        });
   }
 }

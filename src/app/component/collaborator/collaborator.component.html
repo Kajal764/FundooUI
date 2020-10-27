@@ -6,11 +6,8 @@
 
   <!--  ************* Owner info *************-->
   <div fxLayout="row" class="user-div">
-    <div fxFlex="13">
-      <button
-        [ngStyle]="{'background-image':'url(' +'../../../assets/avatar.PNG'+ ')','background-size':'cover','width':'42px','height':'42px','margin-left':'10px'}"
-        matTooltip="Profile" mat-mini-fab>
-      </button>
+    <div fxFlex="13" style="margin-left: 10px">
+      <ngx-avatar size="40" name="{{user.firstName}}"></ngx-avatar>
     </div>
     <div fxFlex='70' fxLayout="column">
       <div style="font-size: 17px;font-weight: 440">
@@ -65,8 +62,8 @@
   <mat-divider></mat-divider>
   <div class="button-background" fxFlex="100">
     <div class="button" fxLayout="row" fxLayoutGap="5%" fxFlex="80">
-      <button mat-button [mat-dialog-close] fxLayoutGap="5%" >Cancel</button>
-      <button mat-button [mat-dialog-close] fxLayoutGap="5%" >Save</button>
+      <button mat-button [mat-dialog-close] fxLayoutGap="5%">Cancel</button>
+      <button mat-button [mat-dialog-close] fxLayoutGap="5%">Save</button>
     </div>
   </div>
 </div>

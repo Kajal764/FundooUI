@@ -63,7 +63,6 @@ export class LoginComponent implements OnInit {
         },
         (error) => {
           this.responseData = error.error;
-          console.log(this.responseData);
           this.openSnackBar('Dismiss');
         });
   }

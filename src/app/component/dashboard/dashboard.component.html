@@ -20,7 +20,7 @@
     </div>
   </div>
 
-  <div class="last-toolbar">
+  <div class="last-toolbar" fxLayout="row">
     <!-- refresh button -->
     <button mat-icon-button *ngIf="isRefresh" (click)="refresh()" id="refresh" matTooltip="refresh">
       <mat-icon id="refresh">refresh</mat-icon>
@@ -35,41 +35,43 @@
         <img *ngIf="isGrid" src="../../../assets/fourgrid.svg" (click)="grid()">
       </mat-icon>
     </button>
-    <button mat-mini-fab
-            [ngStyle]="{'background-image':'url(' +imgUrl+ ')','background-size':'cover','margin':'10px'}"
-            [matMenuTriggerFor]="menu1">
-    </button>
+
+    <div fxLayout="row">
+      <img *ngIf="imgUrl" [src]="imgUrl" class="image"
+           [matMenuTriggerFor]="menu1">
+    </div>
 
     <mat-menu #menu1="matMenu" fxLayout="row" fxLayoutAlign="end start" (click)="$event.stopPropagation()">
-      <div class="profile-div">
-        <button (click)="$event.stopPropagation()"
-                [ngStyle]="{'background-image':'url(' +imgUrl+ ')','background-size':'cover','width':'75px','height':'75px','margin-left':'53px'}"
-                matTooltip="Fundoo Account" mat-mini-fab>
-        </button>
-
-        <!--        <input (click)="$event.stopPropagation()"-->
-        <!--               [ngStyle]="{'background-image':'url(' +imgUrl+ ')','background-size':'cover','width':'75px','height':'75px','margin-left':'53px'}"-->
-        <!--               matTooltip="Fundoo Account" mat-mini-fab>-->
-        <!--        <img width="100%" *ngIf="imgUrl" [src]="imgUrl" class="image" >-->
-        <!--        <input #Image type="file"-->
-        <!--               (change)="handleFileInput($event.target.files)"-->
-        <!--               (click)="$event.stopPropagation()"/>-->
-
-        <!--        <input type="file"-->
-        <!--               (click)="$event.stopPropagation()"-->
-        <!--               (change)="onSelectFile($event)">-->
-        <!--        <div>-->
-        <div class="profileName">
-          {{username}}
+      <div class="profile-div" fxFlex="column">
+        <div>
+          <div>
+            <img width="100%" *ngIf="imgUrl" [src]="imgUrl"
+                 style="background-size: cover;margin-bottom:5px;width: 80px;
+                 height: 80px; margin-left: 70px;border-radius: 41px;">
+            <input type="file" style="margin-left: 20px"
+                   (click)="$event.stopPropagation()"
+                   (change)="onSelectFile($event)">
+          </div>
+          <button (click)="uploadImage()" mat-flat-button color="primary"
+                  style="margin-left: 70px;margin-top: 5px"
+                  (click)="$event.stopPropagation()">Upload
+          </button>
         </div>
-        <div class="profileEmail">
-          {{emailId}}
+
+        <div>
+
+          <div class="profileName">
+            {{userLogin.email}}
+          </div>
+          <div class="profileEmail">
+            {{userLogin.firstName}} {{userLogin.lastName}}
+          </div>
+          <button class="signout" mat-flat-button color="primary" (click)="signOut()">
+            Sign out
+          </button>
         </div>
       </div>
-      <!--      </div>-->
-      <button class="signout" mat-flat-button color="primary" (click)="signOut()">
-        Sign out
-      </button>
+
     </mat-menu>
   </div>
 </mat-toolbar>

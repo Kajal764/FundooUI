@@ -22,6 +22,7 @@ export class CollaboratorComponent implements OnInit {
   private loginUser: string;
 
   public user: IUser;
+  private image: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public note: INote,
               private noteService: NoteService,
@@ -30,6 +31,7 @@ export class CollaboratorComponent implements OnInit {
 
   ngOnInit(): void {
     this.loginUser = localStorage.getItem('email');
+    this.image = localStorage.getItem('image');
     this.note.userList.map(value => {
       if (value.email === this.loginUser) {
         this.user = value;
@@ -93,8 +95,5 @@ export class CollaboratorComponent implements OnInit {
         this.responseData = error.error;
         this.openSnackBar('Dismiss');
       });
-
   }
-
-
 }

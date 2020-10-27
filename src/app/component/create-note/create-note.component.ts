@@ -198,7 +198,6 @@ export class CreateNoteComponent implements OnInit {
     this.dateTime = null;
   }
 
-
   collabFlag(): void {
     this.isCollabDiv = true;
   }
