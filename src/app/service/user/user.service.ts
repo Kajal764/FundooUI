@@ -22,7 +22,6 @@ export class UserService {
   }
 
   postData(data, url): Observable<any> {
-    console.log(data, url);
     return this.httpClient.post<any>(url, data, {observe: 'response' as 'body'})
       .pipe(catchError(this.handleError));
   }
@@ -57,23 +56,21 @@ export class UserService {
     return this.httpClient.get(apiUrl);
   }
 
-  // postFile(fileToUpload: File): Observable<any> {
-  //   const apiUrl: string = this.baseUrl + this.user + 'uploadFile';
-  //   const formData: FormData = new FormData();
-  //   formData.append('file', fileToUpload, fileToUpload.name);
-  //   return this.httpClient.post(apiUrl, fileToUpload, {observe: 'response'});
-  // }
 
-  pushFileToStorage(file: File): Observable<HttpEvent<{}>> {
+  pushFileToStorage(file: File): Observable<any> {
+    // const formdata: FormData = new FormData();
+    // formdata.append('file', file);
+    // const apiUrl: string = this.baseUrl + this.user + 'uploadFile';
+    // const req = new HttpRequest('POST', apiUrl, formdata, {
+    //   reportProgress: true,
+    //   responseType: 'text'
+    // });
+    // return this.httpClient.request(req);
+
     const formdata: FormData = new FormData();
     formdata.append('file', file);
     const apiUrl: string = this.baseUrl + this.user + 'uploadFile';
-
-    const req = new HttpRequest('POST', apiUrl, formdata, {
-      reportProgress: true,
-      responseType: 'text'
-    });
-
-    return this.httpClient.request(req);
+    return this.httpClient.post(apiUrl, formdata)
+      .pipe(catchError(this.handleError));
   }
 }

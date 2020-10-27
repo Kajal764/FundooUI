@@ -10,6 +10,7 @@ import {LabelService} from '../../service/label/label.service';
 import {UserService} from '../../service/user/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {IUser} from '../collaborator/IUser';
+import {HttpEvent} from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -25,15 +26,15 @@ export class DashboardComponent implements OnInit {
   message = 'Fundoo';
   isRefresh = true;
   isGrid = true;
-  username = 'kajal waghmare';
-  emailId = 'kajalw1998@gmail.com';
   search: string;
   noteType: 'note';
   labelList: ILabel[];
-  private responseData: any;
-  public imgUrl = '../../../assets/avatar4.jpg';
+  private uploadFileName = '1603824247311-avatar1.png';
+  public imgUrl = 'http://localhost:8080/fundoo/user/image/' + this.uploadFileName;
+
   selectedFiles: FileList;
   private currentFileUpload: File;
+  private responseData: any;
 
   constructor(private router: Router,
               private noteService: NoteService,
@@ -131,13 +132,12 @@ export class DashboardComponent implements OnInit {
     this.currentFileUpload = this.selectedFiles.item(0);
     this.userService.pushFileToStorage(this.currentFileUpload)
       .subscribe(data => {
-          this.responseData = data;
-          localStorage.setItem('image', this.imgUrl);
+          this.uploadFileName = data;
           this.openSnackBar('Dismiss', 'Profile uploaded');
         },
         error => {
-          this.responseData = error.error;
-          this.openSnackBar('Dismiss', 'Error uploading profile');
+          this.uploadFileName = error.error.text;
+          this.openSnackBar('Dismiss', 'Profile uploaded');
         });
   }
 
