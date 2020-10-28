@@ -44,34 +44,29 @@
     <mat-menu #menu1="matMenu" fxLayout="row" fxLayoutAlign="end start" (click)="$event.stopPropagation()">
       <div class="profile-div" fxFlex="column">
         <div>
-          <div>
-            <img width="100%" *ngIf="imgUrl" [src]="imgUrl"
-                 style="background-size: cover;margin-bottom:5px;width: 80px;
-                 height: 80px; margin-left: 70px;border-radius: 41px;">
-            <input type="file" style="margin-left: 20px"
-                   (click)="$event.stopPropagation()"
-                   (change)="onSelectFile($event)">
+          <div (click)="$event.stopPropagation()" fxLayout="column">
+            <img width="100%" *ngIf="imgUrl" [src]="imgUrl" class="imageSelect"
+                 style="background-size: cover;width: 80px;
+                           height: 80px; align-self: center;border-radius: 41px;border: 1px solid lightgrey;">
+            <img src="../../../assets/add_a_photo-24px.svg"
+                 (click)="imageSelectFile.click()" style="margin-left: 55px;margin-top:-23px">
           </div>
-          <button (click)="uploadImage()" mat-flat-button color="primary"
-                  style="margin-left: 70px;margin-top: 5px"
-                  (click)="$event.stopPropagation()">Upload
-          </button>
         </div>
-
         <div>
-
           <div class="profileName">
             {{userLogin.email}}
           </div>
           <div class="profileEmail">
             {{userLogin.firstName}} {{userLogin.lastName}}
           </div>
+          <input fxHide class="image" type="file" (change)="onSelectFile($event)"
+                 #imageSelectFile (click)="$event.stopPropagation()">
+
           <button class="signout" mat-flat-button color="primary" (click)="signOut()">
             Sign out
           </button>
         </div>
       </div>
-
     </mat-menu>
   </div>
 </mat-toolbar>

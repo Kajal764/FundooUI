@@ -36,9 +36,8 @@ import {ReminderNoteComponent} from './component/reminder-note/reminder-note.com
 import {CollaboratorComponent} from './component/collaborator/collaborator.component';
 import {AvatarModule} from 'ngx-avatar';
 import {GridViewNoteComponent} from './component/grid-view-note/grid-view-note.component';
-// import {MatProgressSpinner, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
 import {NgxSpinnerModule} from 'ngx-spinner';
-
+import {ImageCropperModule} from 'ngx-image-cropper';
 
 @NgModule({
   declarations: [
@@ -62,7 +61,7 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     ReminderComponent,
     ReminderNoteComponent,
     CollaboratorComponent,
-    GridViewNoteComponent
+    GridViewNoteComponent,
   ],
   imports: [
     BrowserModule,
@@ -78,7 +77,8 @@ import {NgxSpinnerModule} from 'ngx-spinner';
     MatDatepickerModule,
     MatNativeDateModule,
     AvatarModule,
-    NgxSpinnerModule
+    NgxSpinnerModule,
+    ImageCropperModule
   ],
   providers: [UserService,
     AuthGuard,

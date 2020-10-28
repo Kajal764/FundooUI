@@ -58,19 +58,11 @@ export class UserService {
 
 
   pushFileToStorage(file: File): Observable<any> {
-    // const formdata: FormData = new FormData();
-    // formdata.append('file', file);
-    // const apiUrl: string = this.baseUrl + this.user + 'uploadFile';
-    // const req = new HttpRequest('POST', apiUrl, formdata, {
-    //   reportProgress: true,
-    //   responseType: 'text'
-    // });
-    // return this.httpClient.request(req);
-
     const formdata: FormData = new FormData();
     formdata.append('file', file);
     const apiUrl: string = this.baseUrl + this.user + 'uploadFile';
     return this.httpClient.post(apiUrl, formdata)
       .pipe(catchError(this.handleError));
   }
+
 }

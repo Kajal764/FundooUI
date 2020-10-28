@@ -10,7 +10,6 @@ import {LabelService} from '../../service/label/label.service';
 import {UserService} from '../../service/user/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {IUser} from '../collaborator/IUser';
-import {HttpEvent} from '@angular/common/http';
 
 @Component({
   selector: 'app-dashboard',
@@ -118,6 +117,20 @@ export class DashboardComponent implements OnInit {
     this.router.navigate(['home/label-map']);
   }
 
+  openSnackBar(action, message): void {
+    this.snackBar.open(message, action, {duration: 3000});
+  }
+
+  private getLoginUser(): void {
+    this.userService.getLoginUser(localStorage.getItem('email'))
+      .subscribe(data => {
+          this.userLogin = data;
+        },
+        error => {
+          this.responseData = error.error;
+        });
+  }
+
   onSelectFile(event: Event): void {
     // @ts-ignore
     this.selectedFiles = event.target.files;
@@ -126,6 +139,7 @@ export class DashboardComponent implements OnInit {
       this.imgUrl = ev.target.result;
     };
     reader.readAsDataURL(this.selectedFiles.item(0));
+    this.uploadImage();
   }
 
   uploadImage(): void {
@@ -138,20 +152,6 @@ export class DashboardComponent implements OnInit {
         error => {
           this.uploadFileName = error.error.text;
           this.openSnackBar('Dismiss', 'Profile uploaded');
-        });
-  }
-
-  openSnackBar(action, message): void {
-    this.snackBar.open(message, action, {duration: 3000});
-  }
-
-  private getLoginUser(): void {
-    this.userService.getLoginUser(localStorage.getItem('email'))
-      .subscribe(data => {
-          this.userLogin = data;
-        },
-        error => {
-          this.responseData = error.error;
         });
   }
 }

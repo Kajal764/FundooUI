@@ -86,15 +86,15 @@ mat-sidenav {
 
 .profile-div {
   overflow: hidden;
-  width: 250px;
-  height: 300px;
-  padding: 15px;
+  width: 203px;
+  height: 210px;
+  padding: 8px 15px 15px 15px;
 }
 
 .profileName {
   text-align: center;
-  font-size: 20px;
-  padding-top: 20px;
+  font-size: 17px;
+  padding-top: 10px;
   font-family: "Times New Roman";
   font-weight: bold;
 }
@@ -106,9 +106,8 @@ mat-sidenav {
 }
 
 .signout {
-  margin-left: 70px;
-  margin-top: 10px;
-}
+  margin-top: 15px;
+  margin-left: 45px}
 
 .mat-sidenav-content {
   background-color: white;
@@ -137,9 +136,12 @@ mat-sidenav {
 
 .image {
   background-size: cover;
-  width: 50px;
-  height: 50px;
-  padding-left: 10px;
+  background-size: cover;
+  width: 45px;
+  height: 45px;
+  border-radius: 47px;
+  margin-left: 10px;
+  border: 1px solid lightgrey;
 
 }
 
