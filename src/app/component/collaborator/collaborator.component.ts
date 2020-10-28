@@ -4,6 +4,7 @@ import {INote} from '../note/note';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {IUser} from './IUser';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-collaborator',
@@ -19,13 +20,13 @@ export class CollaboratorComponent implements OnInit {
   public isFalse = false;
   public list: [{ id: number; firstName: string; lastName: string; email: string; varified: boolean }];
   private loginUser: string;
-  isProgress = false;
   public user: IUser;
   private image: string;
 
   constructor(@Inject(MAT_DIALOG_DATA) public note: INote,
               private noteService: NoteService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -40,17 +41,17 @@ export class CollaboratorComponent implements OnInit {
   }
 
   addUser(): void {
-    this.isProgress = true;
     const data = {
       note_Id: this.note.note_Id,
       email: this.email
     };
+    this.spinner.show();
     this.noteService.createNote(data, 'collaborators')
       .subscribe(response => {
         this.responseData = response;
         this.openSnackBar('Dismiss');
         this.getCollaboratorList();
-        this.isProgress = false;
+        this.spinner.hide();
 
       }, (error) => {
         this.responseData = error.error;
@@ -98,4 +99,6 @@ export class CollaboratorComponent implements OnInit {
         this.openSnackBar('Dismiss');
       });
   }
+
+
 }

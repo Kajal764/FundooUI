@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../../service/user/user.service';
 import {PasswordValidation} from './password-validator';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-register',
@@ -66,8 +67,7 @@ export class RegisterComponent implements OnInit {
     this.router.navigate(['/login']);
   }
 
-  // tslint:disable-next-line:typedef
-  onSubmit() {
+  onSubmit(): void {
     const data = {
       firstName: this.firstname.value,
       lastName: this.lastname.value,
@@ -77,6 +77,7 @@ export class RegisterComponent implements OnInit {
     this.userService.register(data)
       .subscribe(response => {
         this.responseData = response.body;
+
       }, (error) => {
         this.responseData = error.error;
       });
@@ -84,7 +85,7 @@ export class RegisterComponent implements OnInit {
     this.redirectToLogin();
   }
 
-  openSnackBar(action) {
+  openSnackBar(action): void {
     this.snackBar.open(this.responseData.message, action, {duration: 4000});
 
   }

@@ -35,12 +35,11 @@ import {MatNativeDateModule} from '@angular/material/core';
 import {ReminderNoteComponent} from './component/reminder-note/reminder-note.component';
 import {CollaboratorComponent} from './component/collaborator/collaborator.component';
 import {AvatarModule} from 'ngx-avatar';
-import { GridViewNoteComponent } from './component/grid-view-note/grid-view-note.component';
-import {MatProgressSpinner, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {GridViewNoteComponent} from './component/grid-view-note/grid-view-note.component';
+// import {MatProgressSpinner, MatProgressSpinnerModule} from '@angular/material/progress-spinner';
+import {NgxSpinnerModule} from 'ngx-spinner';
 
-// @ts-ignore
 
-// @ts-ignore
 @NgModule({
   declarations: [
     AppComponent,
@@ -79,7 +78,7 @@ import {MatProgressSpinner, MatProgressSpinnerModule} from '@angular/material/pr
     MatDatepickerModule,
     MatNativeDateModule,
     AvatarModule,
-    MatProgressSpinnerModule
+    NgxSpinnerModule
   ],
   providers: [UserService,
     AuthGuard,

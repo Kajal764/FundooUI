@@ -28,6 +28,7 @@
     "classlist.js": "^1.1.20150312",
     "masonry-layout": "^4.2.2",
     "ngx-masonry": "^10.0.6",
+    "ngx-spinner": "^6.1.2",
     "rxjs": "~6.6.0",
     "tslib": "^2.0.0",
     "zone.js": "~0.10.2"
