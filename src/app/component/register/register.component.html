@@ -76,12 +76,27 @@
         </mat-form-field>
         <mat-icon fxLayoutAlign="end center" id="suffix" matSuffix (click)="hide = !hide">{{
           hide ? "visibility_off" : "visibility"
-          }}</mat-icon>
+          }}
+        </mat-icon>
+
+      </div>
+      <div style="padding-top: 10px">
+        <mat-form-field appearance="outline" class="email">
+          <mat-label>City</mat-label>
+          <input matInput placeholder="Enter your city" type="text"
+                 [matAutocomplete]="auto" formControlName="city"
+          />
+          <mat-autocomplete #auto="matAutocomplete" >
+            <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
+              {{option}}
+            </mat-option>
+          </mat-autocomplete>
+        </mat-form-field>
       </div>
 
       <div class="last-div" fxLayoutAlign="space-between center">
         <button mat-button class="login-button" (click)="redirectToLogin()"> Sign in insted</button>
-        <button [disabled]="registerForm.invalid" mat-raised-button color="primary"
+        <button [disabled]="registerForm.invalid " mat-raised-button color="primary"
                 style="margin-right: 35px">
           Sign up
         </button>
@@ -90,4 +105,11 @@
   </mat-card>
 </div>
 
-
+<ngx-spinner
+  bdColor="rgba(215,220,227,0.31)"
+  size="medium"
+  color="#031254"
+  type="square-jelly-box"
+  fullScreen="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>

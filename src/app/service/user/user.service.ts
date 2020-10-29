@@ -28,7 +28,8 @@ export class UserService {
 
   register(data): Observable<any> {
     const apiUrl: string = this.baseUrl + this.user + 'register';
-    return this.postData(data, apiUrl);
+    return this.postData(data, apiUrl)
+      .pipe(catchError(this.handleError));
   }
 
   login(data): Observable<any> {
