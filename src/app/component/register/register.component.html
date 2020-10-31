@@ -86,7 +86,7 @@
           <input matInput placeholder="Enter your city" type="text"
                  [matAutocomplete]="auto" formControlName="city"
           />
-          <mat-autocomplete #auto="matAutocomplete" >
+          <mat-autocomplete #auto="matAutocomplete">
             <mat-option *ngFor="let option of filteredOptions | async" [value]="option">
               {{option}}
             </mat-option>

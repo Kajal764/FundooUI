@@ -4,6 +4,7 @@ import {Router} from '@angular/router';
 import {UserService} from '../../service/user/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpResponse} from '@angular/common/http';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-login',
@@ -19,8 +20,11 @@ export class LoginComponent implements OnInit {
   passwordPattern = '^((?=.*[A-Z])(?=.*[a-z])(?=.*[0-9])(?=.*[@#$%]).{6,})$';
   private responseData: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router, private userService: UserService
-    , private snackBar: MatSnackBar) {
+  constructor(private formBuilder: FormBuilder,
+              private router: Router,
+              private userService: UserService,
+              private snackBar: MatSnackBar,
+              private spinner: NgxSpinnerService) {
   }
 
   loginForm = this.formBuilder.group({
@@ -44,6 +48,7 @@ export class LoginComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit() {
+    this.spinner.show();
     this.isValidFormSubmitted = false;
     if (this.loginForm.invalid) {
       return;
@@ -58,11 +63,13 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', `Bearer ${response.headers.get('AuthorizeToken')}`);
           localStorage.setItem('email', data.email);
           this.responseData = response.body;
+          this.spinner.hide();
           this.openSnackBar('Dismiss');
           this.redirectToDashboard();
         },
         (error) => {
           this.responseData = error.error;
+          this.spinner.hide();
           this.openSnackBar('Dismiss');
         });
   }
@@ -82,7 +89,7 @@ export class LoginComponent implements OnInit {
     this.router.navigate(['/register']);
   }
 
-  private redirectToDashboard() {
+  private redirectToDashboard(): void {
     this.openSnackBar('Dismiss');
     this.router.navigate(['/home']);
   }

@@ -3,6 +3,7 @@ import {FormBuilder, Validators} from '@angular/forms';
 import {ActivatedRoute, Params, Router} from '@angular/router';
 import {UserService} from '../../service/user/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-update-password',
@@ -17,8 +18,12 @@ export class UpdatePasswordComponent implements OnInit {
   private token: any;
   private responseData: any;
 
-  constructor(private formBuilder: FormBuilder, private router: Router,
-              private activatedRoute: ActivatedRoute, private userService: UserService, private snackBar: MatSnackBar) {
+  constructor(private formBuilder: FormBuilder,
+              private router: Router,
+              private activatedRoute: ActivatedRoute,
+              private userService: UserService,
+              private snackBar: MatSnackBar,
+              private spinner: NgxSpinnerService) {
   }
 
   resetPwForm = this.formBuilder.group({
@@ -48,6 +53,7 @@ export class UpdatePasswordComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit() {
+    this.spinner.show();
     this.isValidFormSubmitted = false;
     if (this.resetPwForm.invalid) {
       return;
@@ -64,6 +70,7 @@ export class UpdatePasswordComponent implements OnInit {
       }, (error) => {
         this.responseData = error.error;
       });
+    this.spinner.hide();
     this.openSnackBar('Dismiss');
   }
 

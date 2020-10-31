@@ -2,6 +2,7 @@ import {Component, OnInit, Inject} from '@angular/core';
 import {MAT_DIALOG_DATA} from '@angular/material/dialog';
 import {INote} from '../note/note';
 import {NoteService} from '../../service/note/note.service';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-update-note',
@@ -25,7 +26,9 @@ export class UpdateNoteComponent implements OnInit {
   );
   private responseData: any;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public note: INote, public noteService: NoteService) {
+  constructor(@Inject(MAT_DIALOG_DATA) public note: INote,
+              public noteService: NoteService,
+              private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -44,11 +47,13 @@ export class UpdateNoteComponent implements OnInit {
   }
 
   removeReminder(noteId: number): void {
+    this.spinner.show();
     this.noteService.deleteReminder(noteId)
       .subscribe(response => {
         this.responseData = response;
       }, error => {
         this.responseData = error.error;
       });
+    this.spinner.hide();
   }
 }

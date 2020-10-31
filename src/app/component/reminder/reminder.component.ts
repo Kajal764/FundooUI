@@ -2,6 +2,7 @@ import {Component, Input, OnInit, EventEmitter, Output} from '@angular/core';
 import {AmazingTimePickerService} from 'amazing-time-picker';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-reminder',
@@ -34,7 +35,8 @@ export class ReminderComponent implements OnInit {
 
   constructor(private noteService: NoteService,
               private snackBar: MatSnackBar,
-              private atp: AmazingTimePickerService) {
+              private atp: AmazingTimePickerService,
+              private spinner:NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -93,7 +95,7 @@ export class ReminderComponent implements OnInit {
         note_Id: this.note.note_Id,
         remainder: updateDate
       };
-      // this.saveReminder();
+      this.saveReminder();
     }
   }
 
@@ -106,6 +108,7 @@ export class ReminderComponent implements OnInit {
   }
 
   saveReminder(): void {
+    this.spinner.show();
     if (this.isEdit && this.noteType !== 'reminder' || this.defaultTime !== new Date()) {
       this.noteService.putData(this.data, 'reminder')
         .subscribe(response => {
@@ -113,9 +116,11 @@ export class ReminderComponent implements OnInit {
           this.getList.emit();
           this.getPinList.emit();
           this.getArchiveList.emit();
+          this.spinner.hide();
           this.openSnackBar('Dismiss');
         }, (error) => {
           this.responseData = error.error;
+          this.spinner.hide();
           this.openSnackBar('Dismiss');
         });
     }

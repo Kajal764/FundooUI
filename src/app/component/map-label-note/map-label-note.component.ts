@@ -3,6 +3,7 @@ import {InteractionService} from '../../service/search-data/interaction.service'
 import {ILabel} from '../create-label/ILabel';
 import {NoteService} from '../../service/note/note.service';
 import {INote} from '../note/note';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-map-label-note',
@@ -18,7 +19,8 @@ export class MapLabelNoteComponent implements OnInit {
   isNotePresent = false;
 
   constructor(private interactionService: InteractionService,
-              private noteService: NoteService) {
+              private noteService: NoteService,
+              private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -34,6 +36,7 @@ export class MapLabelNoteComponent implements OnInit {
   }
 
   private getNoteList(label: ILabel): void {
+    this.spinner.show();
     const url = `mapNote/${label.label_Id}`;
     this.noteService.getList(url)
       .subscribe(data => {
@@ -45,5 +48,6 @@ export class MapLabelNoteComponent implements OnInit {
         error => {
           this.message = error.error.message;
         });
+    this.spinner.hide();
   }
 }

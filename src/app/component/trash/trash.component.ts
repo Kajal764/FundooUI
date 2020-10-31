@@ -2,6 +2,7 @@ import {Component, OnInit} from '@angular/core';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {INote} from '../note/note';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-trash',
@@ -13,7 +14,9 @@ export class TrashComponent implements OnInit {
   private message: string;
   private responseData: any;
 
-  constructor(private noteService: NoteService, private snackBar: MatSnackBar) {
+  constructor(private noteService: NoteService,
+              private snackBar: MatSnackBar,
+              private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -21,23 +24,28 @@ export class TrashComponent implements OnInit {
   }
 
   private trashNote(): void {
+    this.spinner.show();
     this.noteService.getList('trashList')
       .subscribe(data => {
           this.trashNoteList = data;
           this.message = 'Note Fetch';
+          this.spinner.hide();
           this.snackBar.open(this.message, 'Dismiss', {duration: 4000});
         },
         error => {
           this.message = error.error.message;
+          this.spinner.hide();
           this.snackBar.open(this.message, 'Dismiss', {duration: 4000});
         });
   }
 
 
   deleteForever(trashNote: INote): void {
+    this.spinner.show();
     this.noteService.permanentDelete(trashNote.note_Id)
       .subscribe(response => {
         this.responseData = response;
+        this.spinner.hide();
         this.openSnackBar('Dismiss');
         const index = this.trashNoteList.indexOf(trashNote);
         if (index !== -1) {
@@ -45,14 +53,17 @@ export class TrashComponent implements OnInit {
         }
       }, error => {
         this.responseData = error.error;
+        this.spinner.hide();
         this.openSnackBar('Dismiss');
       });
   }
 
   restoreNote(trashNote: INote): void {
+    this.spinner.show();
     this.noteService.deleteNote(trashNote.note_Id, 'restoreTrashNote')
       .subscribe(response => {
         this.responseData = response;
+        this.spinner.hide();
         this.openSnackBar('Dismiss');
         const index = this.trashNoteList.indexOf(trashNote);
         if (index !== -1) {
@@ -60,6 +71,7 @@ export class TrashComponent implements OnInit {
         }
       }, error => {
         this.responseData = error.error;
+        this.spinner.hide();
         this.openSnackBar('Dismiss');
       });
   }

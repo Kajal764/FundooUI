@@ -85,7 +85,13 @@
       <button mat-flat-button [mat-dialog-close]="note" [style.backgroundColor]="note.color">Close</button>
     </div>
   </div>
+</mat-dialog-content>
 
-  <mat-dialog-content>
-
-
+<ngx-spinner
+  bdColor="rgba(215,220,227,0.31)"
+  size="medium"
+  color="#031254"
+  type="square-jelly-box"
+  fullScreen="true">
+  <p style="color: white"> Loading... </p>
+</ngx-spinner>

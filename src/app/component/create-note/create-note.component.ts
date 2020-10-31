@@ -7,6 +7,7 @@ import {ILabel} from '../create-label/ILabel';
 import {MatCheckboxChange} from '@angular/material/checkbox';
 import {UserService} from '../../service/user/user.service';
 import {IUser} from '../collaborator/IUser';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-create-note',
@@ -80,7 +81,8 @@ export class CreateNoteComponent implements OnInit {
               private snackBar: MatSnackBar,
               public labelService: LabelService,
               public interactionService: InteractionService,
-              private userService: UserService) {
+              private userService: UserService,
+              private spinner: NgxSpinnerService) {
   }
 
   ngOnInit(): void {
@@ -105,6 +107,7 @@ export class CreateNoteComponent implements OnInit {
 
 
   createNote(): void {
+    this.spinner.show();
     const data = {
       note_id: 0,
       title: this.noteTitle,
@@ -121,9 +124,11 @@ export class CreateNoteComponent implements OnInit {
         this.responseData = response;
         this.getNoteList.emit();
         this.getPinList.emit();
+        this.spinner.hide();
         this.openSnackBar('Dismiss');
       }, (error) => {
         this.responseData = error.error;
+        this.spinner.hide();
         this.openSnackBar('Dismiss');
       });
     this.noteTitle = '';

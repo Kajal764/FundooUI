@@ -10,6 +10,7 @@ import {LabelService} from '../../service/label/label.service';
 import {UserService} from '../../service/user/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {IUser} from '../collaborator/IUser';
+import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-dashboard',
@@ -41,7 +42,8 @@ export class DashboardComponent implements OnInit {
               public dialog: MatDialog,
               private labelService: LabelService,
               private userService: UserService,
-              private snackBar: MatSnackBar) {
+              private snackBar: MatSnackBar,
+              private spinner: NgxSpinnerService) {
   }
 
   toggle(): void {
@@ -55,6 +57,7 @@ export class DashboardComponent implements OnInit {
   }
 
   getLabelList(): void {
+    this.spinner.show();
     this.labelService.getList()
       .subscribe(data => {
           this.labelList = data;
@@ -63,6 +66,7 @@ export class DashboardComponent implements OnInit {
         error => {
           this.responseData = error.error;
         });
+    this.spinner.hide();
   }
 
   private getSubscribeList(): void {
@@ -122,6 +126,7 @@ export class DashboardComponent implements OnInit {
   }
 
   private getLoginUser(): void {
+    this.spinner.show();
     this.userService.getLoginUser(localStorage.getItem('email'))
       .subscribe(data => {
           this.userLogin = data;
@@ -129,6 +134,7 @@ export class DashboardComponent implements OnInit {
         error => {
           this.responseData = error.error;
         });
+    this.spinner.hide();
   }
 
   onSelectFile(event: Event): void {
@@ -143,6 +149,7 @@ export class DashboardComponent implements OnInit {
   }
 
   uploadImage(): void {
+    this.spinner.show();
     this.currentFileUpload = this.selectedFiles.item(0);
     this.userService.pushFileToStorage(this.currentFileUpload)
       .subscribe(data => {
@@ -153,5 +160,6 @@ export class DashboardComponent implements OnInit {
           this.uploadFileName = error.error.text;
           this.openSnackBar('Dismiss', 'Profile uploaded');
         });
+    this.spinner.hide();
   }
 }
