@@ -21,8 +21,7 @@ export class CreateLabelComponent implements OnInit {
 
   constructor(private labelService: LabelService,
               private snackBar: MatSnackBar,
-              private interactionService: InteractionService,
-              private spinner: NgxSpinnerService) {
+              private interactionService: InteractionService) {
   }
 
   ngOnInit(): void {
@@ -38,7 +37,6 @@ export class CreateLabelComponent implements OnInit {
   }
 
   addLabel(): void {
-    this.spinner.show();
     const data = {
       label_Id: 0,
       note_Id: 0,
@@ -50,16 +48,13 @@ export class CreateLabelComponent implements OnInit {
   }
 
   getLabelList(): void {
-    this.spinner.show();
     this.labelService.getList()
       .subscribe(data => {
           this.labelList = data;
-          this.spinner.hide();
           this.interactionService.sendList(this.labelList);
         },
         error => {
           this.responseData = error.error;
-          this.spinner.hide();
           this.openSnackBar('Dismiss');
         });
   }
@@ -82,22 +77,18 @@ export class CreateLabelComponent implements OnInit {
     this.labelService.postLabel(data, url)
       .subscribe(response => {
         this.responseData = response;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
         this.getLabelList();
       }, error => {
         this.responseData = error.error;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
       });
   }
 
   deleteLabel(labelData: any): void {
-    this.spinner.show();
     this.labelService.deleteLabel(labelData.label_Id, 'delete')
       .subscribe(response => {
         this.responseData = response;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
         const index = this.labelList.indexOf(labelData);
         if (index !== -1) {
@@ -105,7 +96,6 @@ export class CreateLabelComponent implements OnInit {
         }
       }, error => {
         this.responseData = error.error;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
       });
   }

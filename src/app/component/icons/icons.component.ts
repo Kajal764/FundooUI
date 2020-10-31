@@ -8,7 +8,6 @@ import {MatCheckboxChange} from '@angular/material/checkbox';
 import {MatDialog} from '@angular/material/dialog';
 import {INote} from '../note/note';
 import {CollaboratorComponent} from '../collaborator/collaborator.component';
-import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-icons',
@@ -59,8 +58,7 @@ export class IconsComponent implements OnInit {
               private snackBar: MatSnackBar,
               private interactionService: InteractionService,
               private labelService: LabelService,
-              public dialog: MatDialog,
-              private spinner: NgxSpinnerService) {
+              public dialog: MatDialog) {
   }
 
   labelCreate(labelName: any): void {
@@ -75,18 +73,15 @@ export class IconsComponent implements OnInit {
   }
 
   deleteNote(apiCall: string): void {
-    this.spinner.show();
     this.noteService.deleteNote(this.note.note_Id, apiCall)
       .subscribe(response => {
         this.responseData = response;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
         this.getList.emit();
         this.getPinList.emit();
         this.getArchiveList.emit();
       }, error => {
         this.responseData = error.error;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
       });
   }
@@ -96,7 +91,6 @@ export class IconsComponent implements OnInit {
   }
 
   colorEdit(color: string, note: any): void {
-    this.spinner.show();
     this.setColor.emit(color);
     const data = {
       note_id: note.note_Id,
@@ -105,17 +99,14 @@ export class IconsComponent implements OnInit {
     this.noteService.updateColor(data)
       .subscribe(response => {
         this.responseData = response;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
       }, error => {
         this.responseData = error.error;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
       });
   }
 
   mapLabel(matCheckboxChange: MatCheckboxChange, labelData: ILabel, note: any): void {
-    this.spinner.show();
     if (matCheckboxChange.checked) {
       const data = {
         label_Id: labelData.label_Id,
@@ -128,11 +119,9 @@ export class IconsComponent implements OnInit {
           this.getList.emit();
           this.getPinList.emit();
           this.getArchiveList.emit();
-          this.spinner.hide();
           this.openSnackBar('Dismiss');
         }, error => {
           this.responseData = error.error;
-          this.spinner.hide();
           this.openSnackBar('Dismiss');
         });
     }
@@ -157,7 +146,6 @@ export class IconsComponent implements OnInit {
   }
 
   createLabel(labelName: string): void {
-    this.spinner.show();
     const data = {
       label_Id: 0,
       note_Id: 0,
@@ -166,14 +154,12 @@ export class IconsComponent implements OnInit {
     this.labelService.postLabel(data, 'create')
       .subscribe(response => {
         this.responseData = response;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
         this.labelValue = '';
         this.getLabelList();
         this.isLabelCreate = false;
       }, error => {
         this.responseData = error.error;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
       });
   }

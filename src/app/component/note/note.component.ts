@@ -5,7 +5,6 @@ import {UpdateNoteComponent} from '../update-note/update-note.component';
 import {NoteService} from '../../service/note/note.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {LabelService} from '../../service/label/label.service';
-import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-note',
@@ -42,8 +41,7 @@ export class NoteComponent implements OnInit {
   constructor(public dialog: MatDialog,
               private noteService: NoteService,
               private snackBar: MatSnackBar,
-              private labelService: LabelService,
-              private spinner: NgxSpinnerService) {
+              private labelService: LabelService) {
   }
 
   ngOnInit(): void {
@@ -54,17 +52,14 @@ export class NoteComponent implements OnInit {
 
 
   notePin(note: INote): void {
-    this.spinner.show();
     this.noteService.deleteNote(note.note_Id, 'pinUnpin')
       .subscribe(response => {
         this.responseData = response;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
         this.getList.emit();
         this.getPinList.emit();
       }, error => {
         this.responseData = error.error;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
       });
   }
@@ -74,7 +69,6 @@ export class NoteComponent implements OnInit {
       {width: '500px', panelClass: 'custom-box', data: this.note});
 
     dialogRef.afterClosed().subscribe(data => {
-      this.spinner.show();
       const updatedNote = {
         note_id: data.note_Id,
         title: data.title,
@@ -83,7 +77,6 @@ export class NoteComponent implements OnInit {
       this.noteService.editNote(updatedNote)
         .subscribe(response => {
           this.responseData = response;
-          this.spinner.hide();
           this.openSnackBar('Dismiss');
           this.getList.emit();
           this.getPinList.emit();
@@ -91,7 +84,6 @@ export class NoteComponent implements OnInit {
 
         }, (error) => {
           this.responseData = error.error;
-          this.spinner.hide();
           this.openSnackBar('Dismiss');
         });
     });
@@ -106,7 +98,6 @@ export class NoteComponent implements OnInit {
   }
 
   removeMapping(noteId: number, labelId: number): void {
-    this.spinner.show();
     const data = {
       note_Id: noteId,
       label_Id: labelId
@@ -117,28 +108,23 @@ export class NoteComponent implements OnInit {
         this.getList.emit();
         this.getPinList.emit();
         this.archiveList.emit();
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
       }, error => {
         this.responseData = error.error;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
       });
   }
 
   removeReminder(noteId: number): void {
-    this.spinner.show();
     this.noteService.deleteReminder(noteId)
       .subscribe(response => {
         this.responseData = response;
         this.getList.emit();
         this.getPinList.emit();
         this.archiveList.emit();
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
       }, error => {
         this.responseData = error.error;
-        this.spinner.hide();
         this.openSnackBar('Dismiss');
       });
   }

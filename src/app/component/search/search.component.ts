@@ -2,7 +2,6 @@ import {Component, OnInit} from '@angular/core';
 import {InteractionService} from '../../service/search-data/interaction.service';
 import {NoteService} from '../../service/note/note.service';
 import {INote} from '../note/note';
-import {NgxSpinnerService} from 'ngx-spinner';
 
 @Component({
   selector: 'app-search',
@@ -15,8 +14,7 @@ export class SearchComponent implements OnInit {
   noteType = 'note';
 
   constructor(private interactionService: InteractionService,
-              private noteService: NoteService,
-              private spinner: NgxSpinnerService) {
+              private noteService: NoteService) {
   }
 
   ngOnInit(): void {
@@ -27,7 +25,6 @@ export class SearchComponent implements OnInit {
   }
 
   searchData(searchValue: any): void {
-    this.spinner.show();
     const url = `searchData/${searchValue}`;
     this.noteService.getList(url)
       .subscribe(data => {
@@ -36,7 +33,6 @@ export class SearchComponent implements OnInit {
         error => {
           this.message = error.error.message;
         });
-    this.spinner.hide();
   }
 
 }

@@ -21,8 +21,7 @@ export class NoteHomePageComponent implements OnInit {
   public isGridView: boolean;
 
   constructor(private noteService: NoteService,
-              private interactionService: InteractionService,
-              private spinner: NgxSpinnerService) {
+              private interactionService: InteractionService) {
   }
 
   ngOnInit(): void {
@@ -39,7 +38,6 @@ export class NoteHomePageComponent implements OnInit {
   }
 
   public getAllNote(): void {
-    this.spinner.show();
     this.noteService.getList('list')
       .subscribe(data => {
           this.noteList = data;
@@ -49,11 +47,9 @@ export class NoteHomePageComponent implements OnInit {
         error => {
           this.message = error.error.message;
         });
-    this.spinner.hide();
   }
 
   public getPinNoteList(): void {
-    this.spinner.show();
     this.noteService.getList('pinList')
       .subscribe(data => {
           this.pinNotes = data;
@@ -62,7 +58,6 @@ export class NoteHomePageComponent implements OnInit {
         error => {
           this.message = error.error.message;
         });
-    this.spinner.hide();
   }
 
 }

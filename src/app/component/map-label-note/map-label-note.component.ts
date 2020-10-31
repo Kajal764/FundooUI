@@ -19,8 +19,7 @@ export class MapLabelNoteComponent implements OnInit {
   isNotePresent = false;
 
   constructor(private interactionService: InteractionService,
-              private noteService: NoteService,
-              private spinner: NgxSpinnerService) {
+              private noteService: NoteService) {
   }
 
   ngOnInit(): void {
@@ -36,7 +35,6 @@ export class MapLabelNoteComponent implements OnInit {
   }
 
   private getNoteList(label: ILabel): void {
-    this.spinner.show();
     const url = `mapNote/${label.label_Id}`;
     this.noteService.getList(url)
       .subscribe(data => {
@@ -48,6 +46,5 @@ export class MapLabelNoteComponent implements OnInit {
         error => {
           this.message = error.error.message;
         });
-    this.spinner.hide();
   }
 }
