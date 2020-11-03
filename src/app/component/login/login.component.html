@@ -1,55 +1,62 @@
-<div fxLayoutAlign="space-around center" fxFlex="100">
-  <mat-card fxFlex="40" class="main-content" fxFlex.xs="100">
-    <img alt="logo" class="fundoo-logo" src="../../../assets/FundooLogo.PNG">
+<div *ngIf="isSocialLogin===false">
+  <div fxLayoutAlign="space-around center" fxFlex="100">
+    <mat-card fxFlex="40" class="main-content" fxFlex.xs="100">
+      <img alt="logo" class="fundoo-logo" src="../../../assets/FundooLogo.PNG">
 
-    <div>
-      <mat-card-title class="signin" fxLayoutAlign="center">Sign In</mat-card-title>
-      <mat-card-subtitle fxLayoutAlign="center">to continue to Fundoo</mat-card-subtitle>
-    </div>
-
-    <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
-      <mat-form-field appearance="outline">
-        <mat-label>Email or phone</mat-label>
-        <input type="text" matInput placeholder="Email or phone" formControlName="email">
-        <mat-error *ngIf="email.errors " [ngClass]="'error'">
-          <div *ngIf="email.errors.required">
-            Email is required.
-          </div>
-          <div *ngIf="email.errors.pattern">
-            Email not valid.
-          </div>
-        </mat-error>
-      </mat-form-field>
-
-      <mat-form-field appearance="outline">
-        <mat-label>Password</mat-label>
-        <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
-        <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
-                [attr.aria-pressed]="hide">
-          <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
-        </button>
-        <mat-error *ngIf="password.errors " [ngClass]="'error'">
-          <ng-container *ngIf="password.errors.required; else second ">Password is required.</ng-container>
-          <ng-template #second>
-            <ng-container *ngIf="password.errors.minlength;else third"> Password must be at least 6 character long.
-            </ng-container>
-          </ng-template>
-          <ng-template #third>Password should contain uppercase,lowercase,digit and symbol</ng-template>
-        </mat-error>
-      </mat-form-field>
-
-      <mat-card-subtitle class="forgot-password" (click)="redirect()">
-        Forgot password
-      </mat-card-subtitle>
-
-      <div class="last-div" fxLayoutAlign="space-between center">
-        <button mat-button class="register-button" (click)="redirectToRegister()"> Create account</button>
-        <button [disabled]="loginForm.invalid" mat-raised-button class="next-button" color="primary">Next</button>
+      <div>
+        <mat-card-title class="signin" fxLayoutAlign="center">Sign In</mat-card-title>
+        <mat-card-subtitle fxLayoutAlign="center">to continue to Fundoo</mat-card-subtitle>
       </div>
 
-    </form>
-  </mat-card>
+      <form [formGroup]="loginForm" class="login-form" (ngSubmit)="onSubmit()">
+        <mat-form-field appearance="outline">
+          <mat-label>Email or phone</mat-label>
+          <input type="text" matInput placeholder="Email or phone" formControlName="email">
+          <mat-error *ngIf="email.errors " [ngClass]="'error'">
+            <div *ngIf="email.errors.required">
+              Email is required.
+            </div>
+            <div *ngIf="email.errors.pattern">
+              Email not valid.
+            </div>
+          </mat-error>
+        </mat-form-field>
 
+        <mat-form-field appearance="outline">
+          <mat-label>Password</mat-label>
+          <input matInput [type]="hide ? 'password' : 'text'" placeholder="Password" formControlName="password">
+          <button mat-icon-button matSuffix (click)="hide = !hide" [attr.aria-label]="'Hide password'"
+                  [attr.aria-pressed]="hide">
+            <mat-icon>{{hide ? 'visibility_off' : 'visibility'}}</mat-icon>
+          </button>
+          <mat-error *ngIf="password.errors " [ngClass]="'error'">
+            <ng-container *ngIf="password.errors.required; else second ">Password is required.</ng-container>
+            <ng-template #second>
+              <ng-container *ngIf="password.errors.minlength;else third"> Password must be at least 6 character long.
+              </ng-container>
+            </ng-template>
+            <ng-template #third>Password should contain uppercase,lowercase,digit and symbol</ng-template>
+          </mat-error>
+        </mat-form-field>
+
+        <mat-card-subtitle class="forgot-password" (click)="redirect()">
+          Forgot password
+        </mat-card-subtitle>
+
+        <div class="last-div" fxLayoutAlign="space-between center">
+          <button mat-button class="register-button"
+                  (click)="redirectToRegister()"> Create account</button>
+          <button (click)="signInWithGoogle()" class="social-login-button">
+            <span style="padding-right: 2px;font-size: 18px">G+</span>
+            Login with Google
+          </button>
+          <button [disabled]="loginForm.invalid"
+                  mat-raised-button class="next-button" color="primary">Next
+          </button>
+        </div>
+      </form>
+    </mat-card>
+  </div>
 </div>
 
 <ngx-spinner
@@ -60,3 +67,22 @@
   fullScreen="true">
   <p style="color: white"> Loading... </p>
 </ngx-spinner>
+
+<div style="margin-top: 5%" *ngIf="isSocialLogin===true">
+  <div fxLayoutAlign="space-around center" fxFlex="100">
+    <div fxLayout="column" fxLayoutAlign="start center">
+      <mat-card fxFlex="60" class="main-content" fxFlex.xs="100">
+        <div>
+          <mat-card-title class="signin" fxLayoutAlign="center">{{user.name}}</mat-card-title>
+          <mat-card-subtitle fxLayoutAlign="center">{{user.email}}</mat-card-subtitle>
+        </div>
+        <div>
+          <img alt="logo" [src]="user.photoUrl" style="width: 104%">
+        </div>
+        <div style="margin-left: 37%; padding-top: 10px">
+          <button mat-raised-button class="next-button" color="primary" (click)="redirectToDashboard()">Login</button>
+        </div>
+      </mat-card>
+    </div>
+  </div>
+</div>

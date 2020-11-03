@@ -56,6 +56,7 @@ export class CollaboratorComponent implements OnInit {
       }, (error) => {
         this.responseData = error.error;
         this.openSnackBar('Dismiss');
+        this.spinner.hide();
       });
     this.email = '';
   }

@@ -32,8 +32,8 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
-  login(data): Observable<any> {
-    const apiUrl = this.baseUrl + this.user + 'login';
+  login(data,url): Observable<any> {
+    const apiUrl = this.baseUrl + this.user + url;
     return this.postData(data, apiUrl);
   }
 

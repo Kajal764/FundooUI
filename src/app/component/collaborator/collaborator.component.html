@@ -50,9 +50,9 @@
              matInput
              placeholder="Person or email to share with"
              autocomplete="off"
-             (click)="isChange()">
+             (ngModelChange)="isChange()">
     </div>
-    <div *ngIf="isCorrect">
+    <div *ngIf="isCorrect===true">
       <button mat-icon-button style="color: gray">
         <img src="../../../assets/check-24px.svg" (click)="addUser()">
       </button>

@@ -1,5 +1,5 @@
 
-.registration-card{
+.registration-card {
 }
 
 .main-content {
@@ -46,10 +46,23 @@
 
 .register-button {
   color: blue;
+  background-color: lightgray;
 }
 
-.subtitle-text{
+.subtitle-text {
   padding-top: 20px;
   font-size: 15px;
 }
 
+.social-login-button {
+  border-radius: 3px;
+  height: 35px;
+  padding: 5px;
+  background-color: firebrick;
+  color: white;
+  border-color: transparent;
+}
+
+.profile-div {
+  height: 30%;
+}
