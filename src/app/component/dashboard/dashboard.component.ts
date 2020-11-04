@@ -126,7 +126,10 @@ export class DashboardComponent implements OnInit {
     this.userService.getLoginUser(localStorage.getItem('email'))
       .subscribe(data => {
           this.userLogin = data;
-          this.userLogin.socialUser ? this.imgUrl = data.imageURL : this.imgUrl = 'http://localhost:8080/fundoo/user/image/' + data.imageURL;
+          this.imgUrl = data.imageURL;
+          if (!this.userLogin.socialUser) {
+            this.imgUrl = 'http://localhost:8080/fundoo/user/image/' + data.imageURL;
+          }
         },
         error => {
           this.responseData = error.error;
