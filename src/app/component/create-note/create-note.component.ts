@@ -8,6 +8,7 @@ import {MatCheckboxChange} from '@angular/material/checkbox';
 import {UserService} from '../../service/user/user.service';
 import {IUser} from '../collaborator/IUser';
 import {NgxSpinnerService} from 'ngx-spinner';
+import {isElementScrolledOutsideView} from '@angular/cdk/overlay/position/scroll-clip';
 
 @Component({
   selector: 'app-create-note',
@@ -58,9 +59,12 @@ export class CreateNoteComponent implements OnInit {
   public labelList: ILabel[];
   noteType = 'reminder';
   noteLabelList: ILabel[] = [];
+  emailIfCollab = null;
+
   public dateTime: any;
   public isCollabDiv = false;
   email: any;
+  public loginUser: string;
 
   todaydate = new Date();
   tomorrow = new Date(
@@ -72,9 +76,7 @@ export class CreateNoteComponent implements OnInit {
     0,
     0
   );
-  private userEmail: any;
-  private collobUser: IUser;
-  private emailIfCollab = null;
+  private collobUser: IUser[] = [];
 
 
   constructor(private noteService: NoteService,
@@ -89,6 +91,7 @@ export class CreateNoteComponent implements OnInit {
     this.getLoginUser();
     this.getLabelList();
     this.getSubscribeList();
+    this.loginUser = localStorage.getItem('email');
   }
 
   addNote(): void {
@@ -98,8 +101,6 @@ export class CreateNoteComponent implements OnInit {
   notePin(): void {
     this.pin ? this.pin = false : this.pin = true;
   }
-
-  // tslint:disable-next-line:typedef
 
   isChange(): void {
     this.isCorrect = true;
@@ -117,7 +118,7 @@ export class CreateNoteComponent implements OnInit {
       pin: this.pin,
       labelList: this.noteLabelList,
       remainder: this.dateTime,
-      collaborateUser: this.emailIfCollab
+      collaborateUserList: this.collobUser
     };
     this.noteService.createNote(data, 'create')
       .subscribe(response => {
@@ -138,7 +139,7 @@ export class CreateNoteComponent implements OnInit {
     this.archive = false;
     this.noteLabelList = [];
     this.email = '';
-    this.collobUser = null;
+    this.collobUser = [];
     this.dateTime = null;
   }
 
@@ -221,8 +222,8 @@ export class CreateNoteComponent implements OnInit {
   addUser(): void {
     this.userService.getLoginUser(this.email)
       .subscribe(data => {
-          this.collobUser = data;
-          this.emailIfCollab = this.collobUser.email;
+          this.collobUser.push(data);
+          this.emailIfCollab = data.email;
           this.email = '';
         },
         error => {

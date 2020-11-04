@@ -50,10 +50,6 @@
                 [(ngModel)]="noteDesc" [style.backgroundColor]="color"></textarea>
       </div>
 
-      <div *ngIf="collobUser != null">
-        <ngx-avatar [size]="30" name="{{collobUser.firstName}}"></ngx-avatar>
-      </div>
-
       <div *ngIf="dateTime!=null" style="padding-top: 10px">
         <div fxLayout="row" fxLayout="row wrap">
           <mat-chip-list class="chip">
@@ -102,6 +98,11 @@
         </mat-chip-list>
       </div>
 
+      <mat-list role="list" fxLayout="row">
+        <div *ngFor="let user of collobUser" style="margin: 2px">
+          <ngx-avatar [size]="30" name="{{user.firstName}}"></ngx-avatar>
+        </div>
+      </mat-list>
 
       <!--    Icons    -->
       <div fxLayout="row" fxLayoutAlign="space-between center">
@@ -170,6 +171,8 @@
           </mat-menu>
 
           <mat-menu #labelMenu="matMenu" yPosition="above" (click)="$event.stopPropagation()">
+            <div *ngIf="labelList.length==0">Label not present</div>
+            <div *ngIf="labelList.length>0">
             <div *ngFor="let labelData of labelList " style="padding: 5px 10px 5px 10px ">
               <div fxLayout="row">
                 <mat-checkbox
@@ -178,6 +181,7 @@
                   {{labelData.labelName}}
                 </mat-checkbox>
               </div>
+            </div>
             </div>
           </mat-menu>
 
@@ -220,24 +224,24 @@
         </div>
 
         <!--  &lt;!&ndash;  *************** collab user ***************&ndash;&gt;-->
-
-        <div *ngIf="collobUser != null">
-          <div fxLayout="row">
-            <div fxFlex="90" style="margin-left: 10px;margin-top: 10px" (click)="isChangeCross()">
-              <div fxFlex="13">
-                <ngx-avatar size="40" name="{{collobUser.firstName}}"></ngx-avatar>
+        <div *ngFor="let collobUser of collobUser">
+          <div *ngIf="collobUser.email !== loginUser">
+            <div fxLayout="row">
+              <div fxFlex="90" style="margin-left: 10px;margin-top: 10px" (click)="isChangeCross()">
+                <div fxFlex="13">
+                  <ngx-avatar size="40" name="{{collobUser.firstName}}"></ngx-avatar>
+                </div>
+                <div fxFlex='65' fxLayout="column">
+                  <div style="font-size: 17px;font-weight: 440">{{collobUser.firstName}} {{collobUser.lastName}}</div>
+                  <div fxLayout="row" style="color: gray;font-size: 15px">{{collobUser.email}}</div>
+                </div>
               </div>
-              <div fxFlex='65' fxLayout="column">
-                <div style="font-size: 17px;font-weight: 440">{{collobUser.firstName}} {{collobUser.lastName}}</div>
-                <div fxLayout="row" style="color: gray;font-size: 15px">{{collobUser.email}}</div>
+              <div fxFlex="10" *ngIf="isFalse" (click)="removeCollabUser()">
+                <button mat-icon-button><img src="../../../assets/close-24px.svg"></button>
               </div>
-            </div>
-            <div fxFlex="10" *ngIf="isFalse" (click)="removeCollabUser()">
-              <button mat-icon-button><img src="../../../assets/close-24px.svg"></button>
             </div>
           </div>
         </div>
-
 
         <div fxLayout="row" class="user-input">
           <div fxFlex="12">
