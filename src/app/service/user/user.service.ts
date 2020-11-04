@@ -1,7 +1,7 @@
 import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {Observable, throwError} from 'rxjs';
-import {HttpBackend, HttpClient, HttpErrorResponse, HttpEvent, HttpRequest} from '@angular/common/http';
+import {HttpBackend, HttpClient, HttpErrorResponse} from '@angular/common/http';
 import {catchError} from 'rxjs/operators';
 import {IUser} from '../../component/collaborator/IUser';
 
@@ -32,7 +32,7 @@ export class UserService {
       .pipe(catchError(this.handleError));
   }
 
-  login(data,url): Observable<any> {
+  login(data, url): Observable<any> {
     const apiUrl = this.baseUrl + this.user + url;
     return this.postData(data, apiUrl);
   }
@@ -57,13 +57,17 @@ export class UserService {
     return this.httpClient.get(apiUrl);
   }
 
-
-  pushFileToStorage(file: File): Observable<any> {
+  pushFileToStorage(file: File, email: string): Observable<any> {
     const formdata: FormData = new FormData();
     formdata.append('file', file);
+    formdata.append('email', email);
     const apiUrl: string = this.baseUrl + this.user + 'uploadFile';
     return this.httpClient.post(apiUrl, formdata)
       .pipe(catchError(this.handleError));
   }
 
+  getUploadedImage(uploadFileName: any): Observable<any> {
+    const apiUrl: string = this.baseUrl + this.user + 'image/' + uploadFileName;
+    return this.httpClient.get(apiUrl).pipe(catchError(this.handleError));
+  }
 }

@@ -28,8 +28,9 @@ export class DashboardComponent implements OnInit {
   search: string;
   noteType: 'note';
   labelList: ILabel[];
-  private uploadFileName = '1603824247311-avatar1.png';
-  public imgUrl = 'http://localhost:8080/fundoo/user/image/' + this.uploadFileName;
+
+  public uploadFileName: string;
+  public imgUrl: string;
 
   selectedFiles: FileList;
   private currentFileUpload: File;
@@ -125,6 +126,7 @@ export class DashboardComponent implements OnInit {
     this.userService.getLoginUser(localStorage.getItem('email'))
       .subscribe(data => {
           this.userLogin = data;
+          this.userLogin.socialUser ? this.imgUrl = data.imageURL : this.imgUrl = 'http://localhost:8080/fundoo/user/image/' + data.imageURL;
         },
         error => {
           this.responseData = error.error;
@@ -135,23 +137,22 @@ export class DashboardComponent implements OnInit {
     // @ts-ignore
     this.selectedFiles = event.target.files;
     const reader = new FileReader();
-    reader.onload = (ev: any) => {
-      this.imgUrl = ev.target.result;
-    };
     reader.readAsDataURL(this.selectedFiles.item(0));
     this.uploadImage();
   }
 
   uploadImage(): void {
     this.currentFileUpload = this.selectedFiles.item(0);
-    this.userService.pushFileToStorage(this.currentFileUpload)
+    this.userService.pushFileToStorage(this.currentFileUpload, this.userLogin.email)
       .subscribe(data => {
           this.uploadFileName = data;
           this.openSnackBar('Dismiss', 'Profile uploaded');
         },
         error => {
           this.uploadFileName = error.error.text;
+          this.imgUrl = 'http://localhost:8080/fundoo/user/image/' + this.uploadFileName;
           this.openSnackBar('Dismiss', 'Profile uploaded');
         });
   }
+
 }

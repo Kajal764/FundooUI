@@ -18,10 +18,9 @@ export class CollaboratorComponent implements OnInit {
   private responseData: any;
   public collabUserList: IUser[];
   public isFalse = false;
-  public list: [{ id: number; firstName: string; lastName: string; email: string; varified: boolean }];
   private loginUser: string;
-  public user: IUser;
   private image: string;
+  public user: { id: number; firstName: string; lastName: string; email: string; varified: boolean };
 
   constructor(@Inject(MAT_DIALOG_DATA) public note: INote,
               private noteService: NoteService,

@@ -4,4 +4,6 @@ export interface IUser {
   lastName: string;
   email: string;
   varified: boolean;
+  imageURL: string;
+  socialUser: boolean;
 }

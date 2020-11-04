@@ -37,17 +37,27 @@
     </button>
 
     <div fxLayout="row">
-      <img *ngIf="imgUrl" [src]="imgUrl" class="image"
+      <img *ngIf="imgUrl!==null" [src]="imgUrl" class="image"
            [matMenuTriggerFor]="menu1">
+      <div *ngIf="imgUrl===null" style="margin-left: 10px">
+        <ngx-avatar size="40"
+                    name="{{userLogin.firstName}}" [matMenuTriggerFor]="menu1">
+        </ngx-avatar>
+      </div>
     </div>
 
     <mat-menu #menu1="matMenu" fxLayout="row" fxLayoutAlign="end start" (click)="$event.stopPropagation()">
       <div class="profile-div" fxFlex="column">
         <div>
           <div (click)="$event.stopPropagation()" fxLayout="column">
-            <img width="100%" *ngIf="imgUrl" [src]="imgUrl" class="imageSelect"
+            <img width="100%" *ngIf="imgUrl!==null" [src]="imgUrl" class="imageSelect"
                  style="background-size: cover;width: 80px;
-                           height: 80px; align-self: center;border-radius: 41px;border: 1px solid lightgrey;">
+                                       height: 80px; align-self: center;
+                                       border-radius: 41px;
+                                       border: 1px solid lightgrey;">
+            <div *ngIf="imgUrl===null" style="margin-left:55px">
+              <ngx-avatar size="75" name="{{userLogin.firstName}}"></ngx-avatar>
+            </div>
             <img src="../../../assets/add_a_photo-24px.svg"
                  (click)="imageSelectFile.click()" style="margin-left: 55px;margin-top:-23px">
           </div>
@@ -61,7 +71,6 @@
           </div>
           <input fxHide class="image" type="file" (change)="onSelectFile($event)"
                  #imageSelectFile (click)="$event.stopPropagation()">
-
           <button class="signout" mat-flat-button color="primary" (click)="signOut()">
             Sign out
           </button>
