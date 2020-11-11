@@ -35,6 +35,7 @@ export class DashboardComponent implements OnInit {
   selectedFiles: FileList;
   private currentFileUpload: File;
   private responseData: any;
+  public isImagePresent: boolean;
 
   constructor(private router: Router,
               private noteService: NoteService,
@@ -127,9 +128,10 @@ export class DashboardComponent implements OnInit {
       .subscribe(data => {
           this.userLogin = data;
           this.imgUrl = data.imageURL;
-          if (!this.userLogin.socialUser) {
+          if (!this.userLogin.socialUser && this.imgUrl !== null) {
             this.imgUrl = 'http://localhost:8080/fundoo/user/image/' + data.imageURL;
           }
+          this.imgUrl === null ? this.isImagePresent = false : this.isImagePresent = true;
         },
         error => {
           this.responseData = error.error;

@@ -113,6 +113,7 @@ export class RegisterComponent implements OnInit {
         this.openSnackBar('Dismiss');
       }, (error) => {
         this.responseData = error.error;
+        this.spinner.hide();
         this.openSnackBar('Dismiss');
       });
 

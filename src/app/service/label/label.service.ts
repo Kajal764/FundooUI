@@ -2,7 +2,6 @@ import {Injectable} from '@angular/core';
 import {environment} from '../../../environments/environment';
 import {HttpclientService} from '../http/httpclient.service';
 import {Observable} from 'rxjs';
-import {INote} from '../../component/note/note';
 import {ILabel} from '../../component/create-label/ILabel';
 
 @Injectable({

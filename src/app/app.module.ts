@@ -38,10 +38,7 @@ import {AvatarModule} from 'ngx-avatar';
 import {GridViewNoteComponent} from './component/grid-view-note/grid-view-note.component';
 import {NgxSpinnerModule} from 'ngx-spinner';
 import {ImageCropperModule} from 'ngx-image-cropper';
-// import {SocialLoginModule, SocialAuthServiceConfig} from 'lib';
-// import {GoogleLoginProvider} from 'lib';
-
-import {SocialAuthServiceConfig, SocialLoginModule} from 'angularx-social-login';
+import {FacebookLoginProvider, SocialAuthServiceConfig, SocialLoginModule} from 'angularx-social-login';
 import {GoogleLoginProvider} from 'angularx-social-login';
 
 @NgModule({
@@ -103,7 +100,7 @@ import {GoogleLoginProvider} from 'angularx-social-login';
             provider: new GoogleLoginProvider(
               '631867203803-gfnbuj33563dmuorhmfm6cv2prqasulq.apps.googleusercontent.com'
             ),
-          },
+          }
         ],
       } as SocialAuthServiceConfig,
     }

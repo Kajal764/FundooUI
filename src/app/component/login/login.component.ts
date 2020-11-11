@@ -5,8 +5,7 @@ import {UserService} from '../../service/user/user.service';
 import {MatSnackBar} from '@angular/material/snack-bar';
 import {HttpResponse} from '@angular/common/http';
 import {NgxSpinnerService} from 'ngx-spinner';
-import {GoogleLoginProvider, SocialAuthService, SocialUser} from "angularx-social-login";
-
+import {FacebookLoginProvider, GoogleLoginProvider, SocialAuthService, SocialUser} from 'angularx-social-login';
 
 @Component({
   selector: 'app-login',
@@ -55,7 +54,6 @@ export class LoginComponent implements OnInit {
 
   // tslint:disable-next-line:typedef
   onSubmit() {
-    this.spinner.show();
     this.isValidFormSubmitted = false;
     if (this.loginForm.invalid) {
       return;
@@ -70,13 +68,11 @@ export class LoginComponent implements OnInit {
           localStorage.setItem('token', `Bearer ${response.headers.get('AuthorizeToken')}`);
           localStorage.setItem('email', data.email);
           this.responseData = response.body;
-          this.spinner.hide();
           this.openSnackBar('Dismiss');
           this.redirectToDashboard();
         },
         (error) => {
           this.responseData = error.error;
-          this.spinner.hide();
           this.openSnackBar('Dismiss');
         });
   }
@@ -102,7 +98,6 @@ export class LoginComponent implements OnInit {
   }
 
   signInWithGoogle(): void {
-    this.isSocialLogin = true;
     this.authService.signIn(GoogleLoginProvider.PROVIDER_ID)
       .then(data => {
         const userData = {
@@ -111,16 +106,22 @@ export class LoginComponent implements OnInit {
           email: data.email,
           imageURL: data.photoUrl
         };
-        this.userService.login(userData, 'social-login')
-          .subscribe((response: HttpResponse<any>) => {
-              localStorage.setItem('token', `Bearer ${response.headers.get('AuthorizeToken')}`);
-              localStorage.setItem('email', userData.email);
-              this.responseData = response.body;
-            },
-            (error) => {
-              this.responseData = error.error;
-              this.openSnackBar('Dismiss');
-            });
+        this.isSocialLogin = true;
+        this.socialLogin(userData);
       });
+  }
+
+  socialLogin(userData: { firstName: string; lastName: string; imageURL: string; email: string }): void {
+    this.userService.login(userData, 'social-login')
+      .subscribe((response: HttpResponse<any>) => {
+          localStorage.setItem('token', `Bearer ${response.headers.get('AuthorizeToken')}`);
+          localStorage.setItem('email', userData.email);
+          this.responseData = response.body;
+          this.redirectToDashboard();
+        },
+        (error) => {
+          this.responseData = error.error;
+          this.openSnackBar('Dismiss');
+        });
   }
 }

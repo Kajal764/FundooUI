@@ -37,9 +37,9 @@
     </button>
 
     <div fxLayout="row">
-      <img *ngIf="imgUrl!==null" [src]="imgUrl" class="image"
+      <img *ngIf="isImagePresent===true" [src]="imgUrl" class="image"
            [matMenuTriggerFor]="menu1">
-      <div *ngIf="imgUrl===null" style="margin-left: 10px">
+      <div *ngIf="isImagePresent===false" style="margin-left: 10px">
         <ngx-avatar size="40"
                     name="{{userLogin.firstName}}" [matMenuTriggerFor]="menu1">
         </ngx-avatar>
